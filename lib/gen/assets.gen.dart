@@ -24,10 +24,6 @@ class $AssetsEnvGen {
   String get envStaging => 'assets/env/.env_staging';
 }
 
-class $AssetsImagesGen {
-  const $AssetsImagesGen();
-}
-
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
@@ -120,7 +116,6 @@ class Assets {
   Assets._();
 
   static const $AssetsEnvGen env = $AssetsEnvGen();
-  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
 }
