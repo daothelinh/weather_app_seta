@@ -9,12 +9,18 @@
 .history
 .svn/
 migrate_working_dir/
-
+.fvm/
 # IntelliJ related
 *.iml
 *.ipr
 *.iws
 .idea/
+#Generated files
+*.lock
+*.config.dart
+*.g.dart
+*.freezed.dart
+*.gr.dart
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
@@ -31,6 +37,9 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+
+# Web related
+lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
