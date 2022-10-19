@@ -5,7 +5,7 @@ class CoreState extends BaseBlocState {
   const CoreState({
     required super.status,
     super.message,
-    this.index = 0,
+    this.index = 1,
   });
 
   final int index;

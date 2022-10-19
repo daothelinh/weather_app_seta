@@ -1,3 +1,4 @@
+import 'package:base_bloc_3/common/index.dart';
 import 'package:base_bloc_3/common/local_data/shared_pref.dart';
 import 'package:base_bloc_3/di/di_setup.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

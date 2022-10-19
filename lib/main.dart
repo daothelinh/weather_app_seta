@@ -7,11 +7,12 @@ import 'package:base_bloc_3/di/di_setup.dart';
 import 'package:base_bloc_3/gen/fonts.gen.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'common/app_theme/app_colors.dart';
 import 'common/config/screen_utils_config.dart';
 import 'routes/app_pages.dart';
 
@@ -37,9 +38,9 @@ Future<void> main() async {
   );
   await EasyLocalization.ensureInitialized();
   configureDependencies();
-  await Firebase.initializeApp();
-  await getIt<PushNotificationHelper>().initialize();
-  await getIt<LocalNotificationHelper>().init();
+  // await Firebase.initializeApp();
+  // await getIt<PushNotificationHelper>().initialize();
+  // await getIt<LocalNotificationHelper>().init();
 
   runApp(
     DevicePreview(
@@ -82,7 +83,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,
-            fontFamily: FontFamily.lexend,
+            // primaryColor: Colors.white,
           ),
           routerDelegate: _appRoute.delegate(),
           routeInformationParser: _appRoute.defaultRouteParser(),

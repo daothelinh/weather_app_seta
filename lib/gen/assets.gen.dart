@@ -24,8 +24,26 @@ class $AssetsEnvGen {
   String get envStaging => 'assets/env/.env_staging';
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/Mask Group.png
+  AssetGenImage get maskGroup =>
+      const AssetGenImage('assets/images/Mask Group.png');
+}
+
 class $AssetsSvgGen {
   const $AssetsSvgGen();
+
+  /// File path: assets/svg/MaskGroup1.svg
+  SvgGenImage get maskGroup1 => const SvgGenImage('assets/svg/MaskGroup1.svg');
+
+  /// File path: assets/svg/actions_weather.svg
+  SvgGenImage get actionsWeather =>
+      const SvgGenImage('assets/svg/actions_weather.svg');
+
+  /// File path: assets/svg/first_icon.svg
+  SvgGenImage get firstIcon => const SvgGenImage('assets/svg/first_icon.svg');
 
   /// File path: assets/svg/ic_add.svg
   SvgGenImage get icAdd => const SvgGenImage('assets/svg/ic_add.svg');
@@ -100,6 +118,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/ic_warning.svg
   SvgGenImage get icWarning => const SvgGenImage('assets/svg/ic_warning.svg');
+
+  /// File path: assets/svg/list.svg
+  SvgGenImage get list => const SvgGenImage('assets/svg/list.svg');
 }
 
 class $AssetsTranslationsGen {
@@ -116,6 +137,7 @@ class Assets {
   Assets._();
 
   static const $AssetsEnvGen env = $AssetsEnvGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
 }

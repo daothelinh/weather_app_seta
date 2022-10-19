@@ -1,7 +1,14 @@
+import 'package:base_bloc_3/common/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppStyles {
+  static final TextStyle t16p = TextStyle(
+    fontSize: 16.sp,
+    height: 1,
+    fontWeight: FontWeight.normal,
+    color: AppColors.textColor,
+  );
   static final TextStyle t48m = TextStyle(
     fontSize: 48.sp,
     height: 56 / 48,

@@ -47,50 +47,52 @@ class BaseScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: FocusScope.of(context).unfocus,
-      child: Scaffold(
-        floatingActionButton: floatingActionButton,
-        floatingActionButtonLocation: floatingActionButtonLocation,
-        bottomNavigationBar: bottomNavigation,
-        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-        extendBodyBehindAppBar: extendBodyBehindAppBar,
-        backgroundColor: backgroundColor,
-        appBar: appBar == null
-            ? null
-            : PreferredSize(
-                preferredSize: Size.fromHeight(
-                  appBarHeight ??
-                      AppBar().preferredSize.height +
-                          (hasTabBar ? kToolbarHeight.h : 0),
-                ),
-                child: appBar!,
-              ),
-        body: Stack(
-          children: [
-            if ((backgroundImage ?? "").isNotEmpty)
-              Container(
-                height: 1.sh,
-                width: 1.sw,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(backgroundImage!),
-                    fit: BoxFit.fill,
+    return Container(
+      child: GestureDetector(
+        onTap: FocusScope.of(context).unfocus,
+        child: Scaffold(
+          floatingActionButton: floatingActionButton,
+          floatingActionButtonLocation: floatingActionButtonLocation,
+          bottomNavigationBar: bottomNavigation,
+          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+          extendBodyBehindAppBar: extendBodyBehindAppBar,
+          backgroundColor: backgroundColor,
+          appBar: appBar == null
+              ? null
+              : PreferredSize(
+                  preferredSize: Size.fromHeight(
+                    appBarHeight ??
+                        AppBar().preferredSize.height +
+                            (hasTabBar ? kToolbarHeight.h : 0),
                   ),
+                  child: appBar!,
                 ),
-              )
-            else
-              const SizedBox.shrink(),
-            SafeArea(
-              bottom: isBottom ?? true,
-              child: Padding(
-                padding: EdgeInsets.only(
-                  top: paddingTop ?? 0,
+          body: Stack(
+            children: [
+              if ((backgroundImage ?? "").isNotEmpty)
+                Container(
+                  height: 1.sh,
+                  width: 1.sw,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(backgroundImage!),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                )
+              else
+                const SizedBox.shrink(),
+              Container(
+                // bottom: isBottom ?? true,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: paddingTop ?? 0,
+                  ),
+                  child: body ?? const SizedBox(),
                 ),
-                child: body ?? const SizedBox(),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

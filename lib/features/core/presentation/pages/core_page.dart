@@ -5,7 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../base/base_widget.dart';
 import '../../../../common/index.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../../example/presentation/pages/example_page.dart';
+import '../../../home/presentation/pages/home_page.dart';
+import '../../../weather/presentation/pages/weather_page.dart';
 
 class CorePage extends StatefulWidget {
   const CorePage({Key? key}) : super(key: key);
@@ -34,9 +37,9 @@ class _Screens extends StatelessWidget {
     return IndexedStack(
       index: index,
       children: const [
-        ExamplePage(),
         DummyScreen(),
-        DummyScreen(),
+        HomePage(),
+        WeatherPage(),
       ],
     );
   }
@@ -50,8 +53,8 @@ class _XBottomNavigationBar extends StatelessWidget {
     final bloc = context.select((CoreBloc bloc) => bloc);
     final index = context.select((CoreBloc bloc) => bloc.state.index);
     return BottomNavigationBar(
-      iconSize: 32,
-      backgroundColor: const Color(0xFFFAFAFA),
+      iconSize: 30.sp,
+      backgroundColor: AppColors.primaryColor,
       elevation: 0,
       type: BottomNavigationBarType.fixed,
       unselectedItemColor: Colors.greenAccent,
@@ -59,19 +62,20 @@ class _XBottomNavigationBar extends StatelessWidget {
       selectedFontSize: 12,
       items: [
         _buildBottomNavItem(
-          label: 'Trò chuyện',
-          icon: const Icon(Icons.add),
-          activeIcon: const Icon(Icons.add),
+          icon: Assets.svg.firstIcon.svg(),
+          activeIcon: Assets.svg.firstIcon.svg(),
+          label: '',
+          showDot: true,
         ),
         _buildBottomNavItem(
-          label: 'Trò chuyện',
           icon: const Icon(Icons.add),
           activeIcon: const Icon(Icons.add),
+          showDot: true,
         ),
         _buildBottomNavItem(
-          label: 'Trò chuyện',
-          icon: const Icon(Icons.add),
-          activeIcon: const Icon(Icons.add),
+          icon: Assets.svg.list.svg(),
+          activeIcon: Assets.svg.list.svg(),
+          showDot: true,
         ),
       ],
       currentIndex: index,
@@ -81,15 +85,15 @@ class _XBottomNavigationBar extends StatelessWidget {
 }
 
 BottomNavigationBarItem _buildBottomNavItem(
-    {required String label,
+    {String? label,
     required Widget icon,
     required Widget activeIcon,
     bool? showDot}) {
   return BottomNavigationBarItem(
-    label: label,
+    label: label ?? '',
     icon: SizedBox(
-      height: 48.w,
-      width: 48.w, //todo: constants
+      height: 30.w,
+      width: 30.w, //todo: constants
       child: Stack(
         children: [
           icon,
@@ -97,7 +101,7 @@ BottomNavigationBarItem _buildBottomNavItem(
             right: 2,
             top: 1,
             child: Visibility(
-              visible: showDot ?? false,
+              visible: false,
               child: Container(
                 width: 10,
                 height: 10,
