@@ -11,6 +11,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
+class $AssetsBackgroundGen {
+  const $AssetsBackgroundGen();
+
+  /// File path: assets/background/background.jpg
+  AssetGenImage get background =>
+      const AssetGenImage('assets/background/background.jpg');
+}
+
 class $AssetsEnvGen {
   const $AssetsEnvGen();
 
@@ -115,6 +123,7 @@ class $AssetsTranslationsGen {
 class Assets {
   Assets._();
 
+  static const $AssetsBackgroundGen background = $AssetsBackgroundGen();
   static const $AssetsEnvGen env = $AssetsEnvGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();

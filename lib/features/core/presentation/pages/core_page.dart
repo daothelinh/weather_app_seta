@@ -1,4 +1,5 @@
 import 'package:base_bloc_3/features/core/presentation/bloc/core_bloc.dart';
+import 'package:base_bloc_3/features/homescreen/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,9 +19,9 @@ class _CorePageState
     extends BaseState<CorePage, CoreEvent, CoreState, CoreBloc> {
   @override
   Widget renderUI(BuildContext context) {
-    return const BaseScaffold(
+    return const Scaffold(
       body: _Screens(),
-      bottomNavigation: _XBottomNavigationBar(),
+      bottomNavigationBar: _XBottomNavigationBar(),
     );
   }
 }
@@ -34,7 +35,8 @@ class _Screens extends StatelessWidget {
     return IndexedStack(
       index: index,
       children: const [
-        ExamplePage(),
+        HomeScreen(),
+        // ExamplePage(),
         DummyScreen(),
         DummyScreen(),
       ],

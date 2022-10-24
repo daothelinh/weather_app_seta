@@ -45,7 +45,7 @@ class _ExamplePageState
 
   @override
   Widget renderUI(BuildContext context) {
-    return BaseScaffold(
+    return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
