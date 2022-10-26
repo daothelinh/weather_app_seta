@@ -1,4 +1,5 @@
 import 'package:base_bloc_3/features/core/presentation/bloc/core_bloc.dart';
+import 'package:base_bloc_3/features/start/presentation/start_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,7 +38,7 @@ class _Screens extends StatelessWidget {
     return IndexedStack(
       index: index,
       children: const [
-        DummyScreen(),
+        StartPage(),
         HomePage(),
         WeatherPage(),
       ],

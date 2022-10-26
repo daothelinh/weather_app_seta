@@ -121,6 +121,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/list.svg
   SvgGenImage get list => const SvgGenImage('assets/svg/list.svg');
+
+  /// File path: assets/svg/zoom.svg
+  SvgGenImage get zoom => const SvgGenImage('assets/svg/zoom.svg');
 }
 
 class $AssetsTranslationsGen {

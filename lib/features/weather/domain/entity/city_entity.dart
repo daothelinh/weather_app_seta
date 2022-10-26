@@ -1,25 +1,22 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../data/model/city_model.dart';
 
 class CityEntity {
-  String? id;
-  CountryEntity? name;
+  final String? id;
+  final CountryEntity? country;
 
-  CityEntity({this.id, this.name});
+  CityEntity(this.id, this.country);
 
-  factory CityEntity.formModel(CityModel city) => CityEntity(
-        id: city.key,
-        name: city.country as CountryEntity,
-      );
+  factory CityEntity.fromModel(CityModel model) {
+    return CityEntity(
+        model.key, CountryEntity(englishName: model.country?.englishName));
+  }
 }
 
 class CountryEntity {
-  String? id;
-  String? englistName;
+  final String? id;
+  final String? englishName;
 
-  CountryEntity({this.id, this.englistName});
-
-  factory CountryEntity.formModel(Country country) => CountryEntity(
-        id: country.id,
-        englistName: country.englishName,
-      );
+  CountryEntity({this.id, this.englishName});
 }

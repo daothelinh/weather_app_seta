@@ -11,5 +11,6 @@ abstract class WeatherUseCase {
   });
   Future<Either<BaseError, List<CityEntity>>> getCity({
     required int offset,
+    required String q,
   });
 }

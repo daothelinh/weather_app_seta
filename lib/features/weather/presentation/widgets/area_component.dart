@@ -16,17 +16,17 @@ class AreaComponent extends StatelessWidget {
       height: 120.h,
       width: 335.w,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15.sp)),
-        // color: Colors.red,
-        image: DecorationImage(
-          image: NetworkImage(
-            index % 2 == 1
-                ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png'
-                : 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
-          ),
-          fit: BoxFit.fill,
-          opacity: 0.6,
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(15.r)),
+        color: Colors.red,
+        // image: DecorationImage(
+        //   image: NetworkImage(
+        //     index % 2 == 1
+        //         ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png'
+        //         : 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+        //   ),
+        //   fit: BoxFit.fill,
+        //   opacity: 0.6,
+        // ),
       ),
       child: Padding(
         padding: EdgeInsets.all(15.sp),

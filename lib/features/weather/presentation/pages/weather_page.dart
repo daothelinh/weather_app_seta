@@ -3,6 +3,7 @@ import 'package:base_bloc_3/common/app_theme/app_colors.dart';
 import 'package:base_bloc_3/common/widgets/base_scaffold.dart';
 import 'package:base_bloc_3/features/weather/presentation/widgets/area_component.dart';
 import 'package:base_bloc_3/features/weather/presentation/widgets/search_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -121,9 +122,12 @@ class _SearchArea extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: SearchWidget(
         controller: controller,
-        hintText: 'Search for a city or airport',
+        hintText: 'Search for a city or airport'.tr(),
         onChange: (text) => bloc.add(WeatherEvent.searching(text)),
-        onTap: showOverlay,
+        onTap: () {
+          showOverlay?.call();
+          bloc.add(WeatherEvent.showOverlay());
+        },
       ),
     );
   }
@@ -138,52 +142,64 @@ class BuildOverlay extends StatefulWidget {
   State<BuildOverlay> createState() => _BuildOverlayState();
 }
 
-class _BuildOverlayState
-    extends BaseState<BuildOverlay, WeatherEvent, WeatherState, WeatherBloc> {
-  // @override
-  // provideBloc(context) => widget.bloc;
+class _BuildOverlayState extends BaseShareState<BuildOverlay, WeatherEvent,
+    WeatherState, WeatherBloc> {
+  @override
+  provideBloc(context) => widget.bloc;
 
   @override
   Widget renderUI(BuildContext context) {
-    // final bloc = context.select((WeatherBloc bloc) => bloc);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Material(
         elevation: 8,
-        child: Column(children: [
-          Align(
-            alignment: Alignment.topRight,
-            child: IconButton(
-              onPressed: widget.fn,
-              icon: const Icon(Icons.close),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            height: 100,
-            color: Colors.red,
-            child: ListView.separated(
-              padding: const EdgeInsets.all(0),
-              // shrinkWrap: true,
-              itemCount: bloc.l.length,
-              itemBuilder: (context, int) => GestureDetector(
-                child: Text(
-                  '${bloc.l[int]}',
-                  style:
-                      AppStyles.t16p.copyWith(color: AppColors.backgroundLight),
-                ),
-                onTap: () {
-                  widget.fn?.call();
-                  print('${bloc.l[int]}');
-                  bloc.add(
-                    WeatherEvent.chooseCity('${bloc.l[int]}'),
-                  );
-                },
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                onPressed: widget.fn,
+                icon: const Icon(Icons.close),
               ),
-              separatorBuilder: (context, index) => const Divider(height: 1),
             ),
+            // blocBuilder((c, p1) => Text('${p1.listSearch?.length}')),
+            ListSearchArea(fn: widget.fn),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ListSearchArea extends StatelessWidget {
+  ListSearchArea({super.key, this.fn});
+  Function()? fn;
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.select((WeatherBloc bloc) => bloc);
+    final state = context.select((WeatherBloc bloc) => bloc.state);
+    return Container(
+      padding: const EdgeInsets.all(8),
+      height: 100,
+      // color: Colors.red,
+      child: ListView.separated(
+        padding: const EdgeInsets.all(0),
+        itemCount: state.listSearch!.length,
+        itemBuilder: (context, int) => GestureDetector(
+          child: Text(
+            '${state.listSearch?[int]}',
+            style: AppStyles.t16p.copyWith(color: AppColors.primaryColor),
           ),
-        ]),
+          onTap: () {
+            // print('${bloc.l[int]}');
+            bloc.add(
+              WeatherEvent.chooseCity('${state.listSearch?[int]}'),
+            );
+            fn?.call();
+          },
+        ),
+        separatorBuilder: (context, index) => const Divider(height: 1),
       ),
     );
   }
