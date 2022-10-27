@@ -12,8 +12,7 @@ class WeatherDataSourceImpl implements WeatherDataSource {
   WeatherDataSourceImpl(this._service);
   final WeatherService _service;
   @override
-  Future<BaseListData<CityModel>> getCity(
-      {required String text, required int offset}) {
+  Future<List<CityModel>> getCity({required String text, required int offset}) {
     return _service.getCity(
       token: AppToken.token,
       q: text,

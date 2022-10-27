@@ -14,7 +14,7 @@ abstract class WeatherService {
   factory WeatherService(Dio dio) = _WeatherService;
 
   @GET('/locations/v1/cities/search')
-  Future<BaseListData<CityModel>> getCity({
+  Future<List<CityModel>> getCity({
     @Query('apikey') required String token,
     @Query('q') required String q,
     @Query('language') required String language,

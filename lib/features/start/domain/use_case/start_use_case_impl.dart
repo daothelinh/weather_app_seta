@@ -10,7 +10,7 @@ class StartUseCaseImpl implements StartUseCase {
   StartUseCaseImpl(this._repo);
   final StartRepository _repo;
   @override
-  Future<Either<BaseError, ListMovie>> getMovie({required int index}) {
+  Future<Either<BaseError, List<MovieEntity>>> getMovie({required int index}) {
     return _repo.getMovie(index: index);
   }
 }

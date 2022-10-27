@@ -1,3 +1,4 @@
+import 'package:base_bloc_3/features/start/presentation/widgets/text_field_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,11 +28,11 @@ class _StartPageState
 
   @override
   Widget renderUI(BuildContext context) {
-    return Scaffold(
+    return BaseScaffold(
       appBar: AppBarCustom(
         // isSearch: true,
         middle: blocBuilder(
-            (c, p1) => p1.isSearch == true ? Text('true') : Text('false')),
+            (c, p1) => p1.isSearch == true ? _SearchArea() : Text('false')),
         trailing: GestureDetector(
           onTap: () => bloc.add(StartEvent.changeSearch()),
           child: blocBuilder((c, p1) =>
@@ -87,6 +88,18 @@ class _StartPageState
           ),
         ],
       ),
+    );
+  }
+}
+
+class _SearchArea extends StatelessWidget {
+  const _SearchArea({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.select((StartBloc bloc) => bloc);
+    return TextFieldCustom(
+      onChanged: (text) => bloc.add(StartEvent.onSearch(text)),
     );
   }
 }

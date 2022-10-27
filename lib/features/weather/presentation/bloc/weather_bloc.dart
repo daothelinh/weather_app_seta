@@ -49,22 +49,22 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
   }
 
   Future onShowOverlay(Emitter<WeatherState> emit) async {
-    emit(state.copyWith(listSearch: list));
+    emit(state.copyWith(status: BaseStateStatus.init, listSearch: list));
   }
 
   Future onSearching(Emitter<WeatherState> emit, String text) async {
     if (text.isNotEmpty) {
-      final res = await _useCase.getCity(offset: 1, q: text.toString());
+      emit(state.copyWith(status: BaseStateStatus.loading));
+      final res = await _useCase.getCity(offset: 10, q: text.toString());
 
       // emit(state.copyWith(listSearch: list));
-      res.fold(
-        (l) => print(res.length()),
-        (r) => print('done'),
-      );
+      emit(res.fold(
+        (l) => state.copyWith(status: BaseStateStatus.failed),
+        (r) => state.copyWith(status: BaseStateStatus.success, listCity: r),
+      ));
+    } else {
+      emit(state.copyWith(status: BaseStateStatus.init, listSearch: list));
     }
-    //Call API
-
-    print(text + ' searching call api');
   }
 
   void checkSelection(String text) async {
@@ -81,7 +81,7 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
       isSearching: false,
       listSearch: list,
     ));
-    onSearching(emit, text);
+    // onSearching(emit, text);
     // localPref.get<String>(AppLocalKey.search);
   }
 }

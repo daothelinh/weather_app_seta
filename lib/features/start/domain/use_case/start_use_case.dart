@@ -3,5 +3,5 @@ import 'package:base_bloc_3/features/start/domain/entity/movie_entity.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class StartUseCase {
-  Future<Either<BaseError, ListMovie>> getMovie({required int index});
+  Future<Either<BaseError, List<MovieEntity>>> getMovie({required int index});
 }

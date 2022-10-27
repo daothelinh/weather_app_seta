@@ -5,9 +5,9 @@ part 'city_model.g.dart';
 @freezed
 class Region with _$Region {
   const factory Region({
-    final String? id,
-    final String? localizedName,
-    final String? englishName,
+    @JsonKey(name: "Id") final String? id,
+    @JsonKey(name: "LocalizedName") final String? localizedName,
+    @JsonKey(name: "EnglishName") final String? englishName,
   }) = _Region;
 
   factory Region.fromJson(Map<String, dynamic> json) => _$RegionFromJson(json);
@@ -16,9 +16,9 @@ class Region with _$Region {
 @freezed
 class Country with _$Country {
   const factory Country({
-    final String? id,
-    final String? localizedName,
-    final String? englishName,
+    @JsonKey(name: "Id") final String? id,
+    @JsonKey(name: "LocalizedName") final String? localizedName,
+    @JsonKey(name: "EnglishName") final String? englishName,
   }) = _Country;
 
   factory Country.fromJson(Map<String, dynamic> json) =>
@@ -28,13 +28,13 @@ class Country with _$Country {
 @freezed
 class AdministrativeArea with _$AdministrativeArea {
   const factory AdministrativeArea({
-    final String? id,
-    final String? localizedName,
-    final String? englishName,
-    final int? level,
-    final String? localizedType,
-    final String? englishType,
-    final String? countryID,
+    @JsonKey(name: "Id") final String? id,
+    @JsonKey(name: "LocalizedName") final String? localizedName,
+    @JsonKey(name: "EnglishName") final String? englishName,
+    @JsonKey(name: "Level") final int? level,
+    @JsonKey(name: "LocalizedType") final String? localizedType,
+    @JsonKey(name: "EnglishType") final String? englishType,
+    @JsonKey(name: "CountryID") final String? countryID,
   }) = _AdministrativeArea;
 
   factory AdministrativeArea.fromJson(Map<String, dynamic> json) =>
@@ -44,11 +44,11 @@ class AdministrativeArea with _$AdministrativeArea {
 @freezed
 class TimeZone with _$TimeZone {
   const factory TimeZone({
-    final String? code,
-    final String? name,
-    final int? gmtOffset,
-    final bool? isDaylightSaving,
-    final dynamic nextOffsetChange,
+    @JsonKey(name: "Code") final String? code,
+    @JsonKey(name: "Name") final String? name,
+    @JsonKey(name: "GmtOffset") final double? gmtOffset,
+    @JsonKey(name: "IsDaylightSaving") final bool? isDaylightSaving,
+    @JsonKey(name: "NextOffsetChange") final dynamic nextOffsetChange,
   }) = _TimeZone;
 
   factory TimeZone.fromJson(Map<String, dynamic> json) =>
@@ -58,9 +58,9 @@ class TimeZone with _$TimeZone {
 @freezed
 class Metric with _$Metric {
   const factory Metric({
-    final int? value,
-    final String? unit,
-    final int? unitType,
+    @JsonKey(name: "Value") final double? value,
+    @JsonKey(name: "Unit") final String? unit,
+    @JsonKey(name: "UnitType") final int? unitType,
   }) = _Metric;
 
   factory Metric.fromJson(Map<String, dynamic> json) => _$MetricFromJson(json);
@@ -69,9 +69,9 @@ class Metric with _$Metric {
 @freezed
 class Imperial with _$Imperial {
   const factory Imperial({
-    final int? value,
-    final String? unit,
-    final int? unitType,
+    @JsonKey(name: "Value") final double? value,
+    @JsonKey(name: "Unit") final String? unit,
+    @JsonKey(name: "UnitType") final int? unitType,
   }) = _Imperial;
 
   factory Imperial.fromJson(Map<String, dynamic> json) =>
@@ -81,8 +81,8 @@ class Imperial with _$Imperial {
 @freezed
 class Elevation with _$Elevation {
   const factory Elevation({
-    final Metric? metric,
-    final Imperial? imperial,
+    @JsonKey(name: "Metric") final Metric? metric,
+    @JsonKey(name: "Imperial") final Imperial? imperial,
   }) = _Elevation;
 
   factory Elevation.fromJson(Map<String, dynamic> json) =>
@@ -92,9 +92,9 @@ class Elevation with _$Elevation {
 @freezed
 class GeoPosition with _$GeoPosition {
   const factory GeoPosition({
-    final double? latitude,
-    final double? longitude,
-    final Elevation? elevation,
+    @JsonKey(name: "Latitude") final double? latitude,
+    @JsonKey(name: "Longitude") final double? longitude,
+    @JsonKey(name: "Elevation") final Elevation? elevation,
   }) = _GeoPosition;
 
   factory GeoPosition.fromJson(Map<String, dynamic> json) =>
@@ -104,21 +104,23 @@ class GeoPosition with _$GeoPosition {
 @freezed
 class CityModel with _$CityModel {
   const factory CityModel({
-    final int? version,
-    final String? key,
-    final String? type,
-    final int? rank,
-    final String? localizedName,
-    final String? englishName,
-    final String? primaryPostalCode,
-    final Region? region,
-    final Country? country,
-    final AdministrativeArea? administrativeArea,
-    final TimeZone? timeZone,
-    final GeoPosition? geoPosition,
-    final bool? isAlias,
-    final List<dynamic>? supplementalAdminAreas,
-    final List<String>? dataSets,
+    @JsonKey(name: "Version") final int? version,
+    @JsonKey(name: "Key") final String? key,
+    @JsonKey(name: "Type") final String? type,
+    @JsonKey(name: "Rank") final int? rank,
+    @JsonKey(name: "LocalizedName") final String? localizedName,
+    @JsonKey(name: "EnglishName") final String? englishName,
+    @JsonKey(name: "PrimaryPostalCode") final String? primaryPostalCode,
+    @JsonKey(name: "Region") final Region? region,
+    @JsonKey(name: "Country") final Country? country,
+    @JsonKey(name: "AdministrativeArea")
+        final AdministrativeArea? administrativeArea,
+    @JsonKey(name: "TimeZone") final TimeZone? timeZone,
+    @JsonKey(name: "GeoPosition") final GeoPosition? geoPosition,
+    @JsonKey(name: "IsAlias") final bool? isAlias,
+    @JsonKey(name: "SupplementalAdminAreas")
+        final List<dynamic>? supplementalAdminAreas,
+    @JsonKey(name: "DataSets") final List<String>? dataSets,
   }) = _CityModel;
 
   factory CityModel.fromJson(Map<String, dynamic> json) =>

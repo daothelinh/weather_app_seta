@@ -11,6 +11,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../base/base_widget.dart';
 import '../../../../base/network/errors/error.dart';
+import '../../domain/entity/movie_entity.dart';
 
 part 'start_bloc.freezed.dart';
 part 'start_bloc.g.dart';
@@ -41,9 +42,16 @@ class StartBloc extends BaseBloc<StartEvent, StartState> {
     }
   }
 
-  onSearch(Emitter<StartState> emit, String text) async {}
+  onSearch(Emitter<StartState> emit, String text) async {
+    if (text != '') {
+      //call api search with text
+      print(text);
+    }
+  }
+
   onChangeSearch(Emitter<StartState> emit) async {
     isSearch = !isSearch!;
+
     emit(state.copyWith(isSearch: isSearch));
   }
 }

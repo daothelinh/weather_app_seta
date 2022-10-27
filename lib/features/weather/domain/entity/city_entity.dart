@@ -6,11 +6,17 @@ class CityEntity {
   final String? id;
   final CountryEntity? country;
 
-  CityEntity(this.id, this.country);
+  CityEntity({this.id, this.country});
 
   factory CityEntity.fromModel(CityModel model) {
     return CityEntity(
-        model.key, CountryEntity(englishName: model.country?.englishName));
+      id: model.key,
+      // country: CountryEntity(
+      //   id: model.country?.id,
+      //   englishName: model.country?.englishName,
+      // ),
+      country: CountryEntity.fromModel(model.country!),
+    );
   }
 }
 
@@ -19,4 +25,10 @@ class CountryEntity {
   final String? englishName;
 
   CountryEntity({this.id, this.englishName});
+  factory CountryEntity.fromModel(Country country) {
+    return CountryEntity(
+      id: country.id,
+      englishName: country.englishName,
+    );
+  }
 }

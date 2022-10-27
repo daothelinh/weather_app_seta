@@ -1,3 +1,4 @@
+import 'package:base_bloc_3/base/network/errors/error_handling.dart';
 import 'package:base_bloc_3/base/network/errors/extension.dart';
 import 'package:base_bloc_3/features/weather/data/remote/source/weather_data_source.dart';
 import 'package:base_bloc_3/features/weather/domain/entity/index.dart';
@@ -9,6 +10,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/repository/weather_repository.dart';
+import '../model/city_model.dart';
 
 @Injectable(as: WeatherRepository)
 class WeatherRepositoryImpl implements WeatherRepository {
@@ -28,10 +30,15 @@ class WeatherRepositoryImpl implements WeatherRepository {
   }) async {
     try {
       final result = await _dataSource.getCity(offset: offset, text: q);
-      return right(
-          (result.data ?? []).map((e) => CityEntity.fromModel(e)).toList());
+      // print(result);
+      return right(result.map((e) => CityEntity.fromModel(e)).toList());
     } on DioError catch (exeption) {
+      print(exeption.type);
+      print(exeption.baseError);
       return left(exeption.baseError);
+    } on Exception catch (e) {
+      print(e);
+      rethrow;
     }
   }
 }

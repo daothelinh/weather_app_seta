@@ -24,8 +24,8 @@ class WeatherPage extends StatefulWidget {
   State<WeatherPage> createState() => _WeatherPageState();
 }
 
-class _WeatherPageState extends BaseShareState<WeatherPage, WeatherEvent,
-    WeatherState, WeatherBloc> {
+class _WeatherPageState
+    extends BaseState<WeatherPage, WeatherEvent, WeatherState, WeatherBloc> {
   late OverlayEntry? entry;
   // late TextEditingController? controller;
 
@@ -179,28 +179,72 @@ class ListSearchArea extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = context.select((WeatherBloc bloc) => bloc);
     final state = context.select((WeatherBloc bloc) => bloc.state);
-    return Container(
-      padding: const EdgeInsets.all(8),
-      height: 100,
-      // color: Colors.red,
-      child: ListView.separated(
-        padding: const EdgeInsets.all(0),
-        itemCount: state.listSearch!.length,
-        itemBuilder: (context, int) => GestureDetector(
-          child: Text(
-            '${state.listSearch?[int]}',
-            style: AppStyles.t16p.copyWith(color: AppColors.primaryColor),
+
+    switch (state.status) {
+      case BaseStateStatus.loading:
+        return const SizedBox(
+          height: 100,
+          child: Center(
+            child: CircularProgressIndicator(),
           ),
-          onTap: () {
-            // print('${bloc.l[int]}');
-            bloc.add(
-              WeatherEvent.chooseCity('${state.listSearch?[int]}'),
-            );
-            fn?.call();
-          },
-        ),
-        separatorBuilder: (context, index) => const Divider(height: 1),
-      ),
-    );
+        );
+      case BaseStateStatus.failed:
+        return const SizedBox(
+          height: 10,
+          child: Text('Not found'),
+        );
+      case BaseStateStatus.success:
+        return Container(
+          padding: const EdgeInsets.all(8),
+          height: 100,
+          // color: Colors.red,
+          child: ListView.separated(
+            padding: const EdgeInsets.all(0),
+            itemCount: state.listCity!.length,
+            itemBuilder: (context, int) => GestureDetector(
+              child: Text(
+                '${state.listCity?[int].country?.englishName}',
+                style: AppStyles.t16p.copyWith(color: AppColors.primaryColor),
+              ),
+              onTap: () {
+                // print('${bloc.l[int]}');
+                bloc.add(
+                  WeatherEvent.chooseCity(
+                      '${state.listCity?[int].country?.englishName}'),
+                );
+                fn?.call();
+              },
+            ),
+            separatorBuilder: (context, index) => const Divider(height: 1),
+          ),
+        );
+      // default:
+      case BaseStateStatus.init:
+        return Container(
+          padding: const EdgeInsets.all(8),
+          height: 100,
+          // color: Colors.red,
+          child: ListView.separated(
+            padding: const EdgeInsets.all(0),
+            itemCount: state.listSearch!.length,
+            itemBuilder: (context, int) => GestureDetector(
+              child: Text(
+                '${state.listSearch?[int]}',
+                style: AppStyles.t16p.copyWith(color: AppColors.primaryColor),
+              ),
+              onTap: () {
+                // print('${bloc.l[int]}');
+                bloc.add(
+                  WeatherEvent.chooseCity('${state.listSearch?[int]}'),
+                );
+                fn?.call();
+              },
+            ),
+            separatorBuilder: (context, index) => const Divider(height: 1),
+          ),
+        );
+      default:
+        return Container();
+    }
   }
 }
