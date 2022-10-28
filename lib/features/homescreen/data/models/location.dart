@@ -275,12 +275,12 @@
 class Location {
   String? location;
   String? locationKey;
-  Location({
-    this.location,
-    this.locationKey,
-  });
+  num? temperature;
+  Location({this.location, this.locationKey, this.temperature});
   Location.fromJson(Map<String, dynamic> json) {
-    location = json[""]["EnglishName"];
-    locationKey = json[""]["Key"];
+    location = json["name"];
+    temperature = json["main"]["temp"];
+
+    // locationKey = json[""]["Key"];
   }
 }

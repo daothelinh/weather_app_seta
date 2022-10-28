@@ -23,20 +23,21 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      constraints: const BoxConstraints.expand(),
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/background/background.jpg"),
-              fit: BoxFit.cover)),
-      child: SingleChildScrollView(
-        child: Center(
-          // Padding(
-          //   padding: const EdgeInsets.all(78.0),
+      body: Container(
+        constraints: const BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/background/background.jpg"),
+                fit: BoxFit.cover)),
+        child: SingleChildScrollView(
           child: FutureBuilder<Location?>(
             future: getData(),
             builder: ((context, snapshot) {
-              return Column(
+              return Center(
+                  // Padding(
+                  //   padding: const EdgeInsets.all(78.0),
+
+                  child: Column(
                 // mainAxisAlignment: MainAxisAlignment.start,
                 // crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -48,10 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(fontSize: 37, color: Colors.white),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 60, top: 10),
+                  Padding(
+                    padding: EdgeInsets.only(left: 50, top: 10),
                     child: Text(
-                      "21°",
+                      "${data?.temperature}°",
+                      // "21°",
                       style: TextStyle(fontSize: 90, color: Colors.white),
                     ),
                   ),
@@ -266,95 +268,95 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 80,
                   ),
                 ],
-              );
+              ));
             }),
           ),
         ),
       ),
-    ));
+    );
   }
-
-  Widget weatherCard() => Column(
-        children: const [
-          Text(
-            "data",
-            style: TextStyle(color: Colors.white, fontSize: 17),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Icon(
-            Icons.sunny,
-            color: Colors.white,
-            size: 32,
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Text(
-            "data",
-            style: TextStyle(color: Colors.white, fontSize: 17),
-          )
-        ],
-      );
-
-  Widget foreCastCard() => Column(
-        children: <Widget>[
-          Container(
-            height: 1,
-            width: 320,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.white,
-              ),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-          ),
-          const SizedBox(
-            height: 14,
-          ),
-          Row(
-            children: <Widget>[
-              const SizedBox(width: 20),
-              const Text(
-                "Today",
-                style: TextStyle(color: Colors.white, fontSize: 22),
-              ),
-              const SizedBox(width: 10),
-              const Icon(
-                Icons.sunny,
-                color: Colors.white,
-              ),
-              const SizedBox(width: 10),
-              const Text(
-                "15°",
-                style: TextStyle(color: Colors.white, fontSize: 22),
-              ),
-              const SizedBox(width: 10),
-              Container(
-                height: 10,
-                width: 130,
-                // color: Colors.yellow,
-                decoration: BoxDecoration(
-                  color: Colors.yellow,
-                  border: Border.all(
-                    color: Colors.white54,
-                    // width: 350,
-                  ),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-              const SizedBox(width: 10),
-              const Text(
-                "29°",
-                style: TextStyle(color: Colors.white, fontSize: 22),
-              ),
-              const SizedBox(width: 10),
-            ],
-          ),
-          const SizedBox(
-            height: 14,
-          ),
-        ],
-      );
 }
+
+Widget weatherCard() => Column(
+      children: const [
+        Text(
+          "data",
+          style: TextStyle(color: Colors.white, fontSize: 17),
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        Icon(
+          Icons.sunny,
+          color: Colors.white,
+          size: 32,
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        Text(
+          "data",
+          style: TextStyle(color: Colors.white, fontSize: 17),
+        )
+      ],
+    );
+
+Widget foreCastCard() => Column(
+      children: <Widget>[
+        Container(
+          height: 1,
+          width: 320,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.white,
+            ),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+        const SizedBox(
+          height: 14,
+        ),
+        Row(
+          children: <Widget>[
+            const SizedBox(width: 20),
+            const Text(
+              "Today",
+              style: TextStyle(color: Colors.white, fontSize: 22),
+            ),
+            const SizedBox(width: 10),
+            const Icon(
+              Icons.sunny,
+              color: Colors.white,
+            ),
+            const SizedBox(width: 10),
+            const Text(
+              "15°",
+              style: TextStyle(color: Colors.white, fontSize: 22),
+            ),
+            const SizedBox(width: 10),
+            Container(
+              height: 10,
+              width: 130,
+              // color: Colors.yellow,
+              decoration: BoxDecoration(
+                color: Colors.yellow,
+                border: Border.all(
+                  color: Colors.white54,
+                  // width: 350,
+                ),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            ),
+            const SizedBox(width: 10),
+            const Text(
+              "29°",
+              style: TextStyle(color: Colors.white, fontSize: 22),
+            ),
+            const SizedBox(width: 10),
+          ],
+        ),
+        const SizedBox(
+          height: 14,
+        ),
+      ],
+    );

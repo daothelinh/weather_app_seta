@@ -47,7 +47,8 @@ dependencies:
   #firebase
   firebase_core: ^1.24.0
   firebase_messaging: ^13.0.4
-
+  firebase_core_platform_interface: 4.5.1 # note removed ^
+  # firebase_messaging: ^13.0.4 # previously I only had this which was pulling in 4.5.2 which you do not want
   flutter_local_notifications: ^11.0.1
 
   flutter_dotenv: ^5.0.2
