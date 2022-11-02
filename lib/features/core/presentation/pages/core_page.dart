@@ -21,6 +21,12 @@ class CorePage extends StatefulWidget {
 class _CorePageState
     extends BaseState<CorePage, CoreEvent, CoreState, CoreBloc> {
   @override
+  void initState() {
+    super.initState();
+    bloc.add(const CoreEvent.init());
+  }
+
+  @override
   Widget renderUI(BuildContext context) {
     return const BaseScaffold(
       body: _Screens(),

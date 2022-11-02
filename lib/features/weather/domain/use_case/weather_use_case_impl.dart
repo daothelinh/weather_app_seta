@@ -11,9 +11,8 @@ class WeatherUseCaseImpl implements WeatherUseCase {
   WeatherUseCaseImpl(this._repo);
   final WeatherRepository _repo;
   @override
-  Future<Either<BaseError, List<AreaEntity>>> getArea(
-      {required int offset, required int limit}) {
-    return _repo.getArea(offset: offset, limit: limit);
+  Future<Either<BaseError, AreaEntity>> getArea({required String locationKey}) {
+    return _repo.getArea(locationKey: locationKey);
   }
 
   @override

@@ -8,8 +8,10 @@ class WeatherState extends BaseBlocState {
     this.isSearching,
     this.listSearch,
     this.listCity,
+    this.area,
   });
   bool? isSearching;
+  AreaEntity? area;
   List<CityEntity>? listCity;
   List<String>? listSearch;
   factory WeatherState.init() {

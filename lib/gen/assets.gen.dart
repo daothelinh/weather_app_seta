@@ -35,6 +35,10 @@ class $AssetsImagesGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/Gear-0.2s-200px.svg
+  SvgGenImage get gear02s200px =>
+      const SvgGenImage('assets/svg/Gear-0.2s-200px.svg');
+
   /// File path: assets/svg/MaskGroup1.svg
   SvgGenImage get maskGroup1 => const SvgGenImage('assets/svg/MaskGroup1.svg');
 

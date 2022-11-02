@@ -47,14 +47,14 @@ class AreaComponent extends StatelessWidget {
                       SizedBox(
                         height: 5.h,
                       ),
-                      Text('Time',
+                      Text('${area?.headline?.endDate ?? 'hihi'} ',
                           style: AppStyles.t16p.copyWith(fontSize: 16.sp)),
                     ],
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('35',
+                      Text('40',
                           style: AppStyles.t16p.copyWith(fontSize: 40.sp)),
                       // Container(
                       //   height: 12.h,
@@ -91,14 +91,20 @@ class AreaComponent extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Partly Cloudy', style: AppStyles.t16p),
+                  SizedBox(
+                    width: 100.w,
+                    child: Text('${area?.headline?.text}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppStyles.t16p),
+                  ),
                   Row(
                     children: [
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'H:29',
+                            'H: ${area?.dailyForecast?[0].temperature?.max?.value}',
                             style: AppStyles.t16p.copyWith(fontSize: 15.sp),
                           ),
                           CustomPaint(
@@ -114,7 +120,7 @@ class AreaComponent extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'L:15',
+                            'L: ${area?.dailyForecast?[0].temperature?.min?.value}',
                             style: AppStyles.t16p.copyWith(fontSize: 15.sp),
                           ),
                           CustomPaint(

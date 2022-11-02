@@ -1,8 +1,11 @@
 import 'package:base_bloc_3/base/bloc/index.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../../weather/presentation/bloc/weather_bloc.dart';
 
 part 'core_bloc.freezed.dart';
 part 'core_bloc.g.dart';
@@ -20,9 +23,14 @@ class CoreBloc extends BaseBloc<CoreEvent, CoreState> {
     });
   }
 
-  onInit(Emitter<CoreState> emit) {}
+  // late EventBus eventBus;
 
-  onChangeIndex(Emitter<CoreState> emit, int i) {
+  onInit(Emitter<CoreState> emit) {
+    // eventBus = EventBus();
+  }
+
+  onChangeIndex(Emitter<CoreState> emit, int i) async {
     emit(state.copyWith(index: i));
+    // eventBus.on<WeatherEvent>().any((element) => false));
   }
 }

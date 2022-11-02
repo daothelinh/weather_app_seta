@@ -17,10 +17,19 @@ class WeatherRepositoryImpl implements WeatherRepository {
   WeatherRepositoryImpl(this._dataSource);
   final WeatherDataSource _dataSource;
   @override
-  Future<Either<BaseError, List<AreaEntity>>> getArea(
-      {required int offset, required int limit}) {
-    // TODO: implement getArea
-    throw UnimplementedError();
+  Future<Either<BaseError, AreaEntity>> getArea(
+      {required String locationKey}) async {
+    try {
+      final result = await _dataSource.getArea(key: locationKey);
+      return right(AreaEntity.fromModel(result));
+    } on DioError catch (exeption) {
+      print(exeption.type);
+      print(exeption.baseError);
+      return left(exeption.baseError);
+    } on Exception catch (e) {
+      print(e);
+      rethrow;
+    }
   }
 
   @override
@@ -30,7 +39,6 @@ class WeatherRepositoryImpl implements WeatherRepository {
   }) async {
     try {
       final result = await _dataSource.getCity(offset: offset, text: q);
-      // print(result);
       return right(result.map((e) => CityEntity.fromModel(e)).toList());
     } on DioError catch (exeption) {
       print(exeption.type);

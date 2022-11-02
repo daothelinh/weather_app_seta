@@ -11,8 +11,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-
 import '../../../../base/base_widget.dart';
+import '../../../../di/di_setup.dart';
 import '../../domain/entity/index.dart';
 
 part 'weather_bloc.freezed.dart';
@@ -27,43 +27,47 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
       await event.when(
         init: () => onInit(emit),
         searching: (String text) => onSearching(emit, text),
-        chooseCity: (String text) => chooseCity(emit, text),
+        chooseCity: (String text, CityEntity city) =>
+            chooseCity(emit, text, city),
         showOverlay: () => onShowOverlay(emit),
+        getArea: (String key) => onGetArea(emit, key),
+        hideOverlay: () => onHideOverlay(emit),
       );
     });
   }
   late bool isSearching = false;
-  late String a = 'hah';
-  late List<String> list = ['a', 'b', 'c', 'd', 'e', 'f'];
-  late List<String> list2 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-  late List<LocalStorage> listLocal;
+  late bool isShowOverlay = false;
   late TextEditingController controller = TextEditingController();
 
   final WeatherUseCase _useCase;
   Future onInit(Emitter<WeatherState> emit) async {
-    controller.selection = TextSelection(
-        baseOffset: controller.text.length,
-        extentOffset: controller.text.length);
-    // emit(state.copyWith());
-    print('haha');
+    emit(state.copyWith(isSearching: true));
+    eventBus.fire(WeatherEvent.hideOverlay());
+  }
+
+  Future onHideOverlay(Emitter<WeatherState> emit) async {
+    emit(state.copyWith(isSearching: false));
   }
 
   Future onShowOverlay(Emitter<WeatherState> emit) async {
-    emit(state.copyWith(status: BaseStateStatus.init, listSearch: list));
+    emit(state.copyWith(
+        isSearching: true,
+        status: BaseStateStatus.init,
+        listCity: await getListPrefCity()));
   }
 
   Future onSearching(Emitter<WeatherState> emit, String text) async {
-    if (text.isNotEmpty) {
+    if (text.trim().isNotEmpty) {
       emit(state.copyWith(status: BaseStateStatus.loading));
       final res = await _useCase.getCity(offset: 10, q: text.toString());
 
-      // emit(state.copyWith(listSearch: list));
       emit(res.fold(
         (l) => state.copyWith(status: BaseStateStatus.failed),
         (r) => state.copyWith(status: BaseStateStatus.success, listCity: r),
       ));
     } else {
-      emit(state.copyWith(status: BaseStateStatus.init, listSearch: list));
+      emit(state.copyWith(
+          status: BaseStateStatus.init, listCity: await getListPrefCity()));
     }
   }
 
@@ -74,14 +78,28 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
         extentOffset: controller.text.length);
   }
 
-  Future chooseCity(Emitter<WeatherState> emit, String text) async {
-    checkSelection(text);
-    localPref.save(AppLocalKey.search, controller.text);
-    emit(state.copyWith(
-      isSearching: false,
-      listSearch: list,
+  Future onGetArea(Emitter<WeatherState> emit, String key) async {
+    emit(state.copyWith(status: BaseStateStatus.loading));
+    final res = await _useCase.getArea(locationKey: key);
+
+    emit(res.fold(
+      (l) => state.copyWith(status: BaseStateStatus.init),
+      (r) => state.copyWith(status: BaseStateStatus.success, area: r),
     ));
-    // onSearching(emit, text);
-    // localPref.get<String>(AppLocalKey.search);
+  }
+
+  Future chooseCity(
+    Emitter<WeatherState> emit,
+    String text,
+    CityEntity city,
+  ) async {
+    checkSelection(text);
+    if (listPrefSearchValue.contains(jsonEncode(city))) {
+    } else {
+      saveListSearch(city);
+    }
+    //emit list city
+    emit(state.copyWith(status: BaseStateStatus.success));
+    await onGetArea(emit, city.id ?? '0');
   }
 }

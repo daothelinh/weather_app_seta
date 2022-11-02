@@ -8,6 +8,7 @@ class AppStyles {
     height: 1,
     fontWeight: FontWeight.normal,
     color: AppColors.textColor,
+    // decoration: TextDecoration.none,
   );
   static final TextStyle t48m = TextStyle(
     fontSize: 48.sp,

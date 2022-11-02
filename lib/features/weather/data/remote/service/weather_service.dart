@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
 
 import '../../../../../base/network/models/base_data.dart';
+import '../../model/area/area_model.dart';
 
 part 'weather_service.g.dart';
 
@@ -22,4 +23,12 @@ abstract class WeatherService {
     @Query('offset') required int offset,
     @Query('alias') required String alias,
   });
+
+  @GET('/forecasts/v1/daily/1day/{locationKey}')
+  Future<AreaModel> getArea(
+      {@Path('locationKey') required String key,
+      @Query('apikey') required String token,
+      @Query('language') required String language,
+      @Query('details') required bool details,
+      @Query('metric') required bool metric});
 }

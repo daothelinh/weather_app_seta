@@ -1,4 +1,5 @@
 import 'package:base_bloc_3/common/local_data/app_token.dart';
+import 'package:base_bloc_3/features/weather/data/model/area/area_model.dart';
 import 'package:base_bloc_3/features/weather/data/model/city_model.dart';
 
 import 'package:base_bloc_3/base/network/models/base_data.dart';
@@ -20,6 +21,17 @@ class WeatherDataSourceImpl implements WeatherDataSource {
       details: AppToken.detail,
       offset: offset,
       alias: AppToken.alias,
+    );
+  }
+
+  @override
+  Future<AreaModel> getArea({required String key}) {
+    return _service.getArea(
+      key: key,
+      token: AppToken.token,
+      language: AppToken.language,
+      details: AppToken.detail,
+      metric: AppToken.detail,
     );
   }
 }
