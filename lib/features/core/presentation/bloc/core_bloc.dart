@@ -25,12 +25,13 @@ class CoreBloc extends BaseBloc<CoreEvent, CoreState> {
 
   // late EventBus eventBus;
 
-  onInit(Emitter<CoreState> emit) {
-    // eventBus = EventBus();
-  }
+  onInit(Emitter<CoreState> emit) {}
 
   onChangeIndex(Emitter<CoreState> emit, int i) async {
     emit(state.copyWith(index: i));
-    // eventBus.on<WeatherEvent>().any((element) => false));
+    // eventBus.on<>().where((event) {
+    //   print(event.runtimeType);
+    // });
+    // eventBus.fire();
   }
 }
