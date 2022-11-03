@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-import '../../data/models/location.dart';
+import '../../../data/models/location.dart';
 
 // const baseUrl =
 //     'http://dataservice.accuweather.com/locations/v1/cities/search?apikey=Ib1qthW5jNCN6Yi9f2zyvqoYDPsL33nB&q=hanoi';

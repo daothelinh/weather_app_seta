@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:base_bloc_3/features/homescreen/data/models/location.dart';
-import 'package:base_bloc_3/features/homescreen/domain/repositories/location_repository.dart';
+import 'package:base_bloc_3/features/homescreen/domain/repositories/forecastTime/location_repository.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Location? data;
 
   Future<Location?> getData() async {
-    data = await client.getCurrentLocation("Hanoi");
+    data = await client.getCurrentLocation("hanoi");
     return data;
   }
 
@@ -36,10 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return Center(
                   // Padding(
                   //   padding: const EdgeInsets.all(78.0),
-
                   child: Column(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                // crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   // Location(location: ,),
                   Padding(
