@@ -41,12 +41,18 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
 
   final WeatherUseCase _useCase;
   Future onInit(Emitter<WeatherState> emit) async {
-    emit(state.copyWith(isSearching: true));
-    eventBus.fire(WeatherEvent.hideOverlay());
+    emit(state.copyWith(isSearching: false));
+    // eventBus.fire(WeatherEvent);
+    // print(eventBus.get())
+    // eventBus.on<_$HideOverlay>().listen((event) {
+    //   print(event.runtimeType);
+    // });
   }
 
   Future onHideOverlay(Emitter<WeatherState> emit) async {
     emit(state.copyWith(isSearching: false));
+
+    print('hide overlay');
   }
 
   Future onShowOverlay(Emitter<WeatherState> emit) async {

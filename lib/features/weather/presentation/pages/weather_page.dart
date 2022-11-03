@@ -36,12 +36,12 @@ class _WeatherPageState
   late OverlayEntry? entry;
   // late TextEditingController? controller;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // bloc.controller = TextEditingController();
-  //   bloc.add(WeatherEvent.init());
-  // }
+  @override
+  void initState() {
+    super.initState();
+    // bloc.controller = TextEditingController();
+    bloc.add(WeatherEvent.init());
+  }
 
   // @override
   // void dispose() {
