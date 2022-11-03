@@ -5,7 +5,7 @@
 import FlutterMacOS
 import Foundation
 
-import connectivity_plus_macos
+import connectivity_plus
 import flutter_local_notifications
 import path_provider_macos
 import shared_preferences_macos

@@ -5,11 +5,22 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
+
+class $AssetsBackgroundGen {
+  const $AssetsBackgroundGen();
+
+  /// File path: assets/background/background.jpg
+  AssetGenImage get background =>
+      const AssetGenImage('assets/background/background.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [background];
+}
 
 class $AssetsEnvGen {
   const $AssetsEnvGen();
@@ -22,14 +33,9 @@ class $AssetsEnvGen {
 
   /// File path: assets/env/.env_staging
   String get envStaging => 'assets/env/.env_staging';
-}
 
-class $AssetsImagesGen {
-  const $AssetsImagesGen();
-
-  /// File path: assets/images/Mask Group.png
-  AssetGenImage get maskGroup =>
-      const AssetGenImage('assets/images/Mask Group.png');
+  /// List of all assets
+  List<String> get values => [envDev, envProduction, envStaging];
 }
 
 class $AssetsSvgGen {
@@ -128,6 +134,39 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/zoom.svg
   SvgGenImage get zoom => const SvgGenImage('assets/svg/zoom.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+        gear02s200px,
+        maskGroup1,
+        actionsWeather,
+        firstIcon,
+        icAdd,
+        icArrowLeft,
+        icCamera,
+        icCancel,
+        icCar,
+        icCheck,
+        icCheckCircle,
+        icClose,
+        icDelete,
+        icFilter,
+        icFolder,
+        icHamburgerMenu,
+        icHide,
+        icLock,
+        icLogout,
+        icMoney,
+        icPhotoLibrary,
+        icProfile,
+        icRightArrowArrow,
+        icSearch,
+        icShow,
+        icTime,
+        icWarning,
+        list,
+        zoom
+      ];
 }
 
 class $AssetsTranslationsGen {
@@ -138,13 +177,16 @@ class $AssetsTranslationsGen {
 
   /// File path: assets/translations/vi-VN.json
   String get viVN => 'assets/translations/vi-VN.json';
+
+  /// List of all assets
+  List<String> get values => [enUS, viVN];
 }
 
 class Assets {
   Assets._();
 
+  static const $AssetsBackgroundGen background = $AssetsBackgroundGen();
   static const $AssetsEnvGen env = $AssetsEnvGen();
-  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
 }
@@ -207,6 +249,8 @@ class AssetGenImage {
     );
   }
 
+  ImageProvider provider() => AssetImage(_assetName);
+
   String get path => _assetName;
 
   String get keyName => _assetName;
@@ -259,4 +303,6 @@ class SvgGenImage {
   }
 
   String get path => _assetName;
+
+  String get keyName => _assetName;
 }
