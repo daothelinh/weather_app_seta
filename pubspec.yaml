@@ -65,7 +65,7 @@ flutter_gen:
 
   assets:
     enable: true
-    package_parameter_enabled: false
+    package_parameter_enabled: true
 
   font:
     enable: true

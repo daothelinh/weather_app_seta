@@ -30,4 +30,12 @@ abstract class BaseBloc<E, S extends BaseBlocState> extends Bloc<E, S> {
         .toList();
     return l;
   }
+
+  getNumberOfPrefCity() async {
+    var l = List<String>.from(
+            await localPref.get(AppLocalKey.search).then((value) => value))
+        .map((e) => CityEntity.fromJson(jsonDecode((e))))
+        .toList();
+    return l.length;
+  }
 }

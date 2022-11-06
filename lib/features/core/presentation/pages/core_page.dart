@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:base_bloc_3/features/core/presentation/bloc/core_bloc.dart';
-import 'package:base_bloc_3/features/start/presentation/start_page.dart';
 import 'package:base_bloc_3/features/homescreen/presentation/pages/home_screen.dart';
+import 'package:base_bloc_3/routes/app_pages.dart';
+import 'package:base_bloc_3/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,13 +44,17 @@ class _Screens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final index = context.select((CoreBloc bloc) => bloc.state.index);
+
     return IndexedStack(
       index: index,
       children: const [
-        StartPage(),
-        // HomePage(),
+        // StartPage(),
+        HomePage(),
         HomeScreen(),
-        WeatherPage(),
+
+        // WeatherPage(),
+        // Container(),
+        SizedBox.shrink()
       ],
     );
   }
@@ -62,34 +68,42 @@ class _XBottomNavigationBar extends StatelessWidget {
     final bloc = context.select((CoreBloc bloc) => bloc);
     final index = context.select((CoreBloc bloc) => bloc.state.index);
     return BottomNavigationBar(
-      iconSize: 30.sp,
-      backgroundColor: AppColors.primaryColor,
-      elevation: 0,
-      type: BottomNavigationBarType.fixed,
-      unselectedItemColor: Colors.greenAccent,
-      fixedColor: Colors.purple,
-      selectedFontSize: 12,
-      items: [
-        _buildBottomNavItem(
-          icon: Assets.svg.firstIcon.svg(),
-          activeIcon: Assets.svg.firstIcon.svg(),
-          label: '',
-          showDot: true,
-        ),
-        _buildBottomNavItem(
-          icon: const Icon(Icons.add),
-          activeIcon: const Icon(Icons.add),
-          showDot: true,
-        ),
-        _buildBottomNavItem(
-          icon: Assets.svg.list.svg(),
-          activeIcon: Assets.svg.list.svg(),
-          showDot: true,
-        ),
-      ],
-      currentIndex: index,
-      onTap: (i) => bloc.add(CoreEvent.changeIndex(i)),
-    );
+        iconSize: 30.sp,
+        backgroundColor: AppColors.primaryColor,
+        elevation: 0,
+        type: BottomNavigationBarType.fixed,
+        unselectedItemColor: Colors.greenAccent,
+        fixedColor: Colors.purple,
+        selectedFontSize: 12,
+        items: [
+          _buildBottomNavItem(
+            icon: Assets.svg.firstIcon.svg(),
+            activeIcon: Assets.svg.firstIcon.svg(color: Colors.red),
+            // label: '',
+            showDot: false,
+          ),
+          _buildBottomNavItem(
+            icon: const Icon(Icons.add),
+            activeIcon: const Icon(
+              Icons.add,
+              color: Colors.red,
+            ),
+            showDot: false,
+          ),
+          _buildBottomNavItem(
+            icon: Assets.svg.list.svg(),
+            activeIcon: Assets.svg.list.svg(color: Colors.red),
+            // showDot: true,
+          ),
+        ],
+        currentIndex: index,
+        onTap: (i) {
+          if (i == 2) {
+            context.router.pushNamed(AppRoutes.weather);
+          } else {
+            bloc.add(CoreEvent.changeIndex(i));
+          }
+        });
   }
 }
 

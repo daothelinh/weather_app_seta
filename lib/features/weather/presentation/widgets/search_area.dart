@@ -30,7 +30,8 @@ class SearchAreaState extends BaseShareState<SearchArea, WeatherEvent,
   @override
   void dispose() {
     super.dispose();
-    bloc.add(const WeatherEvent.hideOverlay());
+    hideOverlay();
+    // bloc.add(const WeatherEvent.hideOverlay());
   }
 
   @override
@@ -48,7 +49,7 @@ class SearchAreaState extends BaseShareState<SearchArea, WeatherEvent,
       prev.isSearching != curr.isSearching;
 
   void showOverlay(BuildContext context) {
-    final overlay = Overlay.of(context)!;
+    final overlay = Overlay.of(context);
     final renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
     final offset = renderBox.localToGlobal(Offset.zero);
