@@ -39,7 +39,7 @@
 //     );
 //   }
 // }
-//
+
 // class _DialogWidget extends StatefulWidget {
 //   final String? leftButtonText;
 //   final String? rightButtonText;
@@ -49,7 +49,7 @@
 //   final TextStyle? descriptionTextStyle;
 //   final TextStyle? leftButtonTextStyle;
 //   final TextStyle? rightButtonTextStyle;
-//
+
 //   const _DialogWidget({
 //     Key? key,
 //     this.leftButtonText,
@@ -61,11 +61,11 @@
 //     this.leftButtonTextStyle,
 //     this.rightButtonTextStyle,
 //   }) : super(key: key);
-//
+
 //   @override
 //   _DialogWidgetState createState() => _DialogWidgetState();
 // }
-//
+
 // class _DialogWidgetState extends State<_DialogWidget> {
 //   @override
 //   Widget build(BuildContext context) {
