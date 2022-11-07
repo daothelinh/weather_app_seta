@@ -5,7 +5,3 @@ import 'package:base_bloc_3/features/homescreen/data/models/weatherbar/weatherBa
 abstract class DataSourceWB {
   Future<List<WeatherBar>> getData();
 }
-
-abstract class DataSourceForecastTime {
-  Future<ForecastTime> getDataForecastTime();
-}
