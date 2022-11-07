@@ -3,11 +3,8 @@ import 'package:base_bloc_3/common/index.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:injectable/injectable.dart';
-import 'package:dartz/dartz.dart';
-
-import '../../../../base/bloc/index.dart';
+import '../../data/models/weatherbar/weatherBar.dart';
 import '../../domain/entity/weatherbar/weatherBarEntity.dart';
 import '../../domain/use_case/use_caseHS.dart';
 
@@ -34,11 +31,21 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
     );
   }
   final HomescreenUseCase _coreUseCaseHS;
+  Future onGetData(Emitter<HomeScreenState> emit) async {
+    emit(state.copyWith(status: BaseStateStatus.loading));
+    final res = await _coreUseCaseHS.getData();
+    res.fold(
+      (l) => emit(
+          state.copyWith(status: BaseStateStatus.failed, message: 'Error')),
+      (r) =>
+          emit(state.copyWith(status: BaseStateStatus.success, weatherbars: r)),
+    );
+
+    print("Done on Get Data in HomeScreen Bloc");
+  }
+
+  onGetWeatherbars(Emitter<HomeScreenState> emit,
+      List<WeatherBarEntity> weatherbars, int offset) {}
+
+  onShowMessage(Emitter<HomeScreenState> emit) {}
 }
-
-onGetWeatherbars(Emitter<HomeScreenState> emit,
-    List<WeatherBarEntity> weatherbars, int offset) {}
-
-onShowMessage(Emitter<HomeScreenState> emit) {}
-
-onGetData(Emitter<HomeScreenState> emit) {}

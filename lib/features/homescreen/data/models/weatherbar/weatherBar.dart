@@ -5,9 +5,9 @@ part 'weatherBar.g.dart';
 @freezed
 class Metric with _$Metric {
   const factory Metric({
-    final double? value,
-    final String? unit,
-    final int? unitType,
+    @JsonKey(name: "Value") final double? value,
+    @JsonKey(name: "Unit") final String? unit,
+    @JsonKey(name: "UnitType") final int? unitType,
   }) = _Metric;
 
   factory Metric.fromJson(Map<String, dynamic> json) => _$MetricFromJson(json);
@@ -16,9 +16,9 @@ class Metric with _$Metric {
 @freezed
 class Imperial with _$Imperial {
   const factory Imperial({
-    final int? value,
-    final String? unit,
-    final int? unitType,
+    @JsonKey(name: "Value") final double? value,
+    @JsonKey(name: "Unit") final String? unit,
+    @JsonKey(name: "UnitType") final int? unitType,
   }) = _Imperial;
 
   factory Imperial.fromJson(Map<String, dynamic> json) =>
@@ -28,8 +28,8 @@ class Imperial with _$Imperial {
 @freezed
 class Temperature with _$Temperature {
   const factory Temperature({
-    final Metric? metric,
-    final Imperial? imperial,
+    @JsonKey(name: "Metric") final Metric? metric,
+    @JsonKey(name: "Imperial") final Imperial? imperial,
   }) = _Temperature;
 
   factory Temperature.fromJson(Map<String, dynamic> json) =>
@@ -39,16 +39,17 @@ class Temperature with _$Temperature {
 @freezed
 class WeatherBar with _$WeatherBar {
   const factory WeatherBar({
-    final String? localObservationDateTime,
-    final int? epochTime,
-    final String? weatherText,
-    final int? weatherIcon,
-    final bool? hasPrecipitation,
-    final dynamic precipitationType,
-    final bool? isDayTime,
-    final Temperature? temperature,
-    final String? mobileLink,
-    final String? link,
+    @JsonKey(name: "LocalObservationDateTime")
+        final String? localObservationDateTime,
+    @JsonKey(name: "EpochTime") final int? epochTime,
+    @JsonKey(name: "WeatherText") final String? weatherText,
+    @JsonKey(name: "WeatherIcon") final int? weatherIcon,
+    @JsonKey(name: "HasPrecipitation") final bool? hasPrecipitation,
+    @JsonKey(name: "PrecipitationType") final dynamic precipitationType,
+    @JsonKey(name: "IsDayTime") final bool? isDayTime,
+    @JsonKey(name: "Temperature") final Temperature? temperature,
+    @JsonKey(name: "MobileLink") final String? mobileLink,
+    @JsonKey(name: "Link") final String? link,
   }) = _WeatherBar;
 
   factory WeatherBar.fromJson(Map<String, dynamic> json) =>

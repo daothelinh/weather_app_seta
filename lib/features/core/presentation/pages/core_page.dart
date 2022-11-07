@@ -21,7 +21,7 @@ class _CorePageState
   Widget renderUI(BuildContext context) {
     return const Scaffold(
       body: _Screens(),
-      bottomNavigationBar: _XBottomNavigationBar(),
+      // bottomNavigationBar: _XBottomNavigationBar(),
     );
   }
 }
@@ -44,43 +44,43 @@ class _Screens extends StatelessWidget {
   }
 }
 
-class _XBottomNavigationBar extends StatelessWidget {
-  const _XBottomNavigationBar();
+// class _XBottomNavigationBar extends StatelessWidget {
+//   const _XBottomNavigationBar();
 
-  @override
-  Widget build(BuildContext context) {
-    final bloc = context.select((CoreBloc bloc) => bloc);
-    final index = context.select((CoreBloc bloc) => bloc.state.index);
-    return BottomNavigationBar(
-      iconSize: 32,
-      backgroundColor: const Color(0xFFFAFAFA),
-      elevation: 0,
-      type: BottomNavigationBarType.fixed,
-      unselectedItemColor: Colors.greenAccent,
-      fixedColor: Colors.purple,
-      selectedFontSize: 12,
-      items: [
-        _buildBottomNavItem(
-          label: 'Trò chuyện',
-          icon: const Icon(Icons.add),
-          activeIcon: const Icon(Icons.add),
-        ),
-        _buildBottomNavItem(
-          label: 'Trò chuyện',
-          icon: const Icon(Icons.add),
-          activeIcon: const Icon(Icons.add),
-        ),
-        _buildBottomNavItem(
-          label: 'Trò chuyện',
-          icon: const Icon(Icons.add),
-          activeIcon: const Icon(Icons.add),
-        ),
-      ],
-      currentIndex: index,
-      onTap: (i) => bloc.add(CoreEvent.changeIndex(i)),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final bloc = context.select((CoreBloc bloc) => bloc);
+//     final index = context.select((CoreBloc bloc) => bloc.state.index);
+//     return BottomNavigationBar(
+//       iconSize: 32,
+//       backgroundColor: const Color(0xFFFAFAFA),
+//       elevation: 0,
+//       type: BottomNavigationBarType.fixed,
+//       unselectedItemColor: Colors.greenAccent,
+//       fixedColor: Colors.purple,
+//       selectedFontSize: 12,
+//       items: [
+//         _buildBottomNavItem(
+//           label: 'Trò chuyện',
+//           icon: const Icon(Icons.add),
+//           activeIcon: const Icon(Icons.add),
+//         ),
+//         _buildBottomNavItem(
+//           label: 'Trò chuyện',
+//           icon: const Icon(Icons.add),
+//           activeIcon: const Icon(Icons.add),
+//         ),
+//         _buildBottomNavItem(
+//           label: 'Trò chuyện',
+//           icon: const Icon(Icons.add),
+//           activeIcon: const Icon(Icons.add),
+//         ),
+//       ],
+//       currentIndex: index,
+//       onTap: (i) => bloc.add(CoreEvent.changeIndex(i)),
+//     );
+//   }
+// }
 
 BottomNavigationBarItem _buildBottomNavItem(
     {required String label,

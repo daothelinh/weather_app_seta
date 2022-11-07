@@ -27,9 +27,7 @@ class WeatherbarRepoImpl implements WeatherbarRepo {
           // locationkey: locationkey,
           // apikey: apikey,
           );
-      return right((result.data ?? [])
-          .map((e) => WeatherBarEntity.fromModel(e))
-          .toList());
+      return right(result.map((e) => WeatherBarEntity.fromModel(e)).toList());
     } on DioError catch (exception) {
       return left(exception.baseError);
     }
