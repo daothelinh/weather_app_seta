@@ -1,5 +1,6 @@
 import 'package:base_bloc_3/base/bloc/index.dart';
 import 'package:base_bloc_3/common/index.dart';
+import 'package:base_bloc_3/features/homescreen/domain/entity/forecast_time/forecast_time_entity.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -24,6 +25,7 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
       (HomeScreenEvent event, Emitter<HomeScreenState> emit) async {
         await event.when(
             getData: () => onGetData(emit),
+            getDataForecastTime: () => onGetDataForecastTime(emit),
             showMessage: () => onShowMessage(emit),
             getWeatherbars: (List<WeatherBarEntity> weatherbars, int offset) =>
                 onGetWeatherbars(emit, weatherbars, offset));
@@ -42,6 +44,10 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
     );
 
     print("Done on Get Data in HomeScreen Bloc");
+  }
+
+  Future onGetDataForecastTime(Emitter<HomeScreenState> emit) async {
+    // emit(state.)
   }
 
   onGetWeatherbars(Emitter<HomeScreenState> emit,
