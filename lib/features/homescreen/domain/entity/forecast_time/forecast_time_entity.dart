@@ -11,7 +11,9 @@ class ForecastTimeEntity {
   factory ForecastTimeEntity.fromModel(ForecastTime forecastTime) =>
       ForecastTimeEntity(
         headline: HeadlineEntity.fromModel(forecastTime.headline!),
-        //dailyForecasts: DailyForecastsEntity.fromModel(forecastTime.dailyForecasts!),
+        dailyForecasts: forecastTime.dailyForecasts
+            ?.map((e) => DailyForecastsEntity.fromModel(e))
+            .toList(),
       );
 }
 
