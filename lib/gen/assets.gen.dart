@@ -5,11 +5,22 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
+
+class $AssetsBackgroundGen {
+  const $AssetsBackgroundGen();
+
+  /// File path: assets/background/background.jpg
+  AssetGenImage get background =>
+      const AssetGenImage('assets/background/background.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [background];
+}
 
 class $AssetsEnvGen {
   const $AssetsEnvGen();
@@ -22,10 +33,27 @@ class $AssetsEnvGen {
 
   /// File path: assets/env/.env_staging
   String get envStaging => 'assets/env/.env_staging';
+
+  /// List of all assets
+  List<String> get values => [envDev, envProduction, envStaging];
 }
 
 class $AssetsSvgGen {
   const $AssetsSvgGen();
+
+  /// File path: assets/svg/Gear-0.2s-200px.svg
+  SvgGenImage get gear02s200px =>
+      const SvgGenImage('assets/svg/Gear-0.2s-200px.svg');
+
+  /// File path: assets/svg/MaskGroup1.svg
+  SvgGenImage get maskGroup1 => const SvgGenImage('assets/svg/MaskGroup1.svg');
+
+  /// File path: assets/svg/actions_weather.svg
+  SvgGenImage get actionsWeather =>
+      const SvgGenImage('assets/svg/actions_weather.svg');
+
+  /// File path: assets/svg/first_icon.svg
+  SvgGenImage get firstIcon => const SvgGenImage('assets/svg/first_icon.svg');
 
   /// File path: assets/svg/ic_add.svg
   SvgGenImage get icAdd => const SvgGenImage('assets/svg/ic_add.svg');
@@ -100,6 +128,45 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/ic_warning.svg
   SvgGenImage get icWarning => const SvgGenImage('assets/svg/ic_warning.svg');
+
+  /// File path: assets/svg/list.svg
+  SvgGenImage get list => const SvgGenImage('assets/svg/list.svg');
+
+  /// File path: assets/svg/zoom.svg
+  SvgGenImage get zoom => const SvgGenImage('assets/svg/zoom.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+        gear02s200px,
+        maskGroup1,
+        actionsWeather,
+        firstIcon,
+        icAdd,
+        icArrowLeft,
+        icCamera,
+        icCancel,
+        icCar,
+        icCheck,
+        icCheckCircle,
+        icClose,
+        icDelete,
+        icFilter,
+        icFolder,
+        icHamburgerMenu,
+        icHide,
+        icLock,
+        icLogout,
+        icMoney,
+        icPhotoLibrary,
+        icProfile,
+        icRightArrowArrow,
+        icSearch,
+        icShow,
+        icTime,
+        icWarning,
+        list,
+        zoom
+      ];
 }
 
 class $AssetsTranslationsGen {
@@ -110,11 +177,15 @@ class $AssetsTranslationsGen {
 
   /// File path: assets/translations/vi-VN.json
   String get viVN => 'assets/translations/vi-VN.json';
+
+  /// List of all assets
+  List<String> get values => [enUS, viVN];
 }
 
 class Assets {
   Assets._();
 
+  static const $AssetsBackgroundGen background = $AssetsBackgroundGen();
   static const $AssetsEnvGen env = $AssetsEnvGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
@@ -178,6 +249,8 @@ class AssetGenImage {
     );
   }
 
+  ImageProvider provider() => AssetImage(_assetName);
+
   String get path => _assetName;
 
   String get keyName => _assetName;
@@ -230,4 +303,6 @@ class SvgGenImage {
   }
 
   String get path => _assetName;
+
+  String get keyName => _assetName;
 }

@@ -107,7 +107,7 @@ abstract class BaseShareState<
   }
 
   Widget blocBuilder(Widget Function(BuildContext c, S) builder,
-      [bool Function(S, S)? buildWhen]) {
+      {bool Function(S, S)? buildWhen}) {
     return BlocBuilder<B, S>(
       bloc: bloc,
       buildWhen: buildWhen,

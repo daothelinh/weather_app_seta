@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:base_bloc_3/features/core/presentation/pages/core_page.dart';
-import 'package:flutter/cupertino.dart';
+
+import 'package:flutter/material.dart';
+
 import 'package:injectable/injectable.dart';
 
+import '../features/core/presentation/pages/core_page.dart';
 import 'app_routes.dart';
-
 part 'app_pages.gr.dart';
 
 @singleton

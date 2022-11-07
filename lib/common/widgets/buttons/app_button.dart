@@ -79,7 +79,7 @@ class AppButton extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: textStyle?.copyWith(color: textColor) ??
-                    AppStyles.t16m.copyWith(
+                    AppStyles.t16p.copyWith(
                         color: (isOutlined ?? false)
                             ? AppColors.primaryA500
                             : AppColors.white),

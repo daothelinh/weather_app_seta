@@ -72,7 +72,7 @@ class BaseAppBar extends StatelessWidget {
                   Icon(
                     Icons.arrow_back_ios,
                     color:
-                        Colors.black, // todo: default color AppColors.primary,
+                        leadingColor, // todo: default color AppColors.primary,
                     size: 22.sp,
                   ), // todo default icon
             ),

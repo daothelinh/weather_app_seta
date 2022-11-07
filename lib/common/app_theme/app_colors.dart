@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class AppColors {
   //weather app
   static const Color primaryColor = Color(0xff2A3040);
-  static const Color primaryColor2 = Color(0xff2A3040);
+  static const Color primaryColor2 = Color(0xff000000);
+  static const Color textColor = Color(0xffffffff);
+  static const Color color0f1b2b = Color(0xff0f1b2b);
+  static const Color colore51937 = Color(0xffe51937);
 
   /// primary
   static const Color primaryA500 = Color(0xFF5768FF);
