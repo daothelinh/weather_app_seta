@@ -14,7 +14,6 @@ import '../../../../base/base_widget.dart';
 import '../../../../common/index.dart';
 import '../../../../di/di_setup.dart';
 import '../../../../gen/assets.gen.dart';
-import '../../../example/presentation/pages/example_page.dart';
 import '../../../home/presentation/view/home_view.dart';
 
 class CorePage extends StatefulWidget {
