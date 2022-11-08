@@ -3,13 +3,13 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
 
-part 'serviceWB.g.dart';
+part 'service_weather_bar.g.dart';
 
 @RestApi()
 @injectable
-abstract class serviceWB {
+abstract class ServiceWeatherBar {
   @factoryMethod
-  factory serviceWB(Dio dio) = _serviceWB;
+  factory ServiceWeatherBar(Dio dio) = _ServiceWeatherBar;
 
   @GET("/currentconditions/v1/{locationKey}")
   Future<List<WeatherBar>> getData({

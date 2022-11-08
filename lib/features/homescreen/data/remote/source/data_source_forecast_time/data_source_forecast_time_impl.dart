@@ -1,6 +1,5 @@
 import 'package:base_bloc_3/common/local_data/app_token.dart';
 import 'package:base_bloc_3/features/homescreen/data/models/forecast_time/forecast_time.dart';
-import 'package:base_bloc_3/features/homescreen/data/remote/service/serviceWB.dart';
 import 'package:base_bloc_3/features/homescreen/data/remote/service/service_forecast_time/service_forecast_time.dart';
 import 'package:base_bloc_3/features/homescreen/data/remote/source/data_source_forecast_time/data_source_forecast_time.dart';
 import 'package:injectable/injectable.dart';

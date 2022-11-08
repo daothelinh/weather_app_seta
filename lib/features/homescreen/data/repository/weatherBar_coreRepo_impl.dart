@@ -6,12 +6,12 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/repositories/weatherBar_coreRepo.dart';
-import '../remote/source/data_source_weather_bar/data_source_WB.dart';
+import '../remote/source/data_source_weather_bar/data_source_weather_bar.dart';
 
 @Injectable(as: WeatherbarRepo)
 class WeatherbarRepoImpl implements WeatherbarRepo {
   WeatherbarRepoImpl(this._remoteDataSource);
-  final DataSourceWB _remoteDataSource;
+  final DataSourceWeatherBar _remoteDataSource;
 
   @override
   Future<Either<BaseError, List<WeatherBarEntity>>> getData(

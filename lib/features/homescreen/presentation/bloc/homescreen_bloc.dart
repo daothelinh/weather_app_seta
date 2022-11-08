@@ -1,14 +1,14 @@
 import 'package:base_bloc_3/base/bloc/index.dart';
 import 'package:base_bloc_3/common/index.dart';
 import 'package:base_bloc_3/features/homescreen/domain/entity/forecast_time/forecast_time_entity.dart';
-import 'package:base_bloc_3/features/homescreen/domain/use_case/use_case_forecast_time.dart/use_case_forecast_time.dart';
+import 'package:base_bloc_3/features/homescreen/domain/use_case/use_case_forecast_time/use_case_forecast_time.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import '../../data/models/weatherbar/weatherBar.dart';
 import '../../domain/entity/weatherbar/weatherBarEntity.dart';
-import '../../domain/use_case/use_caseHS.dart';
+import '../../domain/use_case/use_case_weather_bar/use_case_weather_bar.dart';
 
 part 'homescreen_bloc.freezed.dart';
 part 'homescreen_bloc.g.dart';
@@ -30,7 +30,7 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
       },
     );
   }
-  final HomescreenUseCase _coreUseCaseHS;
+  final WeatherBarUseCase _coreUseCaseHS;
   Future onGetData(Emitter<HomeScreenState> emit) async {
     emit(state.copyWith(status: BaseStateStatus.loading));
     final res = await _coreUseCaseHS.getData();
