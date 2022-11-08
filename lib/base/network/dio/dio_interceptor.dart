@@ -12,12 +12,14 @@ class DioInterceptor extends Interceptor {
   }
 
   @override
+  // ignore: unnecessary_overrides
   void onError(DioError err, ErrorInterceptorHandler handler) {
     // ErrorHandling.withError(error: err);
     super.onError(err, handler);
   }
 
   @override
+  // ignore: unnecessary_overrides
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     super.onResponse(response, handler);
   }

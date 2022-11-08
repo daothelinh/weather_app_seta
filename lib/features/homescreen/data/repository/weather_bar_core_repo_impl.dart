@@ -1,11 +1,11 @@
 import 'package:base_bloc_3/base/network/errors/error.dart';
 import 'package:base_bloc_3/base/network/errors/extension.dart';
-import 'package:base_bloc_3/features/homescreen/domain/entity/weatherbar/weatherBarEntity.dart';
+import 'package:base_bloc_3/features/homescreen/domain/entity/weatherbar/weather_bar_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../domain/repositories/weatherBar_coreRepo.dart';
+import '../../domain/repositories/weather_bar_core_repo.dart';
 import '../remote/source/data_source_weather_bar/data_source_weather_bar.dart';
 
 @Injectable(as: WeatherbarRepo)

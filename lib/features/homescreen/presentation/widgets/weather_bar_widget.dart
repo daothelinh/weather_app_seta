@@ -1,15 +1,16 @@
 import 'package:base_bloc_3/features/homescreen/domain/entity/forecast_time/forecast_time_entity.dart';
-import 'package:base_bloc_3/features/homescreen/domain/entity/weatherbar/weatherBarEntity.dart';
+import 'package:base_bloc_3/features/homescreen/domain/entity/weatherbar/weather_bar_entity.dart';
 import 'package:base_bloc_3/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
 
-class WeatherBarWG extends StatelessWidget {
-  const WeatherBarWG({
+class WeatherBarWidget extends StatelessWidget {
+  const WeatherBarWidget({
     super.key,
     this.temperature,
+    this.forecastTimeEntity,
   });
   final WeatherBarEntity? temperature;
-  // final ForecastTimeEntity? dailyForecasts;
+  final ForecastTimeEntity? forecastTimeEntity;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,12 +39,11 @@ class WeatherBarWG extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        const Padding(
-          padding: EdgeInsets.only(left: 20.0),
+        Padding(
+          padding: const EdgeInsets.only(left: 20.0),
           child: Text(
-            // "H:${dailyForecasts.dailyForecasts.}°  L:15°",
-            "H:29°  L:15°",
-            style: TextStyle(
+            "H: ${forecastTimeEntity?.dailyForecasts?.first.temperature?.maximum?.value}°F   L: ${forecastTimeEntity?.dailyForecasts?.first.temperature?.minimum?.value}°F",
+            style: const TextStyle(
                 fontSize: 17,
                 color: Colors.white,
                 fontFamily: FontFamily.lexend),

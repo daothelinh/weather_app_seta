@@ -9,7 +9,6 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../base/network/errors/error.dart';
-import '../../data/model/index.dart';
 import '../../domain/entity/player_entity.dart';
 
 part 'example_bloc.freezed.dart';
@@ -36,7 +35,6 @@ class ExampleBloc extends BaseBloc<ExampleEvent, ExampleState>
       PagingController(firstPageKey: 0);
 
   Future onGetData(Emitter<ExampleState> emit) async {
-    print('emit state example');
     emit(state.copyWith(attribute: none()));
     final Either<BaseError, List<PlayerEntity>> result =
         await _coreUseCase.getData(limit: 25, offset: 0);

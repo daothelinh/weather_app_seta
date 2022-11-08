@@ -1,5 +1,3 @@
-import 'package:base_bloc_3/features/homescreen/domain/entity/weatherbar/weatherBarEntity.dart';
-
 import '../../../data/models/forecast_time/forecast_time.dart';
 
 class ForecastTimeEntity {
@@ -47,7 +45,7 @@ class TemperatureEntity {
 }
 
 class MinninumEntity {
-  final int? minTemperature;
+  final num? minTemperature;
 
   MinninumEntity({this.minTemperature});
   factory MinninumEntity.fromModel(Minimum minimum) =>
@@ -55,7 +53,7 @@ class MinninumEntity {
 }
 
 class MaximumEntity {
-  final int? maxTemperature;
+  final num? maxTemperature;
 
   MaximumEntity({this.maxTemperature});
   factory MaximumEntity.fromModel(Maximum maximum) =>

@@ -6,7 +6,7 @@ class HomeScreenState extends BaseBlocState {
   final ForecastTimeEntity? forecastTime;
 
   final List<WeatherBar>? weather;
-  HomeScreenState({
+  const HomeScreenState({
     this.weatherbars,
     required super.status,
     super.message,
@@ -15,7 +15,7 @@ class HomeScreenState extends BaseBlocState {
   });
 
   factory HomeScreenState.init() {
-    return HomeScreenState(status: BaseStateStatus.init);
+    return const HomeScreenState(status: BaseStateStatus.init);
   }
 
   @override

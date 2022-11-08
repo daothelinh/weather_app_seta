@@ -1,4 +1,4 @@
-import 'package:base_bloc_3/features/homescreen/data/models/weatherbar/weatherBar.dart';
+import 'package:base_bloc_3/features/homescreen/data/models/weatherbar/weather_bar.dart';
 
 class WeatherBarEntity {
   final String? weatherText;

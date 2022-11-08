@@ -5,15 +5,15 @@ part 'forecast_time.g.dart';
 @freezed
 class Headline with _$Headline {
   const factory Headline({
-    final String? effectiveDate,
-    final int? effectiveEpochDate,
-    final int? severity,
-    final String? text,
-    final String? category,
-    final String? endDate,
-    final int? endEpochDate,
-    final String? mobileLink,
-    final String? link,
+    @JsonKey(name: "EffectiveDate") final String? effectiveDate,
+    @JsonKey(name: "EffectiveEpochDate") final int? effectiveEpochDate,
+    @JsonKey(name: "Severity") final int? severity,
+    @JsonKey(name: "Text") final String? text,
+    @JsonKey(name: "Category") final String? category,
+    @JsonKey(name: "EndDate") final String? endDate,
+    @JsonKey(name: "EndEpochDate") final int? endEpochDate,
+    @JsonKey(name: "MobileLink") final String? mobileLink,
+    @JsonKey(name: "Link") final String? link,
   }) = _Headline;
 
   factory Headline.fromJson(Map<String, dynamic> json) =>
@@ -23,9 +23,9 @@ class Headline with _$Headline {
 @freezed
 class Minimum with _$Minimum {
   const factory Minimum({
-    final int? value,
-    final String? unit,
-    final int? unitType,
+    @JsonKey(name: "Value") final num? value,
+    @JsonKey(name: "Unit") final String? unit,
+    @JsonKey(name: "UnitType") final int? unitType,
   }) = _Minimum;
 
   factory Minimum.fromJson(Map<String, dynamic> json) =>
@@ -35,9 +35,9 @@ class Minimum with _$Minimum {
 @freezed
 class Maximum with _$Maximum {
   const factory Maximum({
-    final int? value,
-    final String? unit,
-    final int? unitType,
+    @JsonKey(name: "Value") final num? value,
+    @JsonKey(name: "Unit") final String? unit,
+    @JsonKey(name: "UnitType") final int? unitType,
   }) = _Maximum;
 
   factory Maximum.fromJson(Map<String, dynamic> json) =>
@@ -47,8 +47,8 @@ class Maximum with _$Maximum {
 @freezed
 class Temperature with _$Temperature {
   const factory Temperature({
-    final Minimum? minimum,
-    final Maximum? maximum,
+    @JsonKey(name: "Minimum") final Minimum? minimum,
+    @JsonKey(name: "Maximum") final Maximum? maximum,
   }) = _Temperature;
 
   factory Temperature.fromJson(Map<String, dynamic> json) =>
@@ -58,9 +58,9 @@ class Temperature with _$Temperature {
 @freezed
 class Day with _$Day {
   const factory Day({
-    final int? icon,
-    final String? iconPhrase,
-    final bool? hasPrecipitation,
+    @JsonKey(name: "Icon") final int? icon,
+    @JsonKey(name: "IconPhrase") final String? iconPhrase,
+    @JsonKey(name: "HasPrecipitation") final bool? hasPrecipitation,
   }) = _Day;
 
   factory Day.fromJson(Map<String, dynamic> json) => _$DayFromJson(json);
@@ -69,9 +69,9 @@ class Day with _$Day {
 @freezed
 class Night with _$Night {
   const factory Night({
-    final int? icon,
-    final String? iconPhrase,
-    final bool? hasPrecipitation,
+    @JsonKey(name: "Icon") final int? icon,
+    @JsonKey(name: "IconPhrase") final String? iconPhrase,
+    @JsonKey(name: "HasPrecipitation") final bool? hasPrecipitation,
   }) = _Night;
 
   factory Night.fromJson(Map<String, dynamic> json) => _$NightFromJson(json);
@@ -80,14 +80,14 @@ class Night with _$Night {
 @freezed
 class DailyForecasts with _$DailyForecasts {
   const factory DailyForecasts({
-    final String? date,
-    final int? epochDate,
-    final Temperature? temperature,
-    final Day? day,
-    final Night? night,
-    final List<String>? sources,
-    final String? mobileLink,
-    final String? link,
+    @JsonKey(name: "Date") final String? date,
+    @JsonKey(name: "EpochDate") final int? epochDate,
+    @JsonKey(name: "Temperature") final Temperature? temperature,
+    @JsonKey(name: "Day") final Day? day,
+    @JsonKey(name: "Night") final Night? night,
+    @JsonKey(name: "Sources") final List<String>? sources,
+    @JsonKey(name: "MobileLink") final String? mobileLink,
+    @JsonKey(name: "Link") final String? link,
   }) = _DailyForecasts;
 
   factory DailyForecasts.fromJson(Map<String, dynamic> json) =>
@@ -97,8 +97,8 @@ class DailyForecasts with _$DailyForecasts {
 @freezed
 class ForecastTime with _$ForecastTime {
   const factory ForecastTime({
-    final Headline? headline,
-    final List<DailyForecasts>? dailyForecasts,
+    @JsonKey(name: "Headline") final Headline? headline,
+    @JsonKey(name: "DailyForecasts") final List<DailyForecasts>? dailyForecasts,
   }) = _ForecastTime;
 
   factory ForecastTime.fromJson(Map<String, dynamic> json) =>

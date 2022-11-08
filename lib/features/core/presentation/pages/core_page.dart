@@ -1,10 +1,7 @@
 import 'dart:async';
-
-import 'package:auto_route/auto_route.dart';
 import 'package:base_bloc_3/common/event_bus/change_index_home_event.dart';
 import 'package:base_bloc_3/features/core/presentation/bloc/core_bloc.dart';
-import 'package:base_bloc_3/routes/app_pages.dart';
-import 'package:base_bloc_3/routes/app_routes.dart';
+import 'package:base_bloc_3/features/homescreen/presentation/pages/home_screen.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +11,6 @@ import '../../../../base/base_widget.dart';
 import '../../../../common/index.dart';
 import '../../../../di/di_setup.dart';
 import '../../../../gen/assets.gen.dart';
-import '../../../home/presentation/view/home_view.dart';
 
 class CorePage extends StatefulWidget {
   const CorePage({Key? key}) : super(key: key);
@@ -63,7 +59,7 @@ class _Screens extends StatelessWidget {
       children: const [
         DummyScreen(),
         // DummyScreen(),
-        HomeView(),
+        HomeScreen(),
         SizedBox.shrink(),
       ],
     );

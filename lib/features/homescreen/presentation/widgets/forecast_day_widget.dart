@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 
-class ForeCastDayWG extends StatefulWidget {
-  const ForeCastDayWG({super.key});
+class ForecastDayWidget extends StatelessWidget {
+  const ForecastDayWidget({super.key});
 
-  @override
-  State<ForeCastDayWG> createState() => _ForeCastDayWGState();
-}
-
-class _ForeCastDayWGState extends State<ForeCastDayWG> {
   @override
   Widget build(BuildContext context) {
     return Column(

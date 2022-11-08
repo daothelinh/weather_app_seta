@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'weatherBar.freezed.dart';
-part 'weatherBar.g.dart';
+part 'weather_bar.freezed.dart';
+part 'weather_bar.g.dart';
 
 @freezed
 class Metric with _$Metric {

@@ -1,4 +1,4 @@
-import 'package:base_bloc_3/features/homescreen/data/models/weatherbar/weatherBar.dart';
+import 'package:base_bloc_3/features/homescreen/data/models/weatherbar/weather_bar.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
