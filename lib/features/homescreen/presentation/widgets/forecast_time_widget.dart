@@ -1,20 +1,25 @@
+import 'package:base_bloc_3/common/index.dart';
+import 'package:base_bloc_3/features/homescreen/domain/entity/forecast_date_time/forecast_date_time_entity.dart';
+import 'package:base_bloc_3/features/homescreen/presentation/bloc/homescreen_bloc.dart';
 import 'package:base_bloc_3/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/entity/forecast_time/forecast_time_entity.dart';
 
 class ForecastTimeWidget extends StatelessWidget {
-  const ForecastTimeWidget({super.key, this.forecastTimeEntity});
+  const ForecastTimeWidget(
+      {super.key, this.forecastTimeEntity, this.forecastDateTimeEntity});
   final ForecastTimeEntity? forecastTimeEntity;
-
+  final ForecastDateTimeEntity? forecastDateTimeEntity;
   @override
   Widget build(BuildContext context) {
+    final bloc = context.select((HomeScreenBloc bloc) => bloc);
     return Column(
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left: 20.0, top: 18),
           child: Text(
-            // " Cloudy conditions from 1AM-9AM, with showers expected at 9AM. ",
             "${forecastTimeEntity?.headline?.forecastTimeText}",
             style: const TextStyle(
                 color: Colors.white, fontFamily: FontFamily.lexend),
@@ -36,38 +41,44 @@ class ForecastTimeWidget extends StatelessWidget {
         ),
         SizedBox(
           height: 110,
-          child: ListView(
+          child: CustomListViewSeparated<ForecastDateTimeEntity>(
+            separatorBuilder: (c, i) => const Divider(),
+            controller: bloc.pagingController,
+            builder: (c, item, i) => WeatherCard(
+              data: item,
+            ),
             scrollDirection: Axis.horizontal,
-            children: [
-              const SizedBox(
-                width: 30,
-              ),
-              weatherCard(),
-              const SizedBox(
-                width: 30,
-              ),
-              weatherCard(),
-              const SizedBox(
-                width: 30,
-              ),
-              weatherCard(),
-              const SizedBox(
-                width: 30,
-              ),
-              weatherCard(),
-              const SizedBox(
-                width: 30,
-              ),
-              weatherCard(),
-              const SizedBox(
-                width: 30,
-              ),
-              weatherCard(),
-              const SizedBox(
-                width: 30,
-              ),
-              weatherCard(),
-            ],
+            // scrollDirection: Axis.horizontal,
+            // children: [
+            //   const SizedBox(
+            //     width: 30,
+            //   ),
+            //   weatherCard(),
+            //   const SizedBox(
+            //     width: 30,
+            //   ),
+            //   weatherCard(),
+            //   const SizedBox(
+            //     width: 30,
+            //   ),
+            //   weatherCard(),
+            //   const SizedBox(
+            //     width: 30,
+            //   ),
+            //   weatherCard(),
+            //   const SizedBox(
+            //     width: 30,
+            //   ),
+            //   weatherCard(),
+            //   const SizedBox(
+            //     width: 30,
+            //   ),
+            //   weatherCard(),
+            //   const SizedBox(
+            //     width: 30,
+            //   ),
+            //   weatherCard(),
+            // ],
           ),
         ),
       ],
@@ -76,8 +87,13 @@ class ForecastTimeWidget extends StatelessWidget {
   }
 }
 
-Widget weatherCard() => Column(
-      children: const [
+class WeatherCard extends StatelessWidget {
+  final ForecastDateTimeEntity data;
+  const WeatherCard({super.key, required this.data});
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
         Text(
           "data",
           style: TextStyle(color: Colors.white, fontSize: 17),
@@ -94,8 +110,11 @@ Widget weatherCard() => Column(
           height: 15,
         ),
         Text(
-          "data",
+          // "data",
+          "${data.temperature?.temperatureDateTime}",
           style: TextStyle(color: Colors.white, fontSize: 17),
-        )
+        ),
       ],
     );
+  }
+}

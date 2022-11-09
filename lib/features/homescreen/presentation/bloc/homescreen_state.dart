@@ -4,9 +4,11 @@ part of 'homescreen_bloc.dart';
 class HomeScreenState extends BaseBlocState {
   final List<WeatherBarEntity>? weatherbars;
   final ForecastTimeEntity? forecastTime;
+  final List<ForecastDateTimeEntity> forecastDateTimes;
 
   final List<WeatherBar>? weather;
   const HomeScreenState({
+    this.forecastDateTimes = const [],
     this.weatherbars,
     required super.status,
     super.message,
@@ -19,5 +21,12 @@ class HomeScreenState extends BaseBlocState {
   }
 
   @override
-  List get props => [status, message, weatherbars, weather, forecastTime];
+  List get props => [
+        status,
+        message,
+        weatherbars,
+        weather,
+        forecastTime,
+        forecastDateTimes,
+      ];
 }

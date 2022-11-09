@@ -12,12 +12,7 @@ class DataSourceWBImpl implements DataSourceWeatherBar {
   final ServiceWeatherBar _service;
 
   @override
-  Future<List<WeatherBar>> getData(
-      //   {
-      //   required int locationkey,
-      //   required String apikey,
-      // }
-      ) {
+  Future<List<WeatherBar>> getData() {
     return _service.getData(
       locationkey: AppToken.locationkey,
       apikey: AppToken.token,

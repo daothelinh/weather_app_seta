@@ -45,7 +45,7 @@ class TemperatureEntity {
 }
 
 class MinninumEntity {
-  final num? minTemperature;
+  final double? minTemperature;
 
   MinninumEntity({this.minTemperature});
   factory MinninumEntity.fromModel(Minimum minimum) =>
@@ -53,7 +53,7 @@ class MinninumEntity {
 }
 
 class MaximumEntity {
-  final num? maxTemperature;
+  final double? maxTemperature;
 
   MaximumEntity({this.maxTemperature});
   factory MaximumEntity.fromModel(Maximum maximum) =>

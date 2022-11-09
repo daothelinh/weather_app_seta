@@ -186,24 +186,27 @@ class CustomListViewSeparated<T> extends StatelessWidget {
   final ScrollPhysics? physics;
   final ScrollController? scrollController;
   final EdgeInsets? padding;
+  final Axis? scrollDirection;
 
-  const CustomListViewSeparated({
-    Key? key,
-    required this.controller,
-    required this.builder,
-    required this.separatorBuilder,
-    this.emptyWidget = const SizedBox.shrink(),
-    this.shrinkWrap = false,
-    this.onRefresh,
-    this.physics,
-    this.scrollController,
-    this.padding,
-    this.firstPageProgressIndicator,
-  }) : super(key: key);
+  const CustomListViewSeparated(
+      {Key? key,
+      required this.controller,
+      required this.builder,
+      required this.separatorBuilder,
+      this.emptyWidget = const SizedBox.shrink(),
+      this.shrinkWrap = false,
+      this.onRefresh,
+      this.physics,
+      this.scrollController,
+      this.padding,
+      this.firstPageProgressIndicator,
+      this.scrollDirection})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return PagedListView<int, T>.separated(
+      scrollDirection: scrollDirection ?? Axis.vertical,
       scrollController: scrollController,
       pagingController: controller,
       shrinkWrap: shrinkWrap,

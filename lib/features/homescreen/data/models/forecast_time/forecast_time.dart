@@ -23,7 +23,7 @@ class Headline with _$Headline {
 @freezed
 class Minimum with _$Minimum {
   const factory Minimum({
-    @JsonKey(name: "Value") final num? value,
+    @JsonKey(name: "Value") final double? value,
     @JsonKey(name: "Unit") final String? unit,
     @JsonKey(name: "UnitType") final int? unitType,
   }) = _Minimum;
@@ -35,7 +35,7 @@ class Minimum with _$Minimum {
 @freezed
 class Maximum with _$Maximum {
   const factory Maximum({
-    @JsonKey(name: "Value") final num? value,
+    @JsonKey(name: "Value") final double? value,
     @JsonKey(name: "Unit") final String? unit,
     @JsonKey(name: "UnitType") final int? unitType,
   }) = _Maximum;

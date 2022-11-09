@@ -25,6 +25,14 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
     super.initState();
     bloc.add(const HomeScreenEvent.getData());
     bloc.add(const HomeScreenEvent.getDataForecastTime());
+    // bloc.add(const HomeScreenEvent.getDataForecastDateTime());
+    bloc.pagingController.addPageRequestListener(
+      (pageKey) => bloc.add(
+        HomeScreenEvent.getDataForecastDateTime(
+          forecastDateTimes: bloc.state.forecastDateTimes,
+        ),
+      ),
+    );
   }
 
   @override
@@ -60,7 +68,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                       height: 20,
                     ),
                     Container(
-                      height: 200,
+                      height: 220,
                       width: 370,
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -74,6 +82,8 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                               ? const CircularProgressIndicator()
                               : ForecastTimeWidget(
                                   forecastTimeEntity: p1.forecastTime,
+                                  // forecastDateTimeEntity:
+                                  //     p1.forecastDateTimes[0],
                                 ),
                         ),
                       ),
