@@ -109,7 +109,7 @@ class _XBottomNavigationBar extends StatelessWidget {
         currentIndex: index,
         onTap: (i) {
           if (i == 2) {
-            // context.router.pushNamed(AppRoutes.weather);
+            context.router.pushNamed(AppRoutes.weather);
           } else {
             bloc.add(CoreEvent.changeIndex(i));
           }

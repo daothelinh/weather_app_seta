@@ -81,6 +81,10 @@ class $AssetsSvgGen {
   /// File path: assets/svg/ic_close.svg
   SvgGenImage get icClose => const SvgGenImage('assets/svg/ic_close.svg');
 
+  /// File path: assets/svg/ic_close_circle.svg
+  SvgGenImage get icCloseCircle =>
+      const SvgGenImage('assets/svg/ic_close_circle.svg');
+
   /// File path: assets/svg/ic_delete.svg
   SvgGenImage get icDelete => const SvgGenImage('assets/svg/ic_delete.svg');
 
@@ -149,6 +153,7 @@ class $AssetsSvgGen {
         icCheck,
         icCheckCircle,
         icClose,
+        icCloseCircle,
         icDelete,
         icFilter,
         icFolder,

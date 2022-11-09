@@ -51,7 +51,7 @@ Future<void> main() async {
             LocalizationConstants.enUSLocale,
             LocalizationConstants.viLocale
           ],
-          startLocale: LocalizationConstants.viLocale,
+          startLocale: LocalizationConstants.enUSLocale,
           path: LocalizationConstants.path,
           fallbackLocale: LocalizationConstants.enUSLocale,
           child: MyApp(),
