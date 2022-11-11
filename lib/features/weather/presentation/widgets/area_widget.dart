@@ -1,11 +1,17 @@
+import 'package:base_bloc_3/features/weather/data/model/focast_time/forecast_time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../common/app_theme/app_colors.dart';
 import '../../../../common/app_theme/app_styles.dart';
+import '../../data/model/location/location.dart';
+import '../argument/area.dart';
 
 class AreaWidget extends StatelessWidget {
-  const AreaWidget({super.key});
+  const AreaWidget({super.key, this.location, this.forecastTime, this.area});
+  final Location? location;
+  final ForecastTime? forecastTime;
+  final Area? area;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +56,7 @@ class AreaWidget extends StatelessWidget {
                 ),
                 SizedBox(
                   width: 200.h,
-                  child: Text('Not as warm tomorrow, witha high of 26°',
+                  child: Text('${area?.location?.weatherText}',
                       style: AppStyles.t16p, overflow: TextOverflow.ellipsis),
                 ),
               ],
@@ -61,10 +67,12 @@ class AreaWidget extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child:
-                      Text('40°', style: AppStyles.t16p.copyWith(fontSize: 40)),
+                  child: Text('${area?.location?.temperature?.metric?.value}°',
+                      style: AppStyles.t16p.copyWith(fontSize: 40)),
                 ),
-                Text('H:29° L:15°', style: AppStyles.t16p),
+                Text(
+                    'H:${area?.forecastTime?.dailyForecasts?[0].temperature?.maximum?.value}° L:${area?.forecastTime?.dailyForecasts?[0].temperature?.minimum?.value}°',
+                    style: AppStyles.t16p),
               ],
             ),
           ],

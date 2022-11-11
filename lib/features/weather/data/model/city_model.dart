@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'area_model.freezed.dart';
-part 'area_model.g.dart';
+part 'city_model.freezed.dart';
+part 'city_model.g.dart';
 
 @freezed
 class Region with _$Region {
@@ -102,8 +102,8 @@ class GeoPosition with _$GeoPosition {
 }
 
 @freezed
-class AreaModel with _$AreaModel {
-  const factory AreaModel({
+class CityModel with _$CityModel {
+  const factory CityModel({
     @JsonKey(name: 'Version') final double? version,
     @JsonKey(name: 'Key') final String? key,
     @JsonKey(name: 'Type') final String? type,
@@ -121,8 +121,8 @@ class AreaModel with _$AreaModel {
     @JsonKey(name: 'SupplementalAdminAreas')
         final List<dynamic>? supplementalAdminAreas,
     @JsonKey(name: 'DataSets') final List<String>? dataSets,
-  }) = _AreaModel;
+  }) = _CityModel;
 
-  factory AreaModel.fromJson(Map<String, dynamic> json) =>
-      _$AreaModelFromJson(json);
+  factory CityModel.fromJson(Map<String, dynamic> json) =>
+      _$CityModelFromJson(json);
 }

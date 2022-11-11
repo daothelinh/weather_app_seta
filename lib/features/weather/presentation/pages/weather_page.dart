@@ -38,50 +38,53 @@ class _WeatherPageState
   @override
   Widget renderUI(BuildContext context) {
     return BaseScaffold(
+      backgroundColor: Colors.black,
+      appBar: BaseAppBar(
         backgroundColor: Colors.black,
-        appBar: BaseAppBar(
-          backgroundColor: Colors.black,
-          hasBack: true,
-          leadingColor: Colors.black,
-          actions: [
-            Assets.svg.actionsWeather.svg(),
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Weather",
-                style: AppStyles.t16p.copyWith(
-                  fontSize: 40.sp,
-                  fontWeight: FontWeight.bold,
-                ),
+        hasBack: true,
+        leadingColor: Colors.black,
+        actions: [
+          Assets.svg.actionsWeather.svg(),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Weather",
+              style: AppStyles.t16p.copyWith(
+                fontSize: 40.sp,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(height: 8.h),
-              Builder(builder: (context) {
-                return TextFieldCustom(
-                    controller: bloc.controller,
-                    onTap: () {
-                      context.router.push(
-                        WeatherPageDialogRoute(bloc: bloc),
-                      );
-                      bloc.add(const WeatherEvent.getFormSearch());
-                    });
-              }),
-              SizedBox(height: 8.h),
-              Expanded(
-                child: ListView.separated(
-                  itemCount: 2,
-                  itemBuilder: (context, index) => const AreaWidget(),
+            ),
+            SizedBox(height: 8.h),
+            TextFieldCustom(
+              controller: bloc.controller,
+              onTap: () {
+                context.router.push(
+                  WeatherPageDialogRoute(bloc: bloc),
+                );
+                bloc.add(const WeatherEvent.getFormSearch());
+              },
+            ),
+            SizedBox(height: 8.h),
+            Expanded(
+              child: blocBuilder(
+                (c, p1) => ListView.separated(
+                  itemCount: p1.area?.length ?? 2,
+                  itemBuilder: (context, index) =>
+                      AreaWidget(area: p1.area?[index]),
                   separatorBuilder: (context, index) => SizedBox(
                     height: 5.h,
                   ),
                 ),
               ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
