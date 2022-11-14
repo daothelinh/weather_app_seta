@@ -1,22 +1,21 @@
-import 'package:base_bloc_3/features/weather/data/model/focast_time/forecast_time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../common/app_theme/app_colors.dart';
-import '../../../../common/app_theme/app_styles.dart';
-import '../../data/model/location/location.dart';
+import '../../../../common/index.dart';
 import '../argument/area.dart';
 
 class AreaWidget extends StatelessWidget {
-  const AreaWidget({super.key, this.location, this.forecastTime, this.area});
-  final Location? location;
-  final ForecastTime? forecastTime;
+  const AreaWidget({super.key, this.area});
+
   final Area? area;
+
+  convertFtoC(double f) {
+    return ((f - 32) * 5 / 9).floor();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 335.w,
+      width: ScreenUtil().screenWidth,
       height: 120.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20.r)),
@@ -71,7 +70,7 @@ class AreaWidget extends StatelessWidget {
                       style: AppStyles.t16p.copyWith(fontSize: 40)),
                 ),
                 Text(
-                    'H:${area?.forecastTime?.dailyForecasts?[0].temperature?.maximum?.value}° L:${area?.forecastTime?.dailyForecasts?[0].temperature?.minimum?.value}°',
+                    'H:${convertFtoC(area?.forecastTime?.dailyForecasts?[0].temperature?.maximum?.value ?? 0)}° L:${convertFtoC(area?.forecastTime?.dailyForecasts?[0].temperature?.minimum?.value ?? 0)}°',
                     style: AppStyles.t16p),
               ],
             ),

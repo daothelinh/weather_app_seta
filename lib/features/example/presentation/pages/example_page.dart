@@ -22,6 +22,7 @@ class _ExamplePageState
   @override
   void initState() {
     super.initState();
+
     bloc.pagingController.addPageRequestListener(
       (pageKey) => bloc.add(
         ExampleEvent.getPlayers(

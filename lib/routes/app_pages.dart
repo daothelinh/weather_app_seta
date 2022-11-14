@@ -1,12 +1,6 @@
-import 'dart:core';
-import 'dart:core';
-
 import 'package:auto_route/auto_route.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:injectable/injectable.dart';
-
 import '../features/core/presentation/pages/core_page.dart';
 import '../features/weather/presentation/bloc/weather_bloc.dart';
 import '../features/weather/presentation/pages/weather_page.dart';

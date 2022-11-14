@@ -1,19 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:base_bloc_3/base/bloc/index.dart';
-import 'package:base_bloc_3/common/app_theme/app_styles.dart';
-import 'package:base_bloc_3/common/widgets/paging_list_view.dart';
 import 'package:base_bloc_3/common/widgets/textfields/app_textfield.dart';
-import 'package:base_bloc_3/features/weather/data/model/city_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../base/base_widget.dart';
-import '../../../../common/app_theme/app_colors.dart';
 import '../../../../common/debounce/debounce.dart';
+import '../../../../common/index.dart';
 import '../bloc/weather_bloc.dart';
 
 class WeatherPageDialog extends StatefulWidget {
@@ -59,6 +53,10 @@ class _WeatherPageDialogState extends BaseShareState<WeatherPageDialog,
                 autofocus: true,
                 onChanged: (text) => _debouncer
                     .run(() => bloc.add(WeatherEvent.getSearchText(text))),
+                clearFn: () {
+                  bloc.controller.text = '';
+                  bloc.add(WeatherEvent.getSearchText(bloc.controller.text));
+                },
               ),
             ),
             const Expanded(
@@ -123,17 +121,32 @@ class _ListArea extends StatelessWidget {
                     height: 1,
                     color: AppColors.white,
                   ),
-              itemCount: state.city!.length
-              //   CustomListViewSeparated<AreaModel>(
-              // controller: bloc.pageController,
-              // builder: (c, m, i) => Text('${m.englishName}'),
-              // separatorBuilder: (c, i) => const Divider(height: 1),
-              ),
+              itemCount: state.city!.length),
         );
-      case BaseStateStatus.init:
-        return ListView.builder(
-          itemBuilder: (c, i) => Text('text'),
-          itemCount: 10,
+      case BaseStateStatus.idle:
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView.separated(
+              itemBuilder: (context, index) => GestureDetector(
+                    onTap: () {
+                      bloc.add(WeatherEvent.chooseCity(state.city?[index]));
+                      context.router.pop();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: DefaultTextStyle(
+                          style: AppStyles.t16p
+                              .copyWith(color: Colors.white, fontSize: 20),
+                          child: Text(
+                            '${state.city?[index].englishName} - ${state.city?[index].key}',
+                          )),
+                    ),
+                  ),
+              separatorBuilder: (context, index) => const Divider(
+                    height: 1,
+                    color: AppColors.white,
+                  ),
+              itemCount: state.city!.length),
         );
       default:
         return Container();

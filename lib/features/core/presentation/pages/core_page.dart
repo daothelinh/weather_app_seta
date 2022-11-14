@@ -122,17 +122,19 @@ class _ActiveIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = context.select((CoreBloc bloc) => bloc);
     final indexHome = context.select((CoreBloc bloc) => bloc.state.indexHome);
+    final listLocationKey =
+        context.select((CoreBloc bloc) => bloc.state.listLocationKey);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: List<Widget>.from(bloc.listInt
+      children: (listLocationKey ?? ['a'])
           .map(
-            (e) => e == indexHome
+            (e) => listLocationKey?.indexOf(e) == indexHome
                 ? const RedDot(
                     borderColor: Colors.white,
                   )
                 : const RedDot(),
           )
-          .toList()),
+          .toList(),
     );
   }
 }

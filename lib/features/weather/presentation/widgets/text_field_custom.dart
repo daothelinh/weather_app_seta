@@ -2,8 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../common/app_theme/app_colors.dart';
-import '../../../../common/app_theme/app_styles.dart';
+import '../../../../common/app_theme/index.dart';
 
 class TextFieldCustom extends StatelessWidget {
   const TextFieldCustom({super.key, this.onTap, this.controller});

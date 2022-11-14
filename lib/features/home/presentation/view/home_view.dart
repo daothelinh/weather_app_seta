@@ -18,23 +18,31 @@ class HomeView extends StatefulWidget {
 class _HomeViewState
     extends BaseState<HomeView, HomeEvent, HomeState, HomeBloc> {
   @override
+  void initState() {
+    super.initState();
+    bloc.add(const HomeEvent.init());
+  }
+
+  @override
   Widget renderUI(BuildContext context) {
     return Container(
       // height: 200,
       color: Colors.red,
-      child: PageView.builder(
-        onPageChanged: (index) {
-          getIt<EventBus>().fire(ChangeIndexHomeEvent(index));
-        },
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return Container(
-            child: Text(
-              'page....',
-              style: TextStyle(color: Colors.white, fontSize: 40),
-            ),
-          );
-        },
+      child: blocBuilder(
+        (c, p1) => PageView.builder(
+          onPageChanged: (index) {
+            getIt<EventBus>().fire(ChangeIndexHomeEvent(index));
+          },
+          itemCount: p1.listLocationKey?.length ?? 1,
+          itemBuilder: (context, index) {
+            return Container(
+              child: Text(
+                'page....',
+                style: TextStyle(color: Colors.white, fontSize: 40),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

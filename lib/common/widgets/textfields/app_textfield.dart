@@ -308,8 +308,11 @@ class AppTextField extends StatefulWidget {
   ///Error text below the text field
   final String? errorText;
 
+  final Function()? clearFn;
+
   const AppTextField({
     Key? key,
+    this.clearFn,
     this.controller,
     this.onTap,
     this.readOnly = false,
@@ -450,8 +453,10 @@ class _AppTextFieldState extends State<AppTextField> {
                 if (_text.isNotEmpty)
                   GestureDetector(
                     onTap: () {
+                      widget.clearFn?.call();
                       setState(() {
-                        _controller.clear();
+                        // _controller.clear();
+                        _controller.text = '';
                         _text = "";
                       });
                     },

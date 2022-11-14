@@ -1,4 +1,5 @@
 class AppLocalKey {
   static const String search = 'Search';
-  static const String listLocation = 'List Location';
+  static const String listLocationKey = 'List Location Key';
+  static const String listSearchCity = 'List Search City';
 }

@@ -1,21 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:base_bloc_3/common/app_theme/app_styles.dart';
 import 'package:base_bloc_3/common/index.dart';
-import 'package:base_bloc_3/common/widgets/base_appbar.dart';
-import 'package:base_bloc_3/common/widgets/base_scaffold.dart';
-import 'package:base_bloc_3/common/widgets/textfields/app_textfield.dart';
-import 'package:base_bloc_3/features/core/presentation/pages/core_page.dart';
-import 'package:base_bloc_3/features/weather/presentation/pages/weather_page_dialog.dart';
 import 'package:base_bloc_3/gen/assets.gen.dart';
 import 'package:base_bloc_3/routes/app_pages.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../../../base/base_widget.dart';
-import '../../../../routes/app_routes.dart';
+
 import '../bloc/weather_bloc.dart';
 import '../widgets/area_widget.dart';
 import '../widgets/text_field_custom.dart';
@@ -66,16 +57,31 @@ class _WeatherPageState
                 context.router.push(
                   WeatherPageDialogRoute(bloc: bloc),
                 );
-                bloc.add(const WeatherEvent.getFormSearch());
               },
             ),
             SizedBox(height: 8.h),
             Expanded(
               child: blocBuilder(
                 (c, p1) => ListView.separated(
-                  itemCount: p1.area?.length ?? 2,
-                  itemBuilder: (context, index) =>
-                      AreaWidget(area: p1.area?[index]),
+                  itemCount: p1.area?.length ?? 1,
+                  itemBuilder: (context, index) => Slidable(
+                    startActionPane: ActionPane(
+                      motion: const ScrollMotion(),
+                      children: [
+                        SlidableAction(
+                          flex: 1,
+                          spacing: 3,
+                          onPressed: (context) =>
+                              bloc.add(WeatherEvent.deleteCity(index)),
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white,
+                          icon: Icons.delete,
+                          label: 'Delete',
+                        ),
+                      ],
+                    ),
+                    child: AreaWidget(area: p1.area?[index]),
+                  ),
                   separatorBuilder: (context, index) => SizedBox(
                     height: 5.h,
                   ),

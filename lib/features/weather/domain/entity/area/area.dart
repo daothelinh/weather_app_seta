@@ -1,7 +1,7 @@
 import 'package:base_bloc_3/features/weather/data/model/focast_time/forecast_time.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 
-import '../../data/model/location/location.dart';
+import '../../../data/model/location/location.dart';
 
 part 'area.g.dart';
 

@@ -1,22 +1,21 @@
+import 'dart:convert';
+
 import 'package:base_bloc_3/base/bloc/index.dart';
 import 'package:base_bloc_3/base/network/errors/extension.dart';
-import 'package:base_bloc_3/common/debounce/debounce.dart';
 import 'package:base_bloc_3/common/index.dart';
-import 'package:base_bloc_3/features/example/domain/use_case/use_case.dart';
 import 'package:base_bloc_3/features/weather/domain/use_case/weather_use_case.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:dartz/dartz.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../base/network/errors/error.dart';
 import '../../data/model/city_model.dart';
 import '../../data/model/focast_time/forecast_time.dart';
 import '../../data/model/location/location.dart';
-import '../argument/area.dart';
+import '../../domain/entity/area/area.dart';
 
 part 'weather_bloc.freezed.dart';
 part 'weather_bloc.g.dart';
@@ -29,28 +28,38 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
     on<WeatherEvent>((WeatherEvent event, Emitter<WeatherState> emit) async {
       await event.when(
         init: () => onInit(emit),
-        getFormSearch: () => onGetFormSearch(emit),
+        deleteCity: (int index) => onDeleteCity(emit, index),
         getSearchText: (String text) => onGetSearchText(emit, text),
         chooseCity: (dynamic city) => onChooseCity(emit, city),
         getListLocation: () => onGetListLocation(emit),
       );
     });
   }
-  late List<String> _listLocationKey; // chứa id
-  late List<dynamic> _listLocation; // chứa id
   final WeatherUseCase _useCase;
-  late List<Area> _area;
+  late List<String> _listLocationKey; // chứa id
+  late List<String> _listCityModelEncode;
+  late List<CityModel> _listCityModel;
+  // late List<Area> _area;
   final PagingController<int, CityModel> pageController =
       PagingController(firstPageKey: 10);
 
   late TextEditingController controller = TextEditingController();
 
   onInit(Emitter<WeatherState> emit) async {
-    _listLocationKey =
-        List<String>.from(await localPref.get(AppLocalKey.listLocation) ?? []);
+    _listLocationKey = List<String>.from(
+        await localPref.get(AppLocalKey.listLocationKey) ?? []);
     print(_listLocationKey);
-    List<Area> _area = [];
+    _listCityModelEncode = List<String>.from(
+        await localPref.get(AppLocalKey.listSearchCity) ?? []);
+    _listCityModel = List<CityModel>.from(
+        _listCityModelEncode.map((e) => CityModel.fromJson(jsonDecode(e))));
+    print(_listCityModelEncode);
+    print(_listCityModel);
+    emit(state.copyWith(area: await onGetListArea()));
+  }
 
+  onGetListArea() async {
+    List<Area> _area = [];
     for (var e in _listLocationKey) {
       List<Future> future = [];
       Area area = Area(key: e);
@@ -61,47 +70,54 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
             (l) => null, (r) => area = area.copyWith(location: r.first)))
       ]);
       await Future.wait(future);
+      _area.add(area);
     }
-    emit(state.copyWith(area: _area));
+    return _area;
   }
 
   onGetListLocation(Emitter<WeatherState> emit) async {
     // _listLocation =
   }
 
-  onGetFormSearch(Emitter<WeatherState> emit) async {
-    // controller.text = 'a';
+  onDeleteCity(Emitter<WeatherState> emit, int index) async {
+    _listLocationKey.removeAt(index);
+    await localPref.save(AppLocalKey.listLocationKey, _listLocationKey);
+    emit(state.copyWith(area: await onGetListArea()));
+  }
+
+  saveCityToLocal(CityModel city) async {
+    if (!_listCityModelEncode.contains(jsonEncode(city))) {
+      _listCityModelEncode.add(jsonEncode(city));
+      await localPref.save(AppLocalKey.listSearchCity, _listCityModelEncode);
+    }
   }
 
   onGetSearchText(Emitter<WeatherState> emit, String text) async {
-    emit(state.copyWith(status: BaseStateStatus.loading));
-    final res = await _useCase.getCity(q: text);
-    emit(res.fold(
-      (l) => state.copyWith(
-          status: BaseStateStatus.failed, message: l.getErrorMessage),
-      (r) => state.copyWith(status: BaseStateStatus.success, city: r),
-    ));
-  }
+    if (text.trim().isNotEmpty) {
+      emit(state.copyWith(status: BaseStateStatus.loading));
 
-  getListArea() {
-    // emit(state.copyWith());
+      final res = await _useCase.getCity(q: text);
+      emit(res.fold(
+        (l) => state.copyWith(
+            status: BaseStateStatus.failed, message: l.getErrorMessage),
+        (r) => state.copyWith(status: BaseStateStatus.success, city: r),
+      ));
+    } else {
+      emit(state.copyWith(status: BaseStateStatus.idle, city: _listCityModel));
+    }
   }
 
   onChooseCity(Emitter<WeatherState> emit, CityModel city) async {
     controller.text = city.englishName ?? '';
     if (!_listLocationKey.contains(city.key)) {
       _listLocationKey.add(city.key ?? '');
-      await localPref.save(AppLocalKey.listLocation, _listLocationKey);
+      await localPref.save(AppLocalKey.listLocationKey, _listLocationKey);
+      saveCityToLocal(city);
     }
-    // final locationRes = await _useCase.getLocation(locationKey: city.key!);
-    // emit(locationRes.fold(
-    //   (l) => state.copyWith(status: BaseStateStatus.failed),
-    //   (r) => state.copyWith(location: r),
-    // ));
-    // final forecastRes = await _useCase.getForecast(locationKey: city.key!);
-    // emit(forecastRes.fold(
-    //   (l) => state.copyWith(status: BaseStateStatus.failed),
-    //   (r) => state.copyWith(forecast: r),
-    // ));
+    emit(state.copyWith(area: await onGetListArea()));
+  }
+
+  onClearTextField(Emitter<WeatherState> emit) async {
+    emit(state.copyWith(area: await onGetListArea()));
   }
 }
