@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../common/index.dart';
-import '../argument/area.dart';
+import '../../domain/entity/area/area.dart';
 
 class AreaWidget extends StatelessWidget {
   const AreaWidget({super.key, this.area});

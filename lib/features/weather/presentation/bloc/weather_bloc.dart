@@ -9,12 +9,9 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../data/model/city_model.dart';
-import '../../data/model/focast_time/forecast_time.dart';
-import '../../data/model/location/location.dart';
 import '../../domain/entity/area/area.dart';
 
 part 'weather_bloc.freezed.dart';
@@ -39,9 +36,8 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
   late List<String> _listLocationKey; // chứa id
   late List<String> _listCityModelEncode;
   late List<CityModel> _listCityModel;
-  // late List<Area> _area;
-  final PagingController<int, CityModel> pageController =
-      PagingController(firstPageKey: 10);
+  // final PagingController<int, CityModel> pageController =
+  //     PagingController(firstPageKey: 10);
 
   late TextEditingController controller = TextEditingController();
 

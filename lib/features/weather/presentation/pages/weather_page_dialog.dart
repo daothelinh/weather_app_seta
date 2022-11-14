@@ -88,7 +88,7 @@ class _WeatherPageDialogState extends BaseShareState<WeatherPageDialog,
 }
 
 class _ListArea extends StatelessWidget {
-  const _ListArea({super.key});
+  const _ListArea();
 
   @override
   Widget build(BuildContext context) {

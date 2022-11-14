@@ -2,7 +2,7 @@ part of 'weather_bloc.dart';
 
 @CopyWith()
 class WeatherState extends BaseBlocState {
-  WeatherState({
+  const WeatherState({
     required super.status,
     super.message,
     this.area,
@@ -12,7 +12,8 @@ class WeatherState extends BaseBlocState {
 
   final List<Area>? area;
 
-  factory WeatherState.init() => WeatherState(status: BaseStateStatus.init);
+  factory WeatherState.init() =>
+      const WeatherState(status: BaseStateStatus.init);
   @override
   List get props => [status, message, city, area];
 }
