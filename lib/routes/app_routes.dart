@@ -4,5 +4,4 @@ class AppRoutes {
   static const String second = '/second';
   static const String weather = '/weather';
   static const String weather_dialog = '/weather_dialog';
-  static const String dialog_weather = '/dialog_weather';
 }

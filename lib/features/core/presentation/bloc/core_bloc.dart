@@ -22,17 +22,11 @@ class CoreBloc extends BaseBloc<CoreEvent, CoreState> {
     });
   }
 
-  // late EventBus eventBus;
-  // late List<String> listLocationKey;
-  // late int number;
-  // final List<int> listInt = [0, 1, 2];
   onInit(Emitter<CoreState> emit) async {
     final List<String> _listLocationKey = List<String>.from(
         await localPref.get(AppLocalKey.listLocationKey) ?? ['0']);
     emit(state.copyWith(
         index: 1, indexHome: 0, listLocationKey: _listLocationKey));
-    print(_listLocationKey);
-    // number = listArea.length;
   }
 
   onChangeIndex(Emitter<CoreState> emit, int i) async {

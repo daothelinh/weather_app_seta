@@ -71,7 +71,7 @@ class _WeatherPageState
                         SlidableAction(
                           flex: 1,
                           spacing: 3,
-                          onPressed: (context) =>
+                          onPressed: (c) =>
                               bloc.add(WeatherEvent.deleteCity(index)),
                           backgroundColor: Colors.red,
                           foregroundColor: Colors.white,

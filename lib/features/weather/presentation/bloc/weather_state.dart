@@ -9,7 +9,6 @@ class WeatherState extends BaseBlocState {
     this.city,
   });
   final List<CityModel>? city;
-
   final List<Area>? area;
 
   factory WeatherState.init() =>

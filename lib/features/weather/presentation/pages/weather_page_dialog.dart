@@ -63,7 +63,10 @@ class _WeatherPageDialogState extends BaseShareState<WeatherPageDialog,
               child: _ListArea(),
             ),
             GestureDetector(
-              onTap: () => context.router.pop(),
+              onTap: () {
+                context.router.pop();
+                bloc.controller.text = '';
+              },
               child: Container(
                 height: 50.h,
                 width: 50.w,

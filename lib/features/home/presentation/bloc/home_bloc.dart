@@ -1,15 +1,10 @@
 import 'package:base_bloc_3/base/bloc/index.dart';
 import 'package:base_bloc_3/common/index.dart';
-import 'package:base_bloc_3/features/example/domain/use_case/use_case.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../../base/network/errors/error.dart';
 
 part 'home_bloc.freezed.dart';
 part 'home_bloc.g.dart';
@@ -37,6 +32,6 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
   }
 
   onChangeIndex(Emitter<HomeState> emit, int index) async {
-    print(index);
+    // print(index);
   }
 }
