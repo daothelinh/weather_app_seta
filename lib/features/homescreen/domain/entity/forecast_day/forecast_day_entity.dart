@@ -15,10 +15,15 @@ class ForecastDayEntity {
 
 class DailyForecastDayEntity {
   final Temperature? temperatureDay;
+  final String? date;
 
-  DailyForecastDayEntity({this.temperatureDay});
+  DailyForecastDayEntity({
+    this.temperatureDay,
+    this.date,
+  });
   factory DailyForecastDayEntity.fromModel(DailyForecasts dailyForecasts) {
-    return DailyForecastDayEntity(temperatureDay: dailyForecasts.temperature);
+    return DailyForecastDayEntity(
+        temperatureDay: dailyForecasts.temperature, date: dailyForecasts.date);
   }
 }
 

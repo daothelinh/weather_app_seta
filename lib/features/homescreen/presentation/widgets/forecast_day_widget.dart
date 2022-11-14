@@ -2,6 +2,7 @@ import 'package:base_bloc_3/features/homescreen/domain/entity/forecast_day/forec
 import 'package:base_bloc_3/features/homescreen/presentation/bloc/homescreen_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class ForecastDayWidget extends StatelessWidget {
   const ForecastDayWidget({super.key, this.forecastDayEntity});
@@ -35,24 +36,28 @@ class ForecastDayWidget extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(child: Builder(builder: (context) {
-          final forecastDay =
-              context.select((HomeScreenBloc bloc) => bloc.state.forecastDay);
-          return ListView.builder(
-            itemBuilder: (c, i) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ForeCastDayCard(
-                    data: forecastDay!,
-                    index: i,
-                  )
-                ],
+        Expanded(
+          child: Builder(
+            builder: (context) {
+              final forecastDay = context
+                  .select((HomeScreenBloc bloc) => bloc.state.forecastDay);
+              return ListView.builder(
+                itemBuilder: (c, i) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      ForeCastDayCard(
+                        data: forecastDay!,
+                        index: i,
+                      )
+                    ],
+                  );
+                },
+                scrollDirection: Axis.vertical,
               );
             },
-            scrollDirection: Axis.vertical,
-          );
-        })),
+          ),
+        ),
       ],
     );
   }
@@ -61,14 +66,18 @@ class ForecastDayWidget extends StatelessWidget {
 class ForeCastDayCard extends StatelessWidget {
   final ForecastDayEntity data;
   final int index;
+
   const ForeCastDayCard({super.key, required this.data, required this.index});
   @override
   Widget build(BuildContext context) {
+    DateTime dateTime = DateFormat("yyyy-MM-ddThh:mm:ss")
+        .parse("${data.dailyForecastsDay?[index].date}");
+    var dateformat = DateFormat('EEEE').format(dateTime);
     return Column(
       children: <Widget>[
         Container(
           height: 1,
-          width: 320,
+          // width: 320,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.white,
@@ -83,9 +92,8 @@ class ForeCastDayCard extends StatelessWidget {
           children: <Widget>[
             const SizedBox(width: 10),
             Text(
-              "Today",
-              // '${DateTime.now()}',
-              style: const TextStyle(color: Colors.white, fontSize: 22),
+              dateformat.toString(),
+              style: const TextStyle(color: Colors.white, fontSize: 15),
             ),
             const SizedBox(width: 10),
             const Icon(
@@ -95,7 +103,7 @@ class ForeCastDayCard extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               "${(data.dailyForecastsDay?[index].temperatureDay?.minimum?.value ?? 0) - 51}°",
-              style: const TextStyle(color: Colors.white, fontSize: 22),
+              style: const TextStyle(color: Colors.white, fontSize: 20),
             ),
             const SizedBox(width: 10),
             Container(
@@ -114,7 +122,7 @@ class ForeCastDayCard extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               "${(data.dailyForecastsDay?[index].temperatureDay?.maximum?.value ?? 0) - 58}°",
-              style: const TextStyle(color: Colors.white, fontSize: 22),
+              style: const TextStyle(color: Colors.white, fontSize: 20),
             ),
             const SizedBox(width: 10),
           ],

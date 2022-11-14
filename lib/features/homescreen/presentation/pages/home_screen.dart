@@ -111,7 +111,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                       height: 40,
                     ),
                     Container(
-                      height: 380,
+                      height: 365,
                       width: 390,
                       decoration: BoxDecoration(
                         border: Border.all(
