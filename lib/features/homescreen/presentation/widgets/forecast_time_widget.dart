@@ -36,53 +36,25 @@ class ForecastTimeWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
-        const SizedBox(
-          height: 10,
-        ),
         SizedBox(
-          height: 110,
+          height: 150,
           child: CustomListViewSeparated<ForecastDateTimeEntity>(
             separatorBuilder: (c, i) => const Divider(),
             controller: bloc.pagingController,
-            builder: (c, item, i) => WeatherCard(
-              data: item,
-            ),
+            builder: (c, item, i) {
+              return Column(children: <Widget>[
+                WeatherCard(
+                  data: item,
+                ),
+                const SizedBox(
+                  width: 80,
+                )
+              ]);
+            },
             scrollDirection: Axis.horizontal,
-            // scrollDirection: Axis.horizontal,
-            // children: [
-            //   const SizedBox(
-            //     width: 30,
-            //   ),
-            //   weatherCard(),
-            //   const SizedBox(
-            //     width: 30,
-            //   ),
-            //   weatherCard(),
-            //   const SizedBox(
-            //     width: 30,
-            //   ),
-            //   weatherCard(),
-            //   const SizedBox(
-            //     width: 30,
-            //   ),
-            //   weatherCard(),
-            //   const SizedBox(
-            //     width: 30,
-            //   ),
-            //   weatherCard(),
-            //   const SizedBox(
-            //     width: 30,
-            //   ),
-            //   weatherCard(),
-            //   const SizedBox(
-            //     width: 30,
-            //   ),
-            //   weatherCard(),
-            // ],
           ),
         ),
       ],
-      // ),
     );
   }
 }
@@ -94,25 +66,29 @@ class WeatherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          "data",
-          style: TextStyle(color: Colors.white, fontSize: 17),
+        const SizedBox(
+          height: 20,
         ),
-        SizedBox(
+        Text(
+          // "data",
+          "${data.dateTime?[11]}${data.dateTime?[12]}",
+          style: const TextStyle(color: Colors.white, fontSize: 20),
+        ),
+        const SizedBox(
           height: 15,
         ),
-        Icon(
+        const Icon(
           Icons.sunny,
           color: Colors.white,
           size: 32,
         ),
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
         Text(
           // "data",
-          "${data.temperature?.temperatureDateTime}",
-          style: TextStyle(color: Colors.white, fontSize: 17),
+          "${(data.temperature?.temperatureDateTime ?? 0) - 55}°",
+          style: const TextStyle(color: Colors.white, fontSize: 20),
         ),
       ],
     );

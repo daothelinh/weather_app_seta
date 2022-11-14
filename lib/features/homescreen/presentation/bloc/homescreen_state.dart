@@ -5,11 +5,15 @@ class HomeScreenState extends BaseBlocState {
   final List<WeatherBarEntity>? weatherbars;
   final ForecastTimeEntity? forecastTime;
   final List<ForecastDateTimeEntity> forecastDateTimes;
+  final ForecastDayEntity? forecastDay;
+  final List<DailyForecastDayEntity> dailyForecastDay;
 
   final List<WeatherBar>? weather;
   const HomeScreenState({
+    this.dailyForecastDay = const [],
     this.forecastDateTimes = const [],
     this.weatherbars,
+    this.forecastDay,
     required super.status,
     super.message,
     this.weather,
@@ -28,5 +32,7 @@ class HomeScreenState extends BaseBlocState {
         weather,
         forecastTime,
         forecastDateTimes,
+        forecastDay,
+        dailyForecastDay
       ];
 }

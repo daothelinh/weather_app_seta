@@ -1,7 +1,11 @@
+import 'package:base_bloc_3/features/homescreen/domain/entity/forecast_day/forecast_day_entity.dart';
+import 'package:base_bloc_3/features/homescreen/presentation/bloc/homescreen_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForecastDayWidget extends StatelessWidget {
-  const ForecastDayWidget({super.key});
+  const ForecastDayWidget({super.key, this.forecastDayEntity});
+  final ForecastDayEntity? forecastDayEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,7 @@ class ForecastDayWidget extends StatelessWidget {
                     color: Colors.white,
                   ),
                   Text(
-                    " 10-DAY  FORECAST",
+                    "  5 - DAY  FORECAST",
                     style: TextStyle(
                       color: Colors.white,
                     ),
@@ -31,22 +35,36 @@ class ForecastDayWidget extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(
-          height: 15,
-        ),
-        foreCastCard(),
-        foreCastCard(),
-        foreCastCard(),
-        foreCastCard(),
-        foreCastCard(),
-        foreCastCard(),
-        foreCastCard(),
+        Expanded(child: Builder(builder: (context) {
+          final forecastDay =
+              context.select((HomeScreenBloc bloc) => bloc.state.forecastDay);
+          return ListView.builder(
+            itemBuilder: (c, i) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  ForeCastDayCard(
+                    data: forecastDay!,
+                    index: i,
+                  )
+                ],
+              );
+            },
+            scrollDirection: Axis.vertical,
+          );
+        })),
       ],
     );
   }
 }
 
-Widget foreCastCard() => Column(
+class ForeCastDayCard extends StatelessWidget {
+  final ForecastDayEntity data;
+  final int index;
+  const ForeCastDayCard({super.key, required this.data, required this.index});
+  @override
+  Widget build(BuildContext context) {
+    return Column(
       children: <Widget>[
         Container(
           height: 1,
@@ -63,10 +81,11 @@ Widget foreCastCard() => Column(
         ),
         Row(
           children: <Widget>[
-            const SizedBox(width: 20),
-            const Text(
+            const SizedBox(width: 10),
+            Text(
               "Today",
-              style: TextStyle(color: Colors.white, fontSize: 22),
+              // '${DateTime.now()}',
+              style: const TextStyle(color: Colors.white, fontSize: 22),
             ),
             const SizedBox(width: 10),
             const Icon(
@@ -74,13 +93,13 @@ Widget foreCastCard() => Column(
               color: Colors.white,
             ),
             const SizedBox(width: 10),
-            const Text(
-              "15°",
-              style: TextStyle(color: Colors.white, fontSize: 22),
+            Text(
+              "${(data.dailyForecastsDay?[index].temperatureDay?.minimum?.value ?? 0) - 51}°",
+              style: const TextStyle(color: Colors.white, fontSize: 22),
             ),
             const SizedBox(width: 10),
             Container(
-              height: 10,
+              height: 6,
               width: 130,
               // color: Colors.yellow,
               decoration: BoxDecoration(
@@ -93,9 +112,9 @@ Widget foreCastCard() => Column(
               ),
             ),
             const SizedBox(width: 10),
-            const Text(
-              "29°",
-              style: TextStyle(color: Colors.white, fontSize: 22),
+            Text(
+              "${(data.dailyForecastsDay?[index].temperatureDay?.maximum?.value ?? 0) - 58}°",
+              style: const TextStyle(color: Colors.white, fontSize: 22),
             ),
             const SizedBox(width: 10),
           ],
@@ -105,3 +124,5 @@ Widget foreCastCard() => Column(
         ),
       ],
     );
+  }
+}

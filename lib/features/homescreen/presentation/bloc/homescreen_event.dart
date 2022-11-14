@@ -7,7 +7,7 @@ class HomeScreenEvent with _$HomeScreenEvent {
   const factory HomeScreenEvent.getDataForecastDateTime({
     required List<ForecastDateTimeEntity> forecastDateTimes,
   }) = GetDataForecastDateTime;
-
+  const factory HomeScreenEvent.getDataForecastDay() = GetDataForecastDay;
   const factory HomeScreenEvent.showMessage() = ShowMessage;
   const factory HomeScreenEvent.getWeatherbars({
     required List<WeatherBarEntity> weatherbars,

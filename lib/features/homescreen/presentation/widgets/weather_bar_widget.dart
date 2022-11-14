@@ -42,7 +42,7 @@ class WeatherBarWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 20.0),
           child: Text(
-            "H: ${(forecastTimeEntity?.dailyForecasts?.first.temperature?.maximum?.value)! - 58.9}°C   L: ${(forecastTimeEntity?.dailyForecasts?.first.temperature?.minimum?.value)! - 50.9}°C",
+            "H: ${(forecastTimeEntity?.dailyForecasts?.first.temperature?.maximum?.value ?? 0) - 56.9}°C   L: ${(forecastTimeEntity?.dailyForecasts?.first.temperature?.minimum?.value ?? 0) - 48}°C",
             style: const TextStyle(
                 fontSize: 17,
                 color: Colors.white,
