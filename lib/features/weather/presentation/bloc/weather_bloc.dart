@@ -122,11 +122,12 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
 
   onDeleteCitySearch(Emitter<WeatherState> emit, int index) async {
     if (index == -1) {
-      _listCityModelEncode = [];
+      await localPref.remove(AppLocalKey.listSearchCity);
     } else {
       //xoá 1 phần tử
+      _listCityModelEncode.removeAt(index);
+      await localPref.save(AppLocalKey.listSearchCity, _listCityModelEncode);
     }
     emit(state.copyWith(city: await getCityFromLocal()));
-    await localPref.save(AppLocalKey.listSearchCity, _listCityModelEncode);
   }
 }

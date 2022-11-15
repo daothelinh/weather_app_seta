@@ -136,7 +136,8 @@ class _ListArea extends StatelessWidget {
                 onTap: () => bloc.add(const WeatherEvent.deleteCitySearch(-1)),
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: Text('Clear search', style: AppStyles.t16p),
+                  child: DefaultTextStyle(
+                      style: AppStyles.t16p, child: const Text('Clear search')),
                 ),
               ),
               Expanded(

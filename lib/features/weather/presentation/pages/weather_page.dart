@@ -79,7 +79,10 @@ class _WeatherPageState
                         ),
                       ],
                     ),
-                    child: AreaWidget(area: p1.area?[index]),
+                    child: GestureDetector(
+                      onTap: () => context.router.pop(),
+                      child: AreaWidget(area: p1.area?[index]),
+                    ),
                   ),
                   separatorBuilder: (context, index) => SizedBox(
                     height: 5.h,
