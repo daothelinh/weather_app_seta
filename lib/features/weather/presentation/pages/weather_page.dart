@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../../../base/base_widget.dart';
-
 import '../bloc/weather_bloc.dart';
 import '../widgets/area_widget.dart';
 import '../widgets/text_field_custom.dart';
@@ -32,7 +31,7 @@ class _WeatherPageState
       backgroundColor: Colors.black,
       appBar: BaseAppBar(
         backgroundColor: Colors.black,
-        hasBack: true,
+        hasBack: false,
         leadingColor: Colors.black,
         actions: [
           Assets.svg.actionsWeather.svg(),
@@ -72,7 +71,7 @@ class _WeatherPageState
                           flex: 1,
                           spacing: 3,
                           onPressed: (c) =>
-                              bloc.add(WeatherEvent.deleteCity(index)),
+                              bloc.add(WeatherEvent.deleteArea(index)),
                           backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
                           icon: Icons.delete,

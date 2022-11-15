@@ -13,7 +13,7 @@ part 'app_pages.gr.dart';
   AutoRoute(path: AppRoutes.initial, page: CorePage, initial: true),
   AutoRoute(path: AppRoutes.weather, page: WeatherPage),
   CupertinoRoute(
-    path: AppRoutes.weather_dialog,
+    path: AppRoutes.weatherDialog,
     page: WeatherPageDialog,
     fullscreenDialog: true,
   ),

@@ -25,32 +25,29 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
     on<WeatherEvent>((WeatherEvent event, Emitter<WeatherState> emit) async {
       await event.when(
         init: () => onInit(emit),
-        deleteCity: (int index) => onDeleteCity(emit, index),
+        deleteArea: (int index) => onDeleteArea(emit, index),
         getSearchText: (String text) => onGetSearchText(emit, text),
         chooseCity: (dynamic city) => onChooseCity(emit, city),
-        getListLocation: () => onGetListLocation(emit),
+        deleteCitySearch: (int index) => onDeleteCitySearch(emit, index),
       );
     });
   }
   final WeatherUseCase _useCase;
   late List<String> _listLocationKey; // chứa id
   late List<String> _listCityModelEncode;
-  late List<CityModel> _listCityModel;
-  // final PagingController<int, CityModel> pageController =
-  //     PagingController(firstPageKey: 10);
-
   late TextEditingController controller = TextEditingController();
 
   onInit(Emitter<WeatherState> emit) async {
     _listLocationKey = List<String>.from(
         await localPref.get(AppLocalKey.listLocationKey) ?? []);
+    // localPref.remove(AppLocalKey.listLocationKey);
+    // localPref.remove(AppLocalKey.listSearchCity);
+    // _listLocationKey = [];
     print(_listLocationKey);
     _listCityModelEncode = List<String>.from(
         await localPref.get(AppLocalKey.listSearchCity) ?? []);
-    _listCityModel = List<CityModel>.from(
-        _listCityModelEncode.map((e) => CityModel.fromJson(jsonDecode(e))));
     print(_listCityModelEncode);
-    print(_listCityModel);
+    // print(_listCityModel);
     emit(state.copyWith(area: await onGetListArea()));
   }
 
@@ -71,11 +68,13 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
     return _area;
   }
 
-  onGetListLocation(Emitter<WeatherState> emit) async {
-    // _listLocation =
+  getCityFromLocal() async {
+    List<CityModel> _listCityModel = List<CityModel>.from(
+        _listCityModelEncode.map((e) => CityModel.fromJson(jsonDecode(e))));
+    return _listCityModel;
   }
 
-  onDeleteCity(Emitter<WeatherState> emit, int index) async {
+  onDeleteArea(Emitter<WeatherState> emit, int index) async {
     _listLocationKey.removeAt(index);
     await localPref.save(AppLocalKey.listLocationKey, _listLocationKey);
     emit(state.copyWith(area: await onGetListArea()));
@@ -99,7 +98,11 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
         (r) => state.copyWith(status: BaseStateStatus.success, city: r),
       ));
     } else {
-      emit(state.copyWith(status: BaseStateStatus.idle, city: _listCityModel));
+      emit(
+        state.copyWith(
+            status: BaseStateStatus.idle, city: await getCityFromLocal()),
+        // state.copyWith(status: BaseStateStatus.idle, city: _listCityModelDemo),
+      );
     }
   }
 
@@ -115,5 +118,15 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
 
   onClearTextField(Emitter<WeatherState> emit) async {
     emit(state.copyWith(area: await onGetListArea()));
+  }
+
+  onDeleteCitySearch(Emitter<WeatherState> emit, int index) async {
+    if (index == -1) {
+      _listCityModelEncode = [];
+    } else {
+      //xoá 1 phần tử
+    }
+    emit(state.copyWith(city: await getCityFromLocal()));
+    await localPref.save(AppLocalKey.listSearchCity, _listCityModelEncode);
   }
 }

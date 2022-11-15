@@ -57,6 +57,7 @@ class _WeatherPageDialogState extends BaseShareState<WeatherPageDialog,
                   bloc.controller.text = '';
                   bloc.add(WeatherEvent.getSearchText(bloc.controller.text));
                 },
+                // onTap: () => bloc.add(const WeatherEvent.getOnTap()),
               ),
             ),
             const Expanded(
@@ -129,27 +130,41 @@ class _ListArea extends StatelessWidget {
       case BaseStateStatus.idle:
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ListView.separated(
-              itemBuilder: (context, index) => GestureDetector(
-                    onTap: () {
-                      bloc.add(WeatherEvent.chooseCity(state.city?[index]));
-                      context.router.pop();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: DefaultTextStyle(
-                          style: AppStyles.t16p
-                              .copyWith(color: Colors.white, fontSize: 20),
-                          child: Text(
-                            '${state.city?[index].englishName} - ${state.city?[index].key}',
-                          )),
-                    ),
-                  ),
-              separatorBuilder: (context, index) => const Divider(
-                    height: 1,
-                    color: AppColors.white,
-                  ),
-              itemCount: state.city!.length),
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: () => bloc.add(const WeatherEvent.deleteCitySearch(-1)),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('Clear search', style: AppStyles.t16p),
+                ),
+              ),
+              Expanded(
+                child: ListView.separated(
+                    itemBuilder: (context, index) => GestureDetector(
+                          onTap: () {
+                            bloc.add(
+                                WeatherEvent.chooseCity(state.city?[index]));
+                            context.router.pop();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: DefaultTextStyle(
+                                style: AppStyles.t16p.copyWith(
+                                    color: Colors.white, fontSize: 20),
+                                child: Text(
+                                  '${state.city?[index].englishName} - ${state.city?[index].key}',
+                                )),
+                          ),
+                        ),
+                    separatorBuilder: (context, index) => const Divider(
+                          height: 1,
+                          color: AppColors.white,
+                        ),
+                    itemCount: state.city!.length),
+              ),
+            ],
+          ),
         );
       default:
         return Container();

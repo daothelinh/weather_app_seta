@@ -66,7 +66,8 @@ class AreaWidget extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: Text('${area?.location?.temperature?.metric?.value}°',
+                  child: Text(
+                      '${area?.location?.temperature?.metric?.value ?? 40}°',
                       style: AppStyles.t16p.copyWith(fontSize: 40)),
                 ),
                 Text(
