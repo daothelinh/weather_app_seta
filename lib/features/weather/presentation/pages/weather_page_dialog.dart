@@ -137,7 +137,7 @@ class _ListArea extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: DefaultTextStyle(
-                      style: AppStyles.t16p, child: const Text('Clear search')),
+                      style: AppStyles.t16p, child: const Text('Clear All')),
                 ),
               ),
               Expanded(

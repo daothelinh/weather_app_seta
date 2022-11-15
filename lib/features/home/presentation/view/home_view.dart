@@ -36,9 +36,11 @@ class _HomeViewState
           itemCount: p1.listLocationKey?.length ?? 1,
           itemBuilder: (context, index) {
             return Container(
-              child: Text(
-                'page....',
-                style: TextStyle(color: Colors.white, fontSize: 40),
+              child: Center(
+                child: Text(
+                  'page.... $index',
+                  style: TextStyle(color: Colors.white, fontSize: 40),
+                ),
               ),
             );
           },

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:base_bloc_3/common/event_bus/change_index_home_event.dart';
 import 'package:base_bloc_3/features/core/presentation/bloc/core_bloc.dart';
-import 'package:base_bloc_3/routes/app_pages.dart';
 import 'package:base_bloc_3/routes/app_routes.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ import '../../../../base/base_widget.dart';
 import '../../../../common/index.dart';
 import '../../../../di/di_setup.dart';
 import '../../../../gen/assets.gen.dart';
-import '../../../example/presentation/pages/example_page.dart';
 import '../../../home/presentation/view/home_view.dart';
 
 class CorePage extends StatefulWidget {
@@ -41,6 +39,8 @@ class _CorePageState
   void dispose() {
     super.dispose();
     changeIndexHome.cancel();
+
+    print('dispose');
   }
 
   @override
