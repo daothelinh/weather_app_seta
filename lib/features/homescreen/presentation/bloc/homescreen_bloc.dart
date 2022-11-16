@@ -1,12 +1,9 @@
 import 'package:base_bloc_3/base/bloc/index.dart';
 import 'package:base_bloc_3/common/index.dart';
-import 'package:base_bloc_3/features/homescreen/data/models/forecast_day/forecast_day.dart';
 import 'package:base_bloc_3/features/homescreen/domain/entity/forecast_date_time/forecast_date_time_entity.dart';
 import 'package:base_bloc_3/features/homescreen/domain/entity/forecast_day/forecast_day_entity.dart';
 import 'package:base_bloc_3/features/homescreen/domain/entity/forecast_time/forecast_time_entity.dart';
-import 'package:base_bloc_3/features/homescreen/domain/use_case/use_case_forecast_date_time/use_case_forecast_date_time.dart';
-import 'package:base_bloc_3/features/homescreen/domain/use_case/use_case_forecast_day/usecase_forecast_day.dart';
-import 'package:base_bloc_3/features/homescreen/domain/use_case/use_case_forecast_time/use_case_forecast_time.dart';
+import 'package:base_bloc_3/features/homescreen/domain/use_case/default_location_use_case/default_location_use_case.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,7 +11,6 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:injectable/injectable.dart';
 import '../../data/models/weatherbar/weather_bar.dart';
 import '../../domain/entity/weatherbar/weather_bar_entity.dart';
-import '../../domain/use_case/use_case_weather_bar/use_case_weather_bar.dart';
 
 part 'homescreen_bloc.freezed.dart';
 part 'homescreen_bloc.g.dart';
@@ -24,12 +20,7 @@ part 'homescreen_state.dart';
 @injectable
 class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
     with BaseCommonMethodMixin {
-  HomeScreenBloc(
-    this._coreUseCaseWeatherBar,
-    this._forecastTimeUsecase,
-    this._forecastDateTimeUsecase,
-    this._forecastDayUsecase,
-  ) : super(HomeScreenState.init()) {
+  HomeScreenBloc(this._defaultLocationUseCase) : super(HomeScreenState.init()) {
     on<HomeScreenEvent>(
       (HomeScreenEvent event, Emitter<HomeScreenState> emit) async {
         await event.when(
@@ -48,10 +39,11 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
       },
     );
   }
-  final WeatherBarUseCase _coreUseCaseWeatherBar;
+  late String locationKey = '353412';
+  final DefaultLocationUseCase _defaultLocationUseCase;
   Future onGetData(Emitter<HomeScreenState> emit) async {
     emit(state.copyWith(status: BaseStateStatus.loading));
-    final res = await _coreUseCaseWeatherBar.getData();
+    final res = await _defaultLocationUseCase.getData(locationKey: locationKey);
     res.fold(
       (l) => emit(
           state.copyWith(status: BaseStateStatus.failed, message: 'Error')),
@@ -63,9 +55,9 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
     print("Done on Get Data weather bar in HomeScreen Bloc");
   }
 
-  final ForecastTimeUsecase _forecastTimeUsecase;
   Future onGetDataForecastTime(Emitter<HomeScreenState> emit) async {
-    final res = await _forecastTimeUsecase.getDataForecastTime();
+    final res = await _defaultLocationUseCase.getDataForecastTime(
+        locationKey: locationKey);
     res.fold(
       (l) => emit(state.copyWith(
           status: BaseStateStatus.failed,
@@ -82,14 +74,14 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
   final PagingController<int, ForecastDateTimeEntity> pagingController =
       PagingController(firstPageKey: 0);
 
-  final ForecastDateTimeUsecase _forecastDateTimeUsecase;
   Future onGetDataForecastDateTime(Emitter<HomeScreenState> emit,
       List<ForecastDateTimeEntity> forecaseDateTimes) async {
     // await Future.delayed(const Duration(seconds: 2));
     // pagingController.itemList = [];
     // emit(
     // state.copyWith(status: BaseStateStatus.success, forecastDateTimes: []));
-    final res = await _forecastDateTimeUsecase.getDataForecastDateTime();
+    final res = await _defaultLocationUseCase.getDataForecastDateTime(
+        locationKey: locationKey);
     res.fold(
       (l) => emit(
           state.copyWith(status: BaseStateStatus.failed, message: 'Error')),
@@ -103,12 +95,12 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
 
   // final PagingController<int, DailyForecastDayEntity> pagingControllerDay =
   //     PagingController(firstPageKey: 0);
-  final ForecastDayUsecase _forecastDayUsecase;
   Future onGetDataForecastDay(
     Emitter<HomeScreenState> emit,
     // List<DailyForecastDayEntity>? dailyForecastDay
   ) async {
-    final res = await _forecastDayUsecase.getDataForecastDay();
+    final res = await _defaultLocationUseCase.getDataForecastDay(
+        locationKey: locationKey);
     res.fold((l) {
       emit(state.copyWith(
         status: BaseStateStatus.failed,
@@ -121,6 +113,7 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
         forecastDay: r,
       ));
     });
+    // ignore: avoid_print
     print('Done get data in forecast day widget');
   }
 

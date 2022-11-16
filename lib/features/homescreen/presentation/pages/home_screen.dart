@@ -47,6 +47,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
     //     ));
   }
 
+  @override
   void dispose() {
     _debounce.dispose();
     super.dispose();
@@ -85,7 +86,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                       height: 20,
                     ),
                     Container(
-                      height: 220,
+                      height: 225,
                       width: 370,
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -95,8 +96,8 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                       ),
                       child: Center(
                         child: blocBuilder((c, p1) {
+                          // ignore: avoid_print
                           print(p1.status);
-                          // return Container();
                           return p1.status == BaseStateStatus.loading
                               ? const CircularProgressIndicator()
                               : ForecastTimeWidget(
@@ -121,6 +122,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                       ),
                       child: Center(
                         child: blocBuilder((c, p1) {
+                          // ignore: avoid_print
                           print(p1.status);
                           // return Container();
                           return p1.status == BaseStateStatus.loading
@@ -144,7 +146,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                         ),
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: TemperatureWidget(),
+                      child: const TemperatureWidget(),
                     ),
                     const SizedBox(
                       height: 40,
@@ -162,7 +164,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                               ),
                               borderRadius: BorderRadius.circular(20.0),
                             ),
-                            child: UVIndexWidget(),
+                            child: const UVIndexWidget(),
                           ),
                           const SizedBox(
                             width: 25,
@@ -176,7 +178,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                               ),
                               borderRadius: BorderRadius.circular(20.0),
                             ),
-                            child: SunsetWidget(),
+                            child: const SunsetWidget(),
                           ),
                         ],
                       ),
@@ -197,7 +199,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                               ),
                               borderRadius: BorderRadius.circular(20.0),
                             ),
-                            child: WindWidget(),
+                            child: const WindWidget(),
                           ),
                           const SizedBox(
                             width: 25,
@@ -211,7 +213,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                               ),
                               borderRadius: BorderRadius.circular(20.0),
                             ),
-                            child: RainfallWidget(),
+                            child: const RainfallWidget(),
                           ),
                         ],
                       ),
@@ -232,7 +234,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                               ),
                               borderRadius: BorderRadius.circular(20.0),
                             ),
-                            child: FeelsLikeWidget(),
+                            child: const FeelsLikeWidget(),
                           ),
                           const SizedBox(
                             width: 25,
@@ -246,7 +248,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                               ),
                               borderRadius: BorderRadius.circular(20.0),
                             ),
-                            child: HumidityWidget(),
+                            child: const HumidityWidget(),
                           ),
                         ],
                       ),
@@ -267,7 +269,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                               ),
                               borderRadius: BorderRadius.circular(20.0),
                             ),
-                            child: VisibilityWidget(),
+                            child: const VisibilityWidget(),
                           ),
                           const SizedBox(
                             width: 25,
@@ -281,7 +283,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                               ),
                               borderRadius: BorderRadius.circular(20.0),
                             ),
-                            child: PressureWidget(),
+                            child: const PressureWidget(),
                           ),
                         ],
                       ),

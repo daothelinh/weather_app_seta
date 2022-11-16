@@ -25,7 +25,7 @@ class WeatherBarWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 50, top: 10),
           child: Text(
-            "${temperature?.temperature?.metric?.value}°",
+            "${(temperature?.temperature?.metric?.value) ?? 0}°",
             style: const TextStyle(fontSize: 90, color: Colors.white),
           ),
         ),
