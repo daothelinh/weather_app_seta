@@ -17,22 +17,20 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
     on<HomeEvent>((HomeEvent event, Emitter<HomeState> emit) async {
       await event.when(
         init: () => onInit(emit),
-        changeIndex: (int index) => onChangeIndex(emit, index),
+        deteleIndexArea: (int index) => onDeleteIndexArea(emit, index),
       );
     });
   }
+  late List<String> listLocationKey;
 
   onInit(Emitter<HomeState> emit) async {
-    final List<String> listLocationKey = List<String>.from(
+    listLocationKey = List<String>.from(
         await localPref.get(AppLocalKey.listLocationKey) ?? ['0']);
     emit(state.copyWith(listLocationKey: listLocationKey));
-    // controller = PageController(initialPage: 1);
-
-    print('$listLocationKey home');
   }
 
-  onChangeIndex(Emitter<HomeState> emit, int index) async {
-    print('$index bloc');
-    // controller.initialPage = index;
+  onDeleteIndexArea(Emitter<HomeState> emit, int index) async {
+    listLocationKey.removeAt(index);
+    emit(state.copyWith(listLocationKey: listLocationKey));
   }
 }

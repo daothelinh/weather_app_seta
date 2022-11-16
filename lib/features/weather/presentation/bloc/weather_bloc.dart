@@ -35,19 +35,17 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
   final WeatherUseCase _useCase;
   late List<String> _listLocationKey; // chứa id
   late List<String> _listCityModelEncode;
-  late TextEditingController controller = TextEditingController();
+  final TextEditingController controller = TextEditingController();
 
   onInit(Emitter<WeatherState> emit) async {
     _listLocationKey = List<String>.from(
         await localPref.get(AppLocalKey.listLocationKey) ?? []);
-    // localPref.remove(AppLocalKey.listLocationKey);
-    // localPref.remove(AppLocalKey.listSearchCity);
-    // _listLocationKey = [];
     print(_listLocationKey);
+
     _listCityModelEncode = List<String>.from(
         await localPref.get(AppLocalKey.listSearchCity) ?? []);
     print(_listCityModelEncode);
-    // print(_listCityModel);
+
     emit(state.copyWith(area: await onGetListArea()));
   }
 

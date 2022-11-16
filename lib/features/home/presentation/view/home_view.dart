@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:base_bloc_3/common/event_bus/change_index_home_event.dart';
 import 'package:base_bloc_3/features/home/presentation/bloc/home_bloc.dart';
 import 'package:base_bloc_3/features/homescreen/presentation/pages/home_screen.dart';
@@ -16,11 +18,17 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState
     extends BaseState<HomeView, HomeEvent, HomeState, HomeBloc> {
+  late StreamSubscription deleteIndexArea;
   // final PageController? controller = PageController(initialPage: 1);
   @override
   void initState() {
     super.initState();
     bloc.add(const HomeEvent.init());
+
+    deleteIndexArea =
+        getIt<EventBus>().on<ChangeIndexHomeEvent>().listen((event) async {
+      bloc.add(HomeEvent.deteleIndexArea(event.index));
+    });
   }
 
   @override
