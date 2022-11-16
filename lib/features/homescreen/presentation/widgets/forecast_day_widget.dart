@@ -37,14 +37,9 @@ class ForecastDayWidget extends StatelessWidget {
               return ListView.separated(
                 padding: const EdgeInsets.all(10),
                 itemBuilder: (c, i) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      ForeCastDayCard(
-                        data: forecastDay!,
-                        index: i,
-                      )
-                    ],
+                  return ForeCastDayCard(
+                    data: forecastDay,
+                    index: i,
                   );
                 },
                 scrollDirection: Axis.vertical,
@@ -60,14 +55,14 @@ class ForecastDayWidget extends StatelessWidget {
 }
 
 class ForeCastDayCard extends StatelessWidget {
-  final ForecastDayEntity data;
-  final int index;
+  final ForecastDayEntity? data;
+  final int? index;
 
-  const ForeCastDayCard({super.key, required this.data, required this.index});
+  const ForeCastDayCard({super.key, this.data, this.index});
   @override
   Widget build(BuildContext context) {
     DateTime dateTime = DateFormat("yyyy-MM-ddThh:mm:ss")
-        .parse("${data.dailyForecastsDay?[index].date}");
+        .parse("${data?.dailyForecastsDay?[index ?? 0].date}");
     var dateformat = DateFormat('EEEE').format(dateTime);
     return Column(
       children: <Widget>[
@@ -97,7 +92,7 @@ class ForeCastDayCard extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Text(
-            "${(data.dailyForecastsDay?[index].temperatureDay?.minimum?.value ?? 0) - 51}°",
+            "${(data?.dailyForecastsDay?[index ?? 0].temperatureDay?.minimum?.value ?? 0) - 51}°",
             style: const TextStyle(color: Colors.white, fontSize: 20),
           ),
           const SizedBox(width: 10),
@@ -116,7 +111,7 @@ class ForeCastDayCard extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Text(
-            "${(data.dailyForecastsDay?[index].temperatureDay?.maximum?.value ?? 0) - 58}°",
+            "${(data?.dailyForecastsDay?[index ?? 0].temperatureDay?.maximum?.value ?? 0) - 58}°",
             style: const TextStyle(color: Colors.white, fontSize: 20),
           ),
           const SizedBox(width: 10),

@@ -10,15 +10,15 @@ import '../../../../common/debounce/debounce.dart';
 import '../../../../common/index.dart';
 import '../bloc/weather_bloc.dart';
 
-class WeatherPageDialog extends StatefulWidget {
-  const WeatherPageDialog({super.key, required this.bloc});
+class WeatherPageSearch extends StatefulWidget {
+  const WeatherPageSearch({super.key, required this.bloc});
   final WeatherBloc bloc;
 
   @override
-  State<WeatherPageDialog> createState() => _WeatherPageDialogState();
+  State<WeatherPageSearch> createState() => _WeatherPageSearchState();
 }
 
-class _WeatherPageDialogState extends BaseShareState<WeatherPageDialog,
+class _WeatherPageSearchState extends BaseShareState<WeatherPageSearch,
     WeatherEvent, WeatherState, WeatherBloc> {
   late Debouncer _debouncer;
   @override

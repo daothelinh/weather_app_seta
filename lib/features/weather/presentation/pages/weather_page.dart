@@ -54,7 +54,7 @@ class _WeatherPageState
               controller: bloc.controller,
               onTap: () {
                 context.router.push(
-                  WeatherPageDialogRoute(bloc: bloc),
+                  WeatherPageSearchRoute(bloc: bloc),
                 );
               },
             ),

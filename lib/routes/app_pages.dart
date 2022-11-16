@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import '../features/core/presentation/pages/core_page.dart';
 import '../features/weather/presentation/bloc/weather_bloc.dart';
 import '../features/weather/presentation/pages/weather_page.dart';
-import '../features/weather/presentation/pages/weather_page_dialog.dart';
+import '../features/weather/presentation/pages/weather_page_search.dart';
 import 'app_routes.dart';
 part 'app_pages.gr.dart';
 
@@ -16,8 +16,8 @@ part 'app_pages.gr.dart';
   AutoRoute(path: AppRoutes.home, page: HomeView),
   AutoRoute(path: AppRoutes.dummyScreen, page: DummyScreen),
   CupertinoRoute(
-    path: AppRoutes.weatherDialog,
-    page: WeatherPageDialog,
+    path: AppRoutes.weatherSearch,
+    page: WeatherPageSearch,
     fullscreenDialog: true,
   ),
 ])

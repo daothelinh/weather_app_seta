@@ -10,12 +10,8 @@ import 'package:base_bloc_3/features/homescreen/presentation/widgets/sunset_widg
 import 'package:base_bloc_3/features/homescreen/presentation/widgets/temperature_widget.dart';
 import 'package:base_bloc_3/features/homescreen/presentation/widgets/visibility_widget.dart';
 import 'package:base_bloc_3/features/homescreen/presentation/widgets/weather_bar_widget.dart';
-import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../base/base_widget.dart';
-import '../../../../common/event_bus/change_index_home_event.dart';
-import '../../../../di/di_setup.dart';
 import '../bloc/homescreen_bloc.dart';
 import '../widgets/uv_index_widget.dart';
 import '../widgets/wind_widget.dart';
@@ -62,10 +58,6 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
   Widget renderUI(BuildContext context) {
     return Container(
       constraints: const BoxConstraints.expand(),
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/background/background.jpg"),
-              fit: BoxFit.cover)),
       child: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -124,7 +116,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                     print(p1.status);
                     // return Container();
                     return p1.status == BaseStateStatus.loading
-                        ? const CircularProgressIndicator()
+                        ? const Center(child: CircularProgressIndicator())
                         : ForecastDayWidget(
                             forecastDayEntity: p1.forecastDay,
                           );
