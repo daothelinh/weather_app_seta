@@ -76,6 +76,7 @@ class LocalNotificationHelper {
   Future<InitializationSettings> _getPlatformSettings() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings(NotificationConfig
+            // ignore: todo
             .notificationIconPath); //TODO: set notification icon
     const DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(
@@ -107,6 +108,7 @@ class LocalNotificationHelper {
       NotificationConfig.highImportance,
       channelDescription: NotificationConfig.highChannelDescription,
       icon: NotificationConfig.notificationIconPath,
+      // ignore: todo
       color: Colors.blue, //TODO: initial colors
       vibrationPattern: vibrationPattern,
       // sound: RawResourceAndroidNotificationSound(

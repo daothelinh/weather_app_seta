@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:base_bloc_3/common/event_bus/change_index_home_event.dart';
 import 'package:base_bloc_3/features/core/presentation/bloc/core_bloc.dart';
@@ -15,6 +14,7 @@ import '../../../../common/index.dart';
 import '../../../../di/di_setup.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../home/presentation/view/home_view.dart';
+import '../../../homescreen/presentation/pages/home_screen.dart';
 
 class CorePage extends StatefulWidget {
   const CorePage({Key? key}) : super(key: key);
@@ -69,7 +69,7 @@ class _Screens extends StatelessWidget {
       children: const [
         DummyScreen(),
         // DummyScreen(),
-        HomeView(),
+        HomeScreen(),
         SizedBox.shrink(),
       ],
     );
