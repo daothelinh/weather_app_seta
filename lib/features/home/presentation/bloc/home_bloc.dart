@@ -23,7 +23,7 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
   }
 
   onInit(Emitter<HomeState> emit) async {
-    final listLocationKey = List<String>.from(
+    final List<String> listLocationKey = List<String>.from(
         await localPref.get(AppLocalKey.listLocationKey) ?? ['0']);
     emit(state.copyWith(listLocationKey: listLocationKey));
     // controller = PageController(initialPage: 1);

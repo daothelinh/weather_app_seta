@@ -13,26 +13,19 @@ class ForecastDayWidget extends StatelessWidget {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(top: 18.0),
-          child: Column(
-            children: [
-              Row(
-                children: const [
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Icon(
-                    Icons.date_range,
-                    color: Colors.white,
-                  ),
-                  Text(
-                    "  5 - DAY  FORECAST",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  )
-                ],
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            children: const [
+              Icon(
+                Icons.date_range,
+                color: Colors.white,
               ),
+              Text(
+                "  5 - DAY  FORECAST",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              )
             ],
           ),
         ),
@@ -41,7 +34,8 @@ class ForecastDayWidget extends StatelessWidget {
             builder: (context) {
               final forecastDay = context
                   .select((HomeScreenBloc bloc) => bloc.state.forecastDay);
-              return ListView.builder(
+              return ListView.separated(
+                padding: const EdgeInsets.all(10),
                 itemBuilder: (c, i) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -54,6 +48,8 @@ class ForecastDayWidget extends StatelessWidget {
                   );
                 },
                 scrollDirection: Axis.vertical,
+                separatorBuilder: (context, index) => const SizedBox(height: 2),
+                itemCount: 5,
               );
             },
           ),
@@ -76,8 +72,8 @@ class ForeCastDayCard extends StatelessWidget {
     return Column(
       children: <Widget>[
         Container(
-          height: 1,
-          // width: 320,
+          height: 1.2,
+          width: 380,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.white,
@@ -88,45 +84,43 @@ class ForeCastDayCard extends StatelessWidget {
         const SizedBox(
           height: 14,
         ),
-        Row(
-          children: <Widget>[
-            const SizedBox(width: 10),
-            Text(
-              dateformat.toString(),
-              style: const TextStyle(color: Colors.white, fontSize: 15),
-            ),
-            const SizedBox(width: 10),
-            const Icon(
-              Icons.sunny,
-              color: Colors.white,
-            ),
-            const SizedBox(width: 10),
-            Text(
-              "${(data.dailyForecastsDay?[index].temperatureDay?.minimum?.value ?? 0) - 51}°",
-              style: const TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            const SizedBox(width: 10),
-            Container(
-              height: 6,
-              width: 130,
-              // color: Colors.yellow,
-              decoration: BoxDecoration(
-                color: Colors.yellow,
-                border: Border.all(
-                  color: Colors.white54,
-                  // width: 350,
-                ),
-                borderRadius: BorderRadius.circular(10.0),
+        Row(children: <Widget>[
+          const SizedBox(width: 10),
+          Text(
+            dateformat.toString(),
+            style: const TextStyle(color: Colors.white, fontSize: 15),
+          ),
+          const SizedBox(width: 10),
+          const Icon(
+            Icons.sunny,
+            color: Colors.white,
+          ),
+          const SizedBox(width: 10),
+          Text(
+            "${(data.dailyForecastsDay?[index].temperatureDay?.minimum?.value ?? 0) - 51}°",
+            style: const TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          const SizedBox(width: 10),
+          Container(
+            height: 6,
+            width: 120,
+            // color: Colors.yellow,
+            decoration: BoxDecoration(
+              color: Colors.yellow,
+              border: Border.all(
+                color: Colors.white54,
+                // width: 350,
               ),
+              borderRadius: BorderRadius.circular(8.0),
             ),
-            const SizedBox(width: 10),
-            Text(
-              "${(data.dailyForecastsDay?[index].temperatureDay?.maximum?.value ?? 0) - 58}°",
-              style: const TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            const SizedBox(width: 10),
-          ],
-        ),
+          ),
+          const SizedBox(width: 10),
+          Text(
+            "${(data.dailyForecastsDay?[index].temperatureDay?.maximum?.value ?? 0) - 58}°",
+            style: const TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          const SizedBox(width: 10),
+        ]),
         const SizedBox(
           height: 14,
         ),

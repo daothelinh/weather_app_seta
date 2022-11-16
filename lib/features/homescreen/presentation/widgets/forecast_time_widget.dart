@@ -27,7 +27,7 @@ class ForecastTimeWidget extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Container(
-          height: 1,
+          height: 1.2,
           width: 320,
           decoration: BoxDecoration(
             border: Border.all(

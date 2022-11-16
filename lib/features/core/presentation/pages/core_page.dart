@@ -69,7 +69,8 @@ class _Screens extends StatelessWidget {
       children: const [
         DummyScreen(),
         // DummyScreen(),
-        HomeScreen(),
+        // HomeScreen(),
+        HomeView(),
         SizedBox.shrink(),
       ],
     );

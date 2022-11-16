@@ -24,15 +24,19 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
     on<HomeScreenEvent>(
       (HomeScreenEvent event, Emitter<HomeScreenState> emit) async {
         await event.when(
-            getData: () => onGetData(emit),
-            getDataForecastTime: () => onGetDataForecastTime(emit),
-            getDataForecastDay: () => onGetDataForecastDay(emit),
+            init: (String locationKey) => onInit(emit, locationKey),
+            getData: (String locationKey) => onGetData(emit, locationKey),
+            getDataForecastTime: (String locationKey) =>
+                onGetDataForecastTime(emit, locationKey),
+            getDataForecastDay: (String locationKey) =>
+                onGetDataForecastDay(emit, locationKey),
             // () =>
             //   (List<DailyForecastDayEntity> dailyForecastDay) =>
             //       onGetDataForecastDay(emit, dailyForecastDay)),
-            getDataForecastDateTime:
-                (List<ForecastDateTimeEntity> forecastDateTimes) =>
-                    onGetDataForecastDateTime(emit, forecastDateTimes),
+            getDataForecastDateTime: (List<ForecastDateTimeEntity>
+                        forecastDateTimes,
+                    String locationKey) =>
+                onGetDataForecastDateTime(emit, forecastDateTimes, locationKey),
             showMessage: () => onShowMessage(emit),
             getWeatherbars: (List<WeatherBarEntity> weatherbars, int offset) =>
                 onGetWeatherbars(emit, weatherbars, offset));
@@ -41,7 +45,9 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
   }
   late String locationKey = '353412';
   final DefaultLocationUseCase _defaultLocationUseCase;
-  Future onGetData(Emitter<HomeScreenState> emit) async {
+  onInit(Emitter<HomeScreenState> emit, String locationKey) async {}
+
+  Future onGetData(Emitter<HomeScreenState> emit, String locationKey) async {
     emit(state.copyWith(status: BaseStateStatus.loading));
     final res = await _defaultLocationUseCase.getData(locationKey: locationKey);
     res.fold(
@@ -55,7 +61,8 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
     print("Done on Get Data weather bar in HomeScreen Bloc");
   }
 
-  Future onGetDataForecastTime(Emitter<HomeScreenState> emit) async {
+  Future onGetDataForecastTime(
+      Emitter<HomeScreenState> emit, String locationKey) async {
     final res = await _defaultLocationUseCase.getDataForecastTime(
         locationKey: locationKey);
     res.fold(
@@ -74,8 +81,10 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
   final PagingController<int, ForecastDateTimeEntity> pagingController =
       PagingController(firstPageKey: 0);
 
-  Future onGetDataForecastDateTime(Emitter<HomeScreenState> emit,
-      List<ForecastDateTimeEntity> forecaseDateTimes) async {
+  Future onGetDataForecastDateTime(
+      Emitter<HomeScreenState> emit,
+      List<ForecastDateTimeEntity> forecaseDateTimes,
+      String locationKey) async {
     // await Future.delayed(const Duration(seconds: 2));
     // pagingController.itemList = [];
     // emit(
@@ -97,6 +106,7 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
   //     PagingController(firstPageKey: 0);
   Future onGetDataForecastDay(
     Emitter<HomeScreenState> emit,
+    String locationKey,
     // List<DailyForecastDayEntity>? dailyForecastDay
   ) async {
     final res = await _defaultLocationUseCase.getDataForecastDay(
