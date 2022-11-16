@@ -21,19 +21,18 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
       );
     });
   }
-  // late List<String> listLocationKey;
-  late PageController? controller;
+
   onInit(Emitter<HomeState> emit) async {
     final listLocationKey = List<String>.from(
         await localPref.get(AppLocalKey.listLocationKey) ?? ['0']);
     emit(state.copyWith(listLocationKey: listLocationKey));
-    controller = PageController(initialPage: 1);
+    // controller = PageController(initialPage: 1);
 
     print('$listLocationKey home');
   }
 
   onChangeIndex(Emitter<HomeState> emit, int index) async {
-    // print(index);
+    print('$index bloc');
     // controller.initialPage = index;
   }
 }

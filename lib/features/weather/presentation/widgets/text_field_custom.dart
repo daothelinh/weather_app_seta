@@ -14,17 +14,13 @@ class TextFieldCustom extends StatelessWidget {
     return TextField(
       onTap: onTap,
       controller: controller,
-      style: AppStyles.t16p.copyWith(
-        color: Colors.white,
-        fontSize: 20.sp,
-      ),
       readOnly: true,
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.search, color: AppColors.white),
         hintText: 'title_search'.tr(),
         hintStyle: AppStyles.t16p.copyWith(
           color: Colors.white.withOpacity(0.5),
-          fontSize: 16.sp,
+          fontSize: 20.sp,
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.white.withOpacity(0.5)),
@@ -35,8 +31,6 @@ class TextFieldCustom extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(15.r)),
         ),
       ),
-      // hintText: 'title_search'.tr(),
-      // onTap: onTap,
     );
   }
 }

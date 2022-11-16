@@ -5,6 +5,7 @@ class AppToken {
   // static const String token = 'TWZjIQaNfJot6Yuf0WEeOSg4Pu93P9jA';
   // static const String token = 'GlZY41JAztLVnXPzFdxLhkyV6tIvziAM';
   // static const String token = 'jXLuSaPbb9Pn0DfchovhOuM5Z8dULBxH';
+  // static const String token = 'FH64CdHANi4gxicbjK97zBf6lMqNnc4y';
 
   static const String language = 'en';
   static const bool detail = false;

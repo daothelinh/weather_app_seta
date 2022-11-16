@@ -5,5 +5,6 @@
   "dio_receive_timeout": "Receive timeout in connection",
   "dio_send_timeout": "Connection failed due to internet connection",
   "app_title" : "Base Bloc Flutter",
-  "title_search": "Tìm kiếm thành phố hoặc sân bay"
+  "title_search": "Tìm kiếm thành phố",
+  "weather_title": "Thời tiết"
 }

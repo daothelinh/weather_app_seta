@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:base_bloc_3/common/event_bus/change_index_home_event.dart';
 import 'package:base_bloc_3/features/core/presentation/bloc/core_bloc.dart';
+import 'package:base_bloc_3/features/weather/presentation/pages/weather_page.dart';
 import 'package:base_bloc_3/routes/app_routes.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,12 @@ class CorePage extends StatefulWidget {
 class _CorePageState
     extends BaseState<CorePage, CoreEvent, CoreState, CoreBloc> {
   late StreamSubscription changeIndexHome;
+
+  void _receiveData(BuildContext context) async {
+    final result = await context.router.pushNamed(AppRoutes.weather);
+    print(result);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -39,8 +46,6 @@ class _CorePageState
   void dispose() {
     super.dispose();
     changeIndexHome.cancel();
-
-    print('dispose');
   }
 
   @override

@@ -12,9 +12,9 @@ part 'app_pages.gr.dart';
 @singleton
 @MaterialAutoRouter(routes: [
   AutoRoute(path: AppRoutes.initial, page: CorePage, initial: true),
-  CupertinoRoute(
-      path: AppRoutes.weather, page: WeatherPage, fullscreenDialog: true),
+  AutoRoute(path: AppRoutes.weather, page: WeatherPage, fullscreenDialog: true),
   AutoRoute(path: AppRoutes.home, page: HomeView),
+  AutoRoute(path: AppRoutes.dummyScreen, page: DummyScreen),
   CupertinoRoute(
     path: AppRoutes.weatherDialog,
     page: WeatherPageDialog,

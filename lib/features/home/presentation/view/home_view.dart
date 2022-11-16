@@ -1,12 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:base_bloc_3/common/event_bus/change_index_home_event.dart';
 import 'package:base_bloc_3/features/home/presentation/bloc/home_bloc.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../../base/base_widget.dart';
 import '../../../../di/di_setup.dart';
+import '../../../../routes/app_routes.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -17,6 +17,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState
     extends BaseState<HomeView, HomeEvent, HomeState, HomeBloc> {
+  // final PageController? controller = PageController(initialPage: 1);
   @override
   void initState() {
     super.initState();
@@ -35,7 +36,7 @@ class _HomeViewState
           },
           itemCount: p1.listLocationKey?.length ?? 1,
           itemBuilder: (context, index) {
-            return Container(
+            return SafeArea(
               child: Center(
                 child: Text(
                   'page.... $index',

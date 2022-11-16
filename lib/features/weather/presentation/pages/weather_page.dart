@@ -1,14 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:base_bloc_3/common/event_bus/change_index_home_event.dart';
 import 'package:base_bloc_3/common/index.dart';
 import 'package:base_bloc_3/gen/assets.gen.dart';
 import 'package:base_bloc_3/routes/app_pages.dart';
-import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../../../base/base_widget.dart';
-import '../../../../di/di_setup.dart';
 import '../bloc/weather_bloc.dart';
 import '../widgets/area_widget.dart';
 import '../widgets/text_field_custom.dart';
@@ -67,7 +64,7 @@ class _WeatherPageState
                 (c, p1) => ListView.separated(
                   itemCount: p1.area?.length ?? 1,
                   itemBuilder: (context, index) => Slidable(
-                    startActionPane: ActionPane(
+                    endActionPane: ActionPane(
                       motion: const ScrollMotion(),
                       children: [
                         SlidableAction(

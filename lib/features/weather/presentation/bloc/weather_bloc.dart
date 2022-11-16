@@ -94,14 +94,20 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
       final res = await _useCase.getCity(q: text);
       emit(res.fold(
         (l) => state.copyWith(
-            status: BaseStateStatus.failed, message: l.getErrorMessage),
-        (r) => state.copyWith(status: BaseStateStatus.success, city: r),
+          status: BaseStateStatus.failed,
+          message: l.getErrorMessage,
+        ),
+        (r) => state.copyWith(
+          status: BaseStateStatus.success,
+          city: r,
+        ),
       ));
     } else {
       emit(
         state.copyWith(
-            status: BaseStateStatus.idle, city: await getCityFromLocal()),
-        // state.copyWith(status: BaseStateStatus.idle, city: _listCityModelDemo),
+          status: BaseStateStatus.idle,
+          city: await getCityFromLocal(),
+        ),
       );
     }
   }

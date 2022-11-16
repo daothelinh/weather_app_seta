@@ -5,5 +5,6 @@
   "dio_receive_timeout": "Receive timeout in connection",
   "dio_send_timeout": "Connection failed due to internet connection",
   "app_title" : "Base Bloc Flutter",
-  "title_search": "Search for a city or airport"
+  "title_search": "Search for a city",
+  "weather_title": "Weather"
 }
