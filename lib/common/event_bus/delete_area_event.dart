@@ -1,4 +1,4 @@
 class DeleteAreaEvent {
-  int? index;
-  DeleteAreaEvent({this.index});
+  int index;
+  DeleteAreaEvent({required this.index});
 }

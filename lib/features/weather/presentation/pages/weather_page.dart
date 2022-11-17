@@ -65,7 +65,7 @@ class _WeatherPageState
             Expanded(
               child: blocBuilder(
                 (c, p1) => ListView.separated(
-                  itemCount: p1.area?.length ?? 1,
+                  itemCount: p1.area?.length ?? 0,
                   itemBuilder: (context, index) => Slidable(
                     endActionPane: ActionPane(
                       motion: const ScrollMotion(),
@@ -73,8 +73,12 @@ class _WeatherPageState
                         SlidableAction(
                           flex: 1,
                           spacing: 3,
-                          onPressed: (c) =>
-                              bloc.add(WeatherEvent.deleteArea(index)),
+                          onPressed: (c) {
+                            bloc.add(WeatherEvent.deleteArea(index));
+
+                            getIt<EventBus>()
+                                .fire(DeleteAreaEvent(index: index));
+                          },
                           backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
                           icon: Icons.delete,
@@ -85,7 +89,6 @@ class _WeatherPageState
                     child: GestureDetector(
                       onTap: () {
                         context.router.pop();
-                        getIt<EventBus>().fire(DeleteAreaEvent(index: index));
                       },
                       child: AreaWidget(area: p1.area?[index]),
                     ),

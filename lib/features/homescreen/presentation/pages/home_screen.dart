@@ -26,7 +26,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
     HomeScreenState, HomeScreenBloc> {
-  final _debounce = Debounce(milliseconds: 500);
+  // final _debounce = Debounce(milliseconds: 500);
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
 
   @override
   void dispose() {
-    _debounce.dispose();
+    // _debounce.dispose();
     super.dispose();
   }
 

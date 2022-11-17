@@ -15,14 +15,17 @@ class CoreBloc extends BaseBloc<CoreEvent, CoreState> {
   CoreBloc() : super(CoreState.init()) {
     on<CoreEvent>((CoreEvent event, Emitter<CoreState> emit) async {
       await event.when(
-          init: () => onInit(emit),
-          changeIndex: (int i) => onChangeIndex(emit, i),
-          changeIndexHome: (int i) => onChangeIndexHome(emit, i));
+        init: () => onInit(emit),
+        changeIndex: (int i) => onChangeIndex(emit, i),
+        changeIndexHome: (int i) => onChangeIndexHome(emit, i),
+        deleteArea: (int i) => onDeleteArea(emit, i),
+        addArea: () => onAddArea(emit),
+      );
     });
   }
-
+  late List<String> _listLocationKey;
   onInit(Emitter<CoreState> emit) async {
-    final List<String> _listLocationKey = List<String>.from(
+    _listLocationKey = List<String>.from(
         await localPref.get(AppLocalKey.listLocationKey) ?? ['0']);
     emit(state.copyWith(
         index: 1, indexHome: 0, listLocationKey: _listLocationKey));
@@ -34,5 +37,16 @@ class CoreBloc extends BaseBloc<CoreEvent, CoreState> {
 
   onChangeIndexHome(Emitter<CoreState> emit, int i) async {
     emit(state.copyWith(indexHome: i));
+  }
+
+  onDeleteArea(Emitter<CoreState> emit, int i) async {
+    _listLocationKey.removeAt(i);
+    emit(state.copyWith(listLocationKey: _listLocationKey));
+  }
+
+  onAddArea(Emitter<CoreState> emit) async {
+    _listLocationKey =
+        List<String>.from(await localPref.get(AppLocalKey.listLocationKey));
+    emit(state.copyWith(listLocationKey: _listLocationKey));
   }
 }
