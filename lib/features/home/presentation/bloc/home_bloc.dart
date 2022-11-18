@@ -16,30 +16,22 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
     on<HomeEvent>((HomeEvent event, Emitter<HomeState> emit) async {
       await event.when(
         init: () => onInit(emit),
-        deteleIndexArea: (int index) => onDeleteIndexArea(emit, index),
-        addArea: () => onAddArea(emit),
+        updateArea: () => onUpdateArea(emit),
       );
     });
   }
-  late List<String> _listLocationKey;
 
+  late List<String> _listLocationKey;
   onInit(Emitter<HomeState> emit) async {
     emit(state.copyWith(
       status: BaseStateStatus.success,
-      listLocationKey: List<String>.from(await localPref
-          .get(AppLocalKey.listLocationKey)
-          .then((value) => value)),
+      listLocationKey: List<String>.from(
+        await localPref.get(AppLocalKey.listLocationKey).then((value) => value),
+      ),
     ));
   }
 
-  onDeleteIndexArea(Emitter<HomeState> emit, int index) async {
-    _listLocationKey = List<String>.from(
-        await localPref.get(AppLocalKey.listLocationKey) ?? ['0']);
-    // _listLocationKey.removeAt(index);
-    emit(state.copyWith(listLocationKey: _listLocationKey));
-  }
-
-  onAddArea(Emitter<HomeState> emit) async {
+  onUpdateArea(Emitter<HomeState> emit) async {
     _listLocationKey = List<String>.from(
         await localPref.get(AppLocalKey.listLocationKey) ?? ['0']);
     emit(state.copyWith(listLocationKey: _listLocationKey));

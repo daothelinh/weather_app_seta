@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:base_bloc_3/base/bloc/index.dart';
 import 'package:base_bloc_3/base/network/errors/extension.dart';
-import 'package:base_bloc_3/common/event_bus/add_area_event.dart';
 import 'package:base_bloc_3/common/index.dart';
 import 'package:base_bloc_3/features/weather/domain/use_case/weather_use_case.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
@@ -13,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../common/event_bus/update_area_event.dart';
 import '../../../../di/di_setup.dart';
 import '../../data/model/city_model.dart';
 import '../../domain/entity/area/area.dart';
@@ -119,7 +119,7 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
       _listLocationKey.add(city.key ?? '');
       await localPref.save(AppLocalKey.listLocationKey, _listLocationKey);
       saveCityToLocal(city);
-      getIt<EventBus>().fire(AddAreaEvent());
+      getIt<EventBus>().fire(UpdateAreaEvent());
     }
     emit(state.copyWith(area: await onGetListArea()));
   }

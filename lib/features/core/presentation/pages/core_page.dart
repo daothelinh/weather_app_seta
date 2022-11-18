@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:base_bloc_3/common/event_bus/change_index_home_event.dart';
-import 'package:base_bloc_3/common/event_bus/delete_area_event.dart';
+import 'package:base_bloc_3/common/event_bus/update_area_event.dart';
 import 'package:base_bloc_3/features/core/presentation/bloc/core_bloc.dart';
-import 'package:base_bloc_3/features/weather/presentation/pages/weather_page.dart';
+
 import 'package:base_bloc_3/routes/app_routes.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../base/base_widget.dart';
-import '../../../../common/event_bus/add_area_event.dart';
 import '../../../../common/index.dart';
 import '../../../../di/di_setup.dart';
 import '../../../../gen/assets.gen.dart';
@@ -28,8 +27,7 @@ class CorePage extends StatefulWidget {
 class _CorePageState
     extends BaseState<CorePage, CoreEvent, CoreState, CoreBloc> {
   late StreamSubscription changeIndexHome;
-  late StreamSubscription deleteAreaEvent;
-  late StreamSubscription addArea;
+  late StreamSubscription updateArea;
 
   void _receiveData(BuildContext context) async {
     final result = await context.router.pushNamed(AppRoutes.weather);
@@ -45,12 +43,8 @@ class _CorePageState
       bloc.add(CoreEvent.changeIndexHome(event.index));
     });
 
-    deleteAreaEvent = getIt<EventBus>().on<DeleteAreaEvent>().listen((event) {
-      bloc.add(CoreEvent.deleteArea(event.index));
-    });
-
-    addArea = getIt<EventBus>().on<AddAreaEvent>().listen((event) {
-      bloc.add(const CoreEvent.addArea());
+    updateArea = getIt<EventBus>().on<UpdateAreaEvent>().listen((event) {
+      bloc.add(const CoreEvent.updateArea());
     });
   }
 

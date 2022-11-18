@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../../../base/base_widget.dart';
-import '../../../../common/event_bus/delete_area_event.dart';
+import '../../../../common/event_bus/update_area_event.dart';
 import '../../../../di/di_setup.dart';
 import '../bloc/weather_bloc.dart';
 import '../widgets/area_widget.dart';
@@ -76,8 +76,7 @@ class _WeatherPageState
                           onPressed: (c) {
                             bloc.add(WeatherEvent.deleteArea(index));
 
-                            getIt<EventBus>()
-                                .fire(DeleteAreaEvent(index: index));
+                            getIt<EventBus>().fire(UpdateAreaEvent());
                           },
                           backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
