@@ -43,7 +43,6 @@ class HomeScreenBloc extends BaseBloc<HomeScreenEvent, HomeScreenState>
       },
     );
   }
-  late String locationKey = '353412';
   final DefaultLocationUseCase _defaultLocationUseCase;
   onInit(Emitter<HomeScreenState> emit, String locationKey) async {}
 

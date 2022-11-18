@@ -11,6 +11,7 @@ import 'package:base_bloc_3/features/homescreen/presentation/widgets/temperature
 import 'package:base_bloc_3/features/homescreen/presentation/widgets/visibility_widget.dart';
 import 'package:base_bloc_3/features/homescreen/presentation/widgets/weather_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../base/base_widget.dart';
 import '../bloc/homescreen_bloc.dart';
 import '../widgets/uv_index_widget.dart';
@@ -26,7 +27,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
     HomeScreenState, HomeScreenBloc> {
-  final _debounce = Debounce(milliseconds: 500);
+  // final _debounce = Debounce(milliseconds: 500);
 
   @override
   void initState() {
@@ -50,7 +51,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
 
   @override
   void dispose() {
-    _debounce.dispose();
+    // _debounce.dispose();
     super.dispose();
   }
 
@@ -92,23 +93,21 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                         ? const CircularProgressIndicator()
                         : ForecastTimeWidget(
                             forecastTimeEntity: p1.forecastTime,
-                            // forecastDateTimeEntity:
-                            //     p1.forecastDateTimes[0],
                           );
                   }),
                 ),
               ),
-              const SizedBox(
-                height: 40,
+              SizedBox(
+                height: 40.h,
               ),
               Container(
-                height: 345,
-                width: 400,
+                height: 345.h,
+                width: 400.w,
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.white54,
                   ),
-                  borderRadius: BorderRadius.circular(20.0),
+                  borderRadius: BorderRadius.circular(20.0.r),
                 ),
                 child: SizedBox(
                   child: blocBuilder((c, p1) {
@@ -123,122 +122,116 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                   }),
                 ),
               ),
-              const SizedBox(
-                height: 40,
+              SizedBox(
+                height: 40.h,
               ),
               Container(
-                height: 300,
-                width: 370,
+                height: 310.h,
+                width: 370.w,
                 decoration: BoxDecoration(
                   // backgroundBlendMode: BlendMode.darken,
                   border: Border.all(
                     color: Colors.white54,
                   ),
-                  borderRadius: BorderRadius.circular(20.0),
+                  borderRadius: BorderRadius.circular(20.0.r),
                 ),
                 child: const TemperatureWidget(),
               ),
-              const SizedBox(
-                height: 40,
+              SizedBox(
+                height: 40.h,
               ),
               Row(
                 children: <Widget>[
-                  // const SizedBox(
-                  //   width: 29,
-                  // ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 18.0),
+                    padding: EdgeInsets.only(left: 18.0.w),
                     child: Container(
-                      height: 170,
-                      width: 170,
+                      height: 160.h,
+                      width: 160.w,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.white54,
                         ),
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderRadius: BorderRadius.circular(20.0.r),
                       ),
                       child: const UVIndexWidget(),
                     ),
                   ),
-                  const SizedBox(
-                    width: 16,
+                  SizedBox(
+                    width: 25.w,
                   ),
+                  Container(
+                    height: 160.h,
+                    width: 160.w,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white54,
+                      ),
+                      borderRadius: BorderRadius.circular(20.0.r),
+                    ),
+                    child: const SunsetWidget(),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              Row(
+                children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(right: 18.0),
+                    padding: EdgeInsets.only(left: 18.0.w),
                     child: Container(
-                      height: 170,
-                      width: 170,
+                      height: 160.h,
+                      width: 160.w,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.white54,
                         ),
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderRadius: BorderRadius.circular(20.0.r),
                       ),
-                      child: const SunsetWidget(),
+                      child: const WindWidget(),
                     ),
                   ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: <Widget>[
-                  const SizedBox(
-                    width: 29,
+                  SizedBox(
+                    width: 25.w,
                   ),
                   Container(
-                    height: 170,
-                    width: 170,
+                    height: 160.h,
+                    width: 160.w,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.white54,
                       ),
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: const WindWidget(),
-                  ),
-                  const SizedBox(
-                    width: 25,
-                  ),
-                  Container(
-                    height: 170,
-                    width: 170,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white54,
-                      ),
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(20.0.r),
                     ),
                     child: const RainfallWidget(),
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Row(
                 children: <Widget>[
-                  const SizedBox(
-                    width: 29,
-                  ),
-                  Container(
-                    height: 170,
-                    width: 170,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white54,
+                  Padding(
+                    padding: EdgeInsets.only(left: 18.0.w),
+                    child: Container(
+                      height: 160.h,
+                      width: 160.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.white54,
+                        ),
+                        borderRadius: BorderRadius.circular(20.0.r),
                       ),
-                      borderRadius: BorderRadius.circular(20.0),
+                      child: const FeelsLikeWidget(),
                     ),
-                    child: const FeelsLikeWidget(),
                   ),
-                  const SizedBox(
-                    width: 25,
+                  SizedBox(
+                    width: 25.w,
                   ),
                   Container(
-                    height: 170,
-                    width: 170,
+                    height: 160.h,
+                    width: 160.w,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.white54,
@@ -249,43 +242,43 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Row(
                 children: <Widget>[
-                  const SizedBox(
-                    width: 29,
-                  ),
-                  Container(
-                    height: 170,
-                    width: 170,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white54,
+                  Padding(
+                    padding: EdgeInsets.only(left: 18.0.w),
+                    child: Container(
+                      height: 160.h,
+                      width: 160.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.white54,
+                        ),
+                        borderRadius: BorderRadius.circular(20.0.r),
                       ),
-                      borderRadius: BorderRadius.circular(20.0),
+                      child: const VisibilityWidget(),
                     ),
-                    child: const VisibilityWidget(),
                   ),
-                  const SizedBox(
-                    width: 25,
+                  SizedBox(
+                    width: 25.w,
                   ),
                   Container(
-                    height: 170,
-                    width: 170,
+                    height: 160.h,
+                    width: 160.w,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.white54,
                       ),
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(20.0.r),
                     ),
                     child: const PressureWidget(),
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 80,
+              SizedBox(
+                height: 80.h,
               ),
             ],
           ),

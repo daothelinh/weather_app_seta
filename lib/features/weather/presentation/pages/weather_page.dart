@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../../../base/base_widget.dart';
-import '../../../../common/event_bus/delete_area_event.dart';
+import '../../../../common/event_bus/update_area_event.dart';
 import '../../../../di/di_setup.dart';
 import '../bloc/weather_bloc.dart';
 import '../widgets/area_widget.dart';
@@ -65,7 +65,7 @@ class _WeatherPageState
             Expanded(
               child: blocBuilder(
                 (c, p1) => ListView.separated(
-                  itemCount: p1.area?.length ?? 1,
+                  itemCount: p1.area?.length ?? 0,
                   itemBuilder: (context, index) => Slidable(
                     endActionPane: ActionPane(
                       motion: const ScrollMotion(),
@@ -73,8 +73,11 @@ class _WeatherPageState
                         SlidableAction(
                           flex: 1,
                           spacing: 3,
-                          onPressed: (c) =>
-                              bloc.add(WeatherEvent.deleteArea(index)),
+                          onPressed: (c) {
+                            bloc.add(WeatherEvent.deleteArea(index));
+
+                            getIt<EventBus>().fire(UpdateAreaEvent());
+                          },
                           backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
                           icon: Icons.delete,
@@ -85,7 +88,6 @@ class _WeatherPageState
                     child: GestureDetector(
                       onTap: () {
                         context.router.pop();
-                        getIt<EventBus>().fire(DeleteAreaEvent(index: index));
                       },
                       child: AreaWidget(area: p1.area?[index]),
                     ),

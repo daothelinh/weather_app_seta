@@ -6,6 +6,7 @@ class AppToken {
   // static const String token = 'GlZY41JAztLVnXPzFdxLhkyV6tIvziAM';
   // static const String token = 'jXLuSaPbb9Pn0DfchovhOuM5Z8dULBxH';
   static const String token = 'pGMFTJ9hotGdsIkt0yYQbCKukZ4p195L';
+  // static const String token = 'OXYp7JS7vhG6Q14SG4Oclm8upWVHwSbf';
 
   // static const int locationkey = 353412;
   // static const String token = 'dMdcJeN2k2Fz9ljZGMGcGXmycP6UDWi6';
