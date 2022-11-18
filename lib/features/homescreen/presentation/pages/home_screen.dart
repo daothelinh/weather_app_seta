@@ -1,5 +1,4 @@
 import 'package:base_bloc_3/base/bloc/bloc_status.dart';
-import 'package:base_bloc_3/common/widgets/textfields/debounce.dart';
 import 'package:base_bloc_3/features/homescreen/presentation/widgets/feels-like_widget.dart';
 import 'package:base_bloc_3/features/homescreen/presentation/widgets/forecast_day_widget.dart';
 import 'package:base_bloc_3/features/homescreen/presentation/widgets/forecast_time_widget.dart';
@@ -31,6 +30,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
 
   @override
   void initState() {
+    // ignore: avoid_print
     print(widget.locationKey);
     super.initState();
     bloc.add(HomeScreenEvent.getData(widget.locationKey ?? '353412'));

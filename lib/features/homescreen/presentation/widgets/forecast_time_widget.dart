@@ -48,7 +48,7 @@ class ForecastTimeWidget extends StatelessWidget {
                   data: item,
                 ),
                 SizedBox(
-                  width: 80.w,
+                  width: 70.w,
                 )
               ]);
             },

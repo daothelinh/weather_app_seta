@@ -43,16 +43,19 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
   onInit(Emitter<WeatherState> emit) async {
     _listLocationKey = List<String>.from(
         await localPref.get(AppLocalKey.listLocationKey) ?? []);
+    // ignore: avoid_print
     print(_listLocationKey);
 
     _listCityModelEncode = List<String>.from(
         await localPref.get(AppLocalKey.listSearchCity) ?? []);
+    // ignore: avoid_print
     print(_listCityModelEncode);
 
     emit(state.copyWith(area: await onGetListArea()));
   }
 
   onGetListArea() async {
+    // ignore: no_leading_underscores_for_local_identifiers
     List<Area> _area = [];
     for (var e in _listLocationKey) {
       List<Future> future = [];
@@ -70,6 +73,7 @@ class WeatherBloc extends BaseBloc<WeatherEvent, WeatherState> {
   }
 
   getCityFromLocal() async {
+    // ignore: no_leading_underscores_for_local_identifiers
     List<CityModel> _listCityModel = List<CityModel>.from(
         _listCityModelEncode.map((e) => CityModel.fromJson(jsonDecode(e))));
     return _listCityModel;

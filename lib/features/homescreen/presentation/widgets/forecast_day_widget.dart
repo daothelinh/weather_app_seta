@@ -87,38 +87,63 @@ class ForeCastDayCard extends StatelessWidget {
           height: 14.h,
         ),
         Row(children: <Widget>[
-          SizedBox(width: 10.w),
-          Text(
-            dateformat.toString(),
-            style: TextStyle(color: Colors.white, fontSize: 19.sp),
-          ),
-          SizedBox(width: 10.w),
-          const Icon(
-            Icons.sunny,
-            color: Colors.white,
-          ),
-          SizedBox(width: 10.w),
-          Text(
-            "${convertFtoC(data?.dailyForecastsDay?[index ?? 0].temperatureDay?.minimum?.value ?? 0)}°",
-            style: TextStyle(color: Colors.white, fontSize: 20.sp),
-          ),
-          SizedBox(width: 10.w),
-          Container(
-            height: 4.h,
-            width: 120.h,
-            decoration: BoxDecoration(
-              color: Colors.yellow,
-              border: Border.all(
-                color: Colors.white54,
-              ),
-              borderRadius: BorderRadius.circular(8.0.r),
+          Flexible(
+            flex: 2,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  dateformat.toString(),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 19.sp,
+                  ),
+                ),
+                SizedBox(width: 10.w),
+                const Icon(
+                  Icons.sunny,
+                  color: Colors.white,
+                ),
+              ],
             ),
           ),
           SizedBox(width: 10.w),
-          Text(
-            "${convertFtoC(data?.dailyForecastsDay?[index ?? 0].temperatureDay?.maximum?.value ?? 0)}°",
-            style: TextStyle(color: Colors.white, fontSize: 20.sp),
+          Flexible(
+            flex: 3,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "${convertFtoC(data?.dailyForecastsDay?[index ?? 0].temperatureDay?.minimum?.value ?? 0)}°",
+                  style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                ),
+                SizedBox(width: 10.w),
+                Container(
+                  height: 4.h,
+                  width: 120.h,
+                  decoration: BoxDecoration(
+                    color: Colors.yellow,
+                    border: Border.all(
+                      color: Colors.white54,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0.r),
+                  ),
+                ),
+              ],
+            ),
           ),
+          Flexible(
+              flex: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(width: 2.w),
+                  Text(
+                    "${convertFtoC(data?.dailyForecastsDay?[index ?? 0].temperatureDay?.maximum?.value ?? 0)}°",
+                    style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                  ),
+                ],
+              )),
         ]),
         SizedBox(
           height: 15.h,

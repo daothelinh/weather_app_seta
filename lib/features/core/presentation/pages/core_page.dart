@@ -15,7 +15,6 @@ import '../../../../common/index.dart';
 import '../../../../di/di_setup.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../home/presentation/view/home_view.dart';
-import '../../../homescreen/presentation/pages/home_screen.dart';
 
 class CorePage extends StatefulWidget {
   const CorePage({Key? key}) : super(key: key);
@@ -29,6 +28,7 @@ class _CorePageState
   late StreamSubscription changeIndexHome;
   late StreamSubscription updateArea;
 
+  // ignore: unused_element
   void _receiveData(BuildContext context) async {
     final result = await context.router.pushNamed(AppRoutes.weather);
     print(result);

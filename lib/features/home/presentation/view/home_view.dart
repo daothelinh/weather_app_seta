@@ -48,6 +48,7 @@ class _HomeViewState
                 },
                 itemCount: p1.listLocationKey?.length ?? 1,
                 itemBuilder: (context, index) {
+                  // ignore: avoid_print
                   print(p1.listLocationKey?[index]);
                   return HomeScreen(
                     locationKey: p1.listLocationKey?[index],
