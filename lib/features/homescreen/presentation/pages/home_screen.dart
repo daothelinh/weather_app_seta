@@ -73,12 +73,12 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                         );
                 }),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Container(
-                height: 225,
-                width: 370,
+                height: 225.h,
+                width: 370.w,
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.white54,
@@ -129,7 +129,6 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
                 height: 310.h,
                 width: 370.w,
                 decoration: BoxDecoration(
-                  // backgroundBlendMode: BlendMode.darken,
                   border: Border.all(
                     color: Colors.white54,
                   ),
@@ -143,7 +142,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(left: 18.0.w),
+                    padding: EdgeInsets.only(left: 15.0.w),
                     child: Container(
                       height: 160.h,
                       width: 160.w,
@@ -178,7 +177,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(left: 18.0.w),
+                    padding: EdgeInsets.only(left: 15.0.w),
                     child: Container(
                       height: 160.h,
                       width: 160.w,
@@ -213,7 +212,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(left: 18.0.w),
+                    padding: EdgeInsets.only(left: 15.0.w),
                     child: Container(
                       height: 160.h,
                       width: 160.w,
@@ -248,7 +247,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(left: 18.0.w),
+                    padding: EdgeInsets.only(left: 15.0.w),
                     child: Container(
                       height: 160.h,
                       width: 160.w,

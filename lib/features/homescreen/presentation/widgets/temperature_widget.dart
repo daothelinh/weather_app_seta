@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TemperatureWidget extends StatelessWidget {
   const TemperatureWidget({super.key});
@@ -8,21 +9,21 @@ class TemperatureWidget extends StatelessWidget {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(top: 18.0),
+          padding: EdgeInsets.only(top: 18.0.h),
           child: Column(
             children: [
               Row(
-                children: const <Widget>[
+                children: <Widget>[
                   SizedBox(
-                    width: 20,
+                    width: 20.w,
                   ),
-                  Icon(
+                  const Icon(
                     Icons.thermostat,
                     color: Colors.white,
                   ),
                   Text(
                     "Temperature",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: TextStyle(color: Colors.white, fontSize: 20.sp),
                   )
                 ],
               )

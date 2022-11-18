@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SunsetWidget extends StatelessWidget {
   const SunsetWidget({super.key});
@@ -6,15 +7,15 @@ class SunsetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
       Padding(
-        padding: const EdgeInsets.only(top: 15.0),
+        padding: EdgeInsets.only(top: 15.0.h),
         child: Column(
           children: [
             Row(
-              children: const [
+              children: [
                 SizedBox(
-                  width: 20,
+                  width: 20.w,
                 ),
-                Icon(
+                const Icon(
                   Icons.sunny_snowing,
                   color: Colors.white,
                 ),
@@ -22,7 +23,7 @@ class SunsetWidget extends StatelessWidget {
                   " SUNSET",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                   ),
                 )
               ],
