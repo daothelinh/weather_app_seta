@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:base_bloc_3/base/bloc/bloc_status.dart';
 import 'package:base_bloc_3/common/event_bus/add_area_event.dart';
 import 'package:base_bloc_3/common/event_bus/change_index_home_event.dart';
 import 'package:base_bloc_3/features/home/presentation/bloc/home_bloc.dart';
@@ -45,19 +46,20 @@ class _HomeViewState
               image: AssetImage("assets/background/background.jpg"),
               fit: BoxFit.cover)),
       child: blocBuilder(
-          (c, p1) => PageView.builder(
-                onPageChanged: (index) {
-                  getIt<EventBus>().fire(ChangeIndexHomeEvent(index));
-                },
-                itemCount: p1.listLocationKey?.length ?? 1,
-                itemBuilder: (context, index) {
-                  print(p1.listLocationKey?[index]);
-                  return HomeScreen(
-                    locationKey: p1.listLocationKey?[index],
-                  );
-                },
-              ),
-          buildWhen: (p1, p2) => p1.listLocationKey != p2.listLocationKey),
+        (c, p1) => PageView.builder(
+          onPageChanged: (index) {
+            getIt<EventBus>().fire(ChangeIndexHomeEvent(index));
+          },
+          itemCount: p1.listLocationKey?.length ?? 1,
+          itemBuilder: (context, index) {
+            print(p1.listLocationKey?[index]);
+            return HomeScreen(
+              locationKey: p1.listLocationKey?[index],
+            );
+          },
+        ),
+        buildWhen: (p1, p2) => p1.listLocationKey != p2.listLocationKey,
+      ),
     );
   }
 }

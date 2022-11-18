@@ -1,7 +1,6 @@
 import 'package:base_bloc_3/base/bloc/index.dart';
 import 'package:base_bloc_3/common/index.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -25,14 +24,18 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
   late List<String> _listLocationKey;
 
   onInit(Emitter<HomeState> emit) async {
-    _listLocationKey = List<String>.from(
-        await localPref.get(AppLocalKey.listLocationKey) ?? ['0']);
-    print(_listLocationKey);
-    emit(state.copyWith(listLocationKey: _listLocationKey));
+    emit(state.copyWith(
+      status: BaseStateStatus.success,
+      listLocationKey: List<String>.from(await localPref
+          .get(AppLocalKey.listLocationKey)
+          .then((value) => value)),
+    ));
   }
 
   onDeleteIndexArea(Emitter<HomeState> emit, int index) async {
-    _listLocationKey.removeAt(index);
+    _listLocationKey = List<String>.from(
+        await localPref.get(AppLocalKey.listLocationKey) ?? ['0']);
+    // _listLocationKey.removeAt(index);
     emit(state.copyWith(listLocationKey: _listLocationKey));
   }
 

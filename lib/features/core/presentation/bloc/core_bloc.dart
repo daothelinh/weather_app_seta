@@ -45,8 +45,9 @@ class CoreBloc extends BaseBloc<CoreEvent, CoreState> {
   }
 
   onAddArea(Emitter<CoreState> emit) async {
-    _listLocationKey =
-        List<String>.from(await localPref.get(AppLocalKey.listLocationKey));
+    _listLocationKey = List<String>.from(await localPref
+        .get(AppLocalKey.listLocationKey)
+        .then((value) => value));
     emit(state.copyWith(listLocationKey: _listLocationKey));
   }
 }
