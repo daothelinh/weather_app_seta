@@ -143,33 +143,39 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeScreenEvent,
               ),
               Row(
                 children: <Widget>[
-                  const SizedBox(
-                    width: 29,
-                  ),
-                  Container(
-                    height: 170,
-                    width: 170,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white54,
+                  // const SizedBox(
+                  //   width: 29,
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 18.0),
+                    child: Container(
+                      height: 170,
+                      width: 170,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.white54,
+                        ),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
-                      borderRadius: BorderRadius.circular(20.0),
+                      child: const UVIndexWidget(),
                     ),
-                    child: const UVIndexWidget(),
                   ),
                   const SizedBox(
-                    width: 25,
+                    width: 16,
                   ),
-                  Container(
-                    height: 170,
-                    width: 170,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white54,
+                  Padding(
+                    padding: const EdgeInsets.only(right: 18.0),
+                    child: Container(
+                      height: 170,
+                      width: 170,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.white54,
+                        ),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
-                      borderRadius: BorderRadius.circular(20.0),
+                      child: const SunsetWidget(),
                     ),
-                    child: const SunsetWidget(),
                   ),
                 ],
               ),

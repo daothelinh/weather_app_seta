@@ -83,7 +83,7 @@ class ForeCastDayCard extends StatelessWidget {
           const SizedBox(width: 10),
           Text(
             dateformat.toString(),
-            style: const TextStyle(color: Colors.white, fontSize: 15),
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
           const SizedBox(width: 10),
           const Icon(
@@ -93,12 +93,12 @@ class ForeCastDayCard extends StatelessWidget {
           const SizedBox(width: 10),
           Text(
             "${(data?.dailyForecastsDay?[index ?? 0].temperatureDay?.minimum?.value ?? 0) - 51}°",
-            style: const TextStyle(color: Colors.white, fontSize: 20),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           ),
           const SizedBox(width: 10),
           Container(
-            height: 6,
-            width: 120,
+            height: 4,
+            width: 115,
             // color: Colors.yellow,
             decoration: BoxDecoration(
               color: Colors.yellow,
@@ -112,7 +112,7 @@ class ForeCastDayCard extends StatelessWidget {
           const SizedBox(width: 10),
           Text(
             "${(data?.dailyForecastsDay?[index ?? 0].temperatureDay?.maximum?.value ?? 0) - 58}°",
-            style: const TextStyle(color: Colors.white, fontSize: 20),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           ),
           const SizedBox(width: 10),
         ]),
